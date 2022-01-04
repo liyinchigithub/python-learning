@@ -4,6 +4,9 @@
 # 读写csv
 
 import csv
+'''
+读取csv文件
+'''
 
 def readCsv():
     with open("./test.csv") as f:
@@ -16,6 +19,9 @@ def readCsv():
 
 readCsv()
 
+'''
+写入csv文件，追加到最后一行
+'''
 def writeCsv():
     with open("./test.csv",'a') as f:
         row=['曹操','23','学生','黑龙江','5000']
@@ -23,5 +29,4 @@ def writeCsv():
         write.writerow(row)
         print("写入完毕！")
 
-readCsv()
 writeCsv()

@@ -5,6 +5,7 @@
 
 '''
  f.read()
+ 读取文本文件
 '''
 def txtRead():
     try:
@@ -20,6 +21,7 @@ txtRead()
 
 '''
  f.read() with
+ 读取文本文件
 '''
 def txtReadWith():
     try:
@@ -53,6 +55,7 @@ txtReadWithReadlines()
 
 '''
  f.write()
+ 写入文本文件
 '''
 def txtWrite():
     try:
