@@ -2,7 +2,8 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 # 文件名：test07.py
-# selenium
+# selenium 
+# https://selenium-python-zh.readthedocs.io/en/latest/
 
 # import requests
 import time
@@ -17,5 +18,5 @@ file=driver.get_screenshot_as_png
 print(file)
 time.sleep(1)
 driver.find_element_by_id("kw").send_keys("python")
-
-    
+time.sleep(10)
+driver.close()

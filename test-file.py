@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
-# 文件名：test02.py
+# 文件名：test01.py
 # 读写txt文件
 
 '''

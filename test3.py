@@ -1,94 +1,21 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 # 文件名：test0.py
-# Python 变量类型
+# Python 运算符
+# https://www.runoob.com/python3/python3-basic-operators.html
 
+'''
+Python 语言支持以下类型的运算符:
 
-def isBoolean():
-   if True:
-    print("Answer")
-    print("True")
-   else:
-    print("Answer")
-    # 没有严格缩进，在执行时会报错
-    print("False")
-
-# isBoolean()
-
-def definitions():
-   # 数字
-   A = 100
-   # 同时对多个变量赋值
-   B, C, D = "liyinchi", 12, "泉州" 
-   print(A)
-   print(B)
-   print(C)
-   print(D)
-
-# definitions()
-
-def split():
-   s='abcdefg'
-   print('字符串abcdefg 截取s[1:5] 得到'+s[1:5])# 索引0开始，到5（不包含5） 输出：bcde   
-
-# split()
-
-def listIndex():
-   # 字符串
-   str = 'Hello World!'
-   li=['1','2','3','4','5','6','7'] # 列表
-   print(str)           # 输出完整字符串 输出：Hello World!
-   print(str[0])        # 输出字符串中的第一个字符 输出H
-   print(str[2:5])      # 输出字符串中第三个至第六个(不含第六个)之间的字符串 输出：llo 
-   print(str[2:])       # 输出从第三个字符开始的字符串
-   print(str*2)      # 输出字符串两次 输出：Hello World!Hello World!
-   print(str+"TEST")  # 输出连接的字符串 输出：Hello World!TEST
-   print(li[2:5:2])      # 输出字符串中第三个至第六个（不含第六个）之间的字符串,步长为2 输出：['3', '5']
-
-# listIndex()
-
-def listMerge():
-   # 列表
-   list = [ 'runoob', 786 , 2.23, 'john', 70.2 ]
-   tinylist = [123, 'john']
-   print(list + tinylist)    # 打印组合的列表 输出：[ 'runoob', 786 , 2.23, 'john', 70.2, 123, 'john' ]
-
-# listMerge()
-
-def Tuple():
-   # 元组
-   tuple = ( 'runoob', 786 , 2.23, 'john', 70.2 )
-   tinytuple = (123, 'john')
-   
-   print(tuple)               # 输出完整元组 输出：('runoob', 786, 2.23, 'john', 70.2)
-   print(tuple[0])            # 输出元组的第一个元素 输出：runoob
-   print(tuple[1:3])          # 输出第二个至第四个（不包含）的元素 输出：(786, 2.23)
-   print(tuple[2:])           # 输出从第三个开始至列表末尾的所有元素 输出：(2.23, 'john', 70.2)
-   print(tinytuple * 2)       # 输出元组两次 输出：(123, 'john', 123, 'john')
-   print(tuple + tinytuple)   # 打印组合的元组 输出：('runoob', 786, 2.23, 'john', 70.2, 123, 'john')
-
-# Tuple()
-
-def dict():
-   # 字典
-   dict = {}
-   dict['one'] = "This is one" # 放入字典中 {'one':"This is one"}
-   dict[2] = "This is two" # 放入字典中 {'one':"This is one",2:"This is two"}
-   tinydict = {'name': 'runoob','code':6734, 'dept': 'sales'}
-   print(dict['one'])          # 输出键为'one' 的值 输出:This is one
-   print(dict[2])              # 输出键为 2 的值 输出:"This is two"
-   print(tinydict)             # 输出完整的字典 输出：{'name': 'runoob','code':6734, 'dept': 'sales'}
-   print(tinydict.keys())      # 输出所有键 输出：dict_keys(['name', 'code', 'dept'])
-   print(tinydict.values())    # 输出所有值 输出：dict_values(['runoob', 6734, 'sales'])
-
-# dict()
-
-def stringToNumber():
-   # 数据类型转换
-   str="1"
-   print(int(str)+1);# 字符串转数值 输出2
-
-# stringToNumber()
+算术运算符
+比较（关系）运算符
+赋值运算符
+逻辑运算符
+位运算符
+成员运算符
+身份运算符
+运算符优先级
+'''
 
 def sum():
    # 算数运算符

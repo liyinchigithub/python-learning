@@ -2,6 +2,7 @@
 # -*- coding: UTF-8 -*-
 # 文件名：test00.py
 # for、while 循环
+# https://www.runoob.com/python3/python3-loop.html
 
 import time
 
