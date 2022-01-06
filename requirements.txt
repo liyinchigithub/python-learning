@@ -1,2 +1,4 @@
+pytesseract==0.3.8
 requests==2.22.0
 selenium==4.1.0
+webdriver-manager==3.5.2

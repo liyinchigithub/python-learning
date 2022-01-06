@@ -1,7 +1,8 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
-# 文件名：test01.py
+# 文件名：test-file.py
 # 读写txt文件
+# https://www.runoob.com/python3/python3-file-methods.html
 
 '''
  f.read()
