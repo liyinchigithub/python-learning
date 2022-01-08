@@ -7,6 +7,7 @@
 
 from os import error
 import requests
+import json
 '''
     GET
 '''
@@ -31,8 +32,12 @@ def getDemo02():
     print(type(response. text)) # 响应body类型
     print(response.text)# 响应body
     print(response.cookies)# 响应cookies  urllib 处理过 Cookies，写法比较复杂，而有了 requests，获取和设置 Cookies 只需 一步即可完成
+    # print(response.cookies['cookie'])# 获取cookies中cookie，用于长久登录
     headers=response.headers;
     print('headers["Server"]:'+headers['Server'])
+    #
+    print(response.json()) # JSON格式的响应内容，如果解码失败，result.json()将会引发异常
+    print(response.content) # J二进制响应内容
 # getDemo02()
 
 
@@ -115,6 +120,7 @@ def ssl():
         print(response.status_code) 
     except OSError:
         print("出现异常") # 输出 <class 'OSError'>
+        print(response.raise_for_status())# 抛出异常进行检查，如果我们的请求是执行成功的，即状态码为200，此时raise_for_status()的值将会是None
 # ssl()
 
 '''
@@ -190,7 +196,13 @@ def postDemo02():
 '''
     POST 
     Content-Type：multipart/form-data
+    [文件上传]
 '''
+
+def fileUpdate():
+    with open('demo01.txt','rb') as f:
+        result = requests.post('http://localhost:5000/post',files={"files":f})
+fileUpdate()
 
 '''
     POST 
