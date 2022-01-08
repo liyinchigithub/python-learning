@@ -150,10 +150,10 @@ def timeoutSet():
     https://requests-oauthlib.readthedocs.org/
 '''
 def auth():
-    response = requests.get('http://110.40.156.59:8000/api/json?pretty=true',auth=('admin','test123'))
+    response = requests.get('http://110.40.156.59:8000/api/json?pretty=true',auth=('admin','xxxx'))
     print(response.status_code)
     
-auth()
+# auth()
 
 
 '''
