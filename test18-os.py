@@ -8,6 +8,9 @@ import os;
 import sys;
 import stat;
 import xlsxwriter;
+import xlwt;
+ 
+
 
 '''
     os.access() 文件是否存在、可读写、可执行
@@ -178,7 +181,19 @@ def createExcel():
     worksheet.write(1,5,250) # 第2行第6列，写入250
             #写入信息
     workbook.close()
-createExcel()
+# createExcel()
+
+'''
+    创建Excel
+'''
+def createExcel2():
+    wb = xlwt.Workbook()
+    ws = wb.add_sheet('s001')# 指定sheet
+    ws.write(0,0,452)
+    ws.write(1,4,6868)
+    ws.write(2,3,6666)
+    wb.save('103.xlsx')
+# createExcel2()
 
 '''
     os.getcwd() 返回当前工作目录。
