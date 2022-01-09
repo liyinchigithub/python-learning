@@ -7,6 +7,8 @@
 import os;
 import sys;
 import stat;
+import xlsxwriter;
+
 '''
     os.access() 文件是否存在、可读写、可执行
     使用当前的uid/gid尝试访问路径。大部分操作使用有效的 uid/gid, 因此运行环境可以在 suid/sgid 环境尝试。
@@ -132,7 +134,6 @@ def createFile(fileName):
     https://www.runoob.com/python3/python3-os-makedirs.html
 '''
 
-
 def mkdir(path):
  
 	folder = os.path.exists(path)
@@ -145,6 +146,39 @@ def mkdir(path):
 		
 file = "a/test/" # 要创建的文件夹路径
 # mkdir(file) 
+
+
+'''
+    在指定文件夹中创建txt文件，并写入内容
+'''
+
+
+def txt(name,text):
+    file = os.getcwd()[:-4] + 'new'
+    if not os.path.exists(file):     # 判断当前路径是否存在，没有则创建new文件夹
+        os.makedirs(file)
+        xxoo = file + name + '.txt'    # 在当前py文件所在路径下的new文件中创建txt
+        file = open(xxoo,'w')
+        file.write(text)        # 写入内容信息
+        file.close()
+        print ('ok')
+# txt('test','hello,python')       #创建名称为test的txt文件，内容为hello,python
+
+'''
+    创建Excel
+'''
+def createExcel():
+ 
+    workbook = xlsxwriter.Workbook('test-1.xlsx')
+            #在G盘xxoo文件下创建103的excel
+    worksheet = workbook.add_worksheet('s001')
+            #103的excel的sheet页名称为s001
+    worksheet.write(0,0,123456)
+    worksheet.write(2,1,664)
+    worksheet.write(1,5,250)
+            #写入信息
+    workbook.close()
+createExcel()
 
 '''
     os.getcwd() 返回当前工作目录。
