@@ -29,10 +29,12 @@ def getDemo02():
     print(type(response))
     print(response.status_code) # 响应状态码
     print(response.headers) # 响应头
+    print(response.request.headers) # 获取发送给服务器的头文件信息
     print(type(response. text)) # 响应body类型
     print(response.text)# 响应body
     print(response.cookies)# 响应cookies  urllib 处理过 Cookies，写法比较复杂，而有了 requests，获取和设置 Cookies 只需 一步即可完成
     # print(response.cookies['cookie'])# 获取cookies中cookie，用于长久登录
+    print(response.encoding) # 获取当前的编码
     headers=response.headers;
     print('headers["Server"]:'+headers['Server'])
     #
