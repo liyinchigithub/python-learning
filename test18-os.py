@@ -173,9 +173,9 @@ def createExcel():
             #在G盘xxoo文件下创建103的excel
     worksheet = workbook.add_worksheet('s001')
             #103的excel的sheet页名称为s001
-    worksheet.write(0,0,123456)
-    worksheet.write(2,1,664)
-    worksheet.write(1,5,250)
+    worksheet.write(0,0,123456)# 第1行第1列，写入123456
+    worksheet.write(2,1,664) # 第3行第2列，写入664
+    worksheet.write(1,5,250) # 第2行第6列，写入250
             #写入信息
     workbook.close()
 createExcel()
