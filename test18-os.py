@@ -206,6 +206,16 @@ def getDir():
 # getDir()
 
 '''
+    os.system("pwd") 执行cmd命令。
+'''
+    
+def execCMD():
+    result=os.system("node -v");
+    print("os.system():",result);
+
+# execCMD()
+
+'''
     os.chmod() 更改文件或目录的权限。
     Unix 系统可用。
     https://www.runoob.com/python3/python3-os-chmod.html
@@ -216,3 +226,8 @@ def chmod():
     os.chmod("/tmp/foo.txt", stat.S_IXGRP)
     # 设置文件可以被其他用户写入
     os.chmod("/tmp/foo.txt", stat.S_IWOTH)
+    
+    
+'''
+    切换目录
+'''
