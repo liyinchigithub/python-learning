@@ -44,3 +44,30 @@ class TestStringMethods(unittest.TestCase):# 派生类继承基类
 
 if __name__ == '__main__':
     unittest.main()
+    
+'''
+继承 unittest.TestCase 就创建了一个测试样例。
+上述三个独立的测试是三个类的方法，这些方法的命名都以 test 开头。
+这个命名约定告诉测试运行者类的哪些方法表示测试。
+'''
+
+'''
+每个测试的关键是：调用 assertEqual() 来检查预期的输出;
+调用 assertTrue() 或 assertFalse() 来验证一个条件;
+调用 assertRaises() 来验证抛出了一个特定的异常。
+使用这些方法而不是 assert 语句是为了让测试运行者能聚合所有的测试结果并产生结果报告。
+'''
+
+'''
+通过 setUp() 和 tearDown() 方法，可以设置测试开始前与完成后需要执行的指令,在组织你的测试代码中，对此有更为详细的描述。
+'''
+
+'''
+最后的代码块中，演示了运行测试的一个简单的方法。 
+unittest.main() 提供了一个测试脚本的命令行接口。
+'''
+
+'''
+    命令行执行：pytest test-pytest.py -v
+    在调用测试脚本时添加 -v 参数使 unittest.main() 显示更为详细的信息
+'''
