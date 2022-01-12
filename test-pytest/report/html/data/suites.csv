@@ -1,7 +1,0 @@
-"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"passed","Wed Jan 12 14:59:30 CST 2022","Wed Jan 12 14:59:30 CST 2022","0","","test_pytest","","","","test_1",""
-"failed","Wed Jan 12 14:59:26 CST 2022","Wed Jan 12 14:59:26 CST 2022","0","","test_pytest-html-report","","","","test_demo",""
-"failed","Wed Jan 12 14:59:22 CST 2022","Wed Jan 12 14:59:22 CST 2022","0","","test_pytest-allure-report","","","","test_demo",""
-"passed","Wed Jan 12 14:59:30 CST 2022","Wed Jan 12 14:59:30 CST 2022","0","","test_pytest","","","","test_3",""
-"failed","Wed Jan 12 14:59:30 CST 2022","Wed Jan 12 14:59:30 CST 2022","0","","test_pytest-rerun","","","","test_demo",""
-"passed","Wed Jan 12 14:59:30 CST 2022","Wed Jan 12 14:59:30 CST 2022","0","","test_pytest","","","","test_2",""

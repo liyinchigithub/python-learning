@@ -6,20 +6,15 @@
 # https://blog.51cto.com/u_10913485/2898631
 
 '''
-    Pytest使用@pytest.mark.parametrize装饰器来实现数据驱动测试的，也就是常说的参数化
-    
-    parametrize(self,argnames, argvalues, indirect=False, ids=None, scope=None)
-    
+    Pytest使用 @pytest.mark.parametrize[装饰器] 来实现数据驱动测试的，也就是常说的参数化
+    格式：parametrize(self,argnames, argvalues, indirect=False, ids=None, scope=None)
     [argnames]:参数名
-
     [argvalues]:参数对应值，[类型必须为list] 如果只有一个参数，里面则是值的列表
     例如:
         @pytest.mark.parametrize("username", ["yy", "yy2", "yy3"])。
         如果有多个参数，则需要用元组来存放值，
         一个元组对应一组参数的值，如：@pytest.mark.parametrize("name,pwd", [("yy1", "123"), ("yy2", "123"), ("yy3", "123")])。
-
     [Indirect]:如果设置成True，则把传进来的参数当函数执行，而不是一个参数。
-
     [ids]:用例的ID，传一个字符串列表，用来标识每一个测试用例，自定义测试数据结果，增加可读性。
 
 '''
@@ -29,7 +24,6 @@ import pytest
 
 # 1.单个数据
 data = ["小红", "小明"]
-
 
 @pytest.mark.parametrize("name", data)
 def test_demo(name):
@@ -42,9 +36,9 @@ data_1 = [
     {"username": "admin2", "password": "12345678"},
 ]
 
-
 @pytest.mark.parametrize("data", data_1)
-def test_login(data):
+
+def test_login(data):# 函数接收入参
     print("账号:{},密码:{}".format(data["username"], data["password"]))
 
 
@@ -94,7 +88,6 @@ def test_demo(uname, pwd):
     print("用户名:{},密码:{}".format(uname, pwd))
 
 # 8.增加可读性（parametrize参数中的ids，可以标识每一个测试用例，自定义测试数据结果的显示，增加可读性。）
-
 
 data_1 = [
     (1, 2, 3),
