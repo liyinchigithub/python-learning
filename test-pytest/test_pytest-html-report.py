@@ -3,10 +3,9 @@
 # -*- coding: UTF-8 -*-
 # 文件名：test-pytest-html-report.py
 # pytest-html
-# 测试报告
+# pytest测试报告
 
 '''
-
 
 '''
 
