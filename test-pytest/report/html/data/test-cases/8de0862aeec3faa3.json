@@ -1,0 +1,80 @@
+{
+  "uid" : "8de0862aeec3faa3",
+  "name" : "test_3",
+  "fullName" : "test_pytest#test_3",
+  "historyId" : "8453776a9f87aaa38277ab5a6cd6f195",
+  "time" : {
+    "start" : 1641970770461,
+    "stop" : 1641970770461,
+    "duration" : 0
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ {
+    "name" : "setup_module",
+    "time" : {
+      "start" : 1641970770457,
+      "stop" : 1641970770458,
+      "duration" : 1
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "afterStages" : [ {
+    "name" : "setup_module::teardown_module",
+    "time" : {
+      "start" : 1641970770461,
+      "stop" : 1641970770461,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "test_pytest"
+  }, {
+    "name" : "host",
+    "value" : "liyinchideMacBook-Pro.local"
+  }, {
+    "name" : "thread",
+    "value" : "89996-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "test_pytest"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "8de0862aeec3faa3.json",
+  "parameterValues" : [ ]
+}

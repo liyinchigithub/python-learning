@@ -1,0 +1,53 @@
+{
+  "uid" : "79e67f6b61ecab81",
+  "name" : "test_demo",
+  "fullName" : "test_pytest-allure-report#test_demo",
+  "historyId" : "7114efc4a77413aa08cd40255d817ae3",
+  "time" : {
+    "start" : 1641970760395,
+    "stop" : 1641970760395,
+    "duration" : 0
+  },
+  "status" : "failed",
+  "statusMessage" : "AssertionError: assert 3 == 4",
+  "statusTrace" : "@pytest.mark.flaky(reruns=2,reruns_delay=2)\n    def test_demo():\n>       assert 3==4\nE       assert 3 == 4\n\ntest_pytest-allure-report.py:37: AssertionError",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "tag",
+    "value" : "flaky(reruns=2, reruns_delay=2)"
+  }, {
+    "name" : "suite",
+    "value" : "test_pytest-allure-report"
+  }, {
+    "name" : "host",
+    "value" : "liyinchideMacBook-Pro.local"
+  }, {
+    "name" : "thread",
+    "value" : "89996-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "test_pytest-allure-report"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : true,
+  "retry" : true,
+  "extra" : {
+    "categories" : [ ],
+    "tags" : [ "flaky(reruns=2, reruns_delay=2)" ]
+  },
+  "source" : "79e67f6b61ecab81.json",
+  "parameterValues" : [ ]
+}
