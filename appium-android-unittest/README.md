@@ -41,4 +41,11 @@ python run.py
 * testcase
 存放测试用例脚本（以test开头unittest单元测试脚本）
 
+# appium capability 参数
+
+
+# 参考
+
+[unittest](https://docs.python.org/zh-cn/3/library/unittest.html)
+[appium capability](http://appium.io/docs/cn/writing-running-appium/caps/)
 

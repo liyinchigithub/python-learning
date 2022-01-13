@@ -24,7 +24,7 @@ import pytest
 
 # 1.单个数据
 data = ["小红", "小明"]
-
+@pytest.mark.skip(reason="功能未实现,暂不执行")
 @pytest.mark.parametrize("name", data)
 def test_demo(name):
     print("测试数据为{}".format(name))
@@ -35,9 +35,8 @@ data_1 = [
     {"username": "admin1", "password": "123456"},
     {"username": "admin2", "password": "12345678"},
 ]
-
+@pytest.mark.skip(reason="功能未实现,暂不执行")
 @pytest.mark.parametrize("data", data_1)
-
 def test_login(data):# 函数接收入参
     print("账号:{},密码:{}".format(data["username"], data["password"]))
 
@@ -48,7 +47,7 @@ data_1 = [
     ["admin2", "12345678"],
 ]
 
-
+@pytest.mark.skip(reason="功能未实现,暂不执行")
 @pytest.mark.parametrize("username,password", data_1)
 def test_login(username, password):
     print("账号:{},密码:{}".format(username, password))
@@ -60,17 +59,18 @@ data_1 = [
     ("admin2", "12345678"),
 ]
 
-
+@pytest.mark.skip(reason="功能未实现,暂不执行")
 @pytest.mark.parametrize("username,password", data_1)
 def test_login(username, password):
     print("账号:{},密码:{}".format(username, password))
 
-
+@pytest.mark.skip(reason="功能未实现,暂不执行")
 # 5.装饰函数
 @pytest.mark.parametrize("username,password", [("admin01", "123456"), ("admin02", "12345678")])
 def test_demo(username, password):
     print("用户名:{},密码:{}".format(username, password))
 
+@pytest.mark.skip(reason="功能未实现,暂不执行")
 # 6.装饰类
 @pytest.mark.parametrize("username,password", [("admin01", "123456"), ("admin02", "12345678")])
 class TestDemo:
@@ -81,7 +81,7 @@ class TestDemo:
 # 7.多个参数化修饰器
 username = ["admin1", "admin2", "admin3"]
 password = ["123456", "1234567", "12345678"]
-
+@pytest.mark.skip(reason="功能未实现,暂不执行")
 @pytest.mark.parametrize("uname", username)
 @pytest.mark.parametrize("pwd", password)
 def test_demo(uname, pwd):
@@ -99,8 +99,9 @@ ids = ["a:{}+b:{}=expect:{}".format(a, b, expect)for a, b, expect in data_1]
 def add(a, b):
     return a + b
 
-
+@pytest.mark.skip(reason="功能未实现,暂不执行")
 @pytest.mark.parametrize('a, b, expect', data_1, ids=ids)
 def test_parametrize_1(a, b, expect):
     print('\n测试函数1测试数据为\n{}-{}'.format(a, b))
     assert add(a, b) == expect
+

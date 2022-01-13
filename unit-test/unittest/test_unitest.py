@@ -29,7 +29,7 @@ class TestStringMethods(unittest.TestCase):# 派生类继承基类
 
     def test_upper(self):
         self.assertEqual('foo'.upper(), 'FOO')# 字符串转大写断言
-        self.assertEqual('FOO'.lower(), 'FOO')# 字符串转小写断言
+        self.assertEqual('FOO'.lower(), 'foo')# 字符串转小写断言
 
     def test_isupper(self):
         self.assertTrue('FOO'.isupper())# 判断是否大写
@@ -68,6 +68,5 @@ unittest.main() 提供了一个测试脚本的命令行接口。
 '''
 
 '''
-    命令行执行：pytest test-pytest.py -v
-    在调用测试脚本时添加 -v 参数使 unittest.main() 显示更为详细的信息
+    python test_unitest.py
 '''

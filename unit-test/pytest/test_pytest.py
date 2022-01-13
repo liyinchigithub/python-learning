@@ -68,7 +68,7 @@ class TestDemo():
     print("这是test_demo01")
  def test_demo02(self):
     print("这是test_demo02")
-    
+@pytest.mark.skip(reason="功能未实现,暂不执行")
 # 跳过某个方法
 class TestDemo():
     def test_demo01(self):
@@ -82,13 +82,13 @@ class TestDemo():
 def test_demo02():
     print("这是test_demo02")
     
-    
+@pytest.mark.skip(reason="功能未实现,暂不执行")
 # 用例断言失败，且标记为xfail
 @pytest.mark.xfail()
 def test_demo02():
     print("这是test_demo02")
     assert 1==2
-
+@pytest.mark.skip(reason="功能未实现,暂不执行")
 # 用例断言成功，标记为xfail
 @pytest.mark.xfail()
 def test_demo02():

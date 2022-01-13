@@ -11,6 +11,7 @@
 
 import pytest
 
+@pytest.mark.skip(reason="功能未实现,暂不执行")
 @pytest.mark.flaky(reruns=2,reruns_delay=2)
 def test_demo():
     assert 3==4

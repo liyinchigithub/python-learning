@@ -23,6 +23,7 @@
 import pytest
 import sys
 
+@pytest.mark.skip(reason="功能未实现,暂不执行")
 # 类级别冒烟测试
 @pytest.mark.smoke
 class TestDemo:
@@ -38,6 +39,7 @@ class TestDemo:
     def test_demo04():
         print("这是test_demo04")
 
+@pytest.mark.skip(reason="功能未实现,暂不执行")
 # 函数级别冒烟测试
 @pytest.mark.smoke
 def test_demo04():

@@ -16,12 +16,14 @@
     pip install pytest-rerunfailures
 '''
 import pytest
-# 
+@pytest.mark.skip(reason="功能未实现,暂不执行")
+# 重新运行
 @pytest.mark.flaky(reruns=2)
 def test_demo():
     assert 3 == 4
     print('一次')
-
+    
+@pytest.mark.skip(reason="功能未实现,暂不执行")
 # 指定运行等待时间
 @pytest.mark.flaky(reruns=2, reruns_delay=2)
 def test_demo():
