@@ -61,16 +61,19 @@ driver = webdriver.Chrome(ChromeDriverManager().install(),options=options, desir
 '''
 
 
-def setup_function():
-    print("setup_function():每个方法之前执行")
+# def setup_function():
+#     print("setup_function():每个方法之前执行")
 
 
-def teardown_function():
-    print("teardown_function():每个方法之后执行")
+# def teardown_function():
+#     print("teardown_function():每个方法之后执行")
 
-def setup_module():
-    print("teardown_function():每个方法之后执行")
-    driver.close()
+# def setup_module():
+#     print("teardown_module():每个模块（文件）之前执行")
+    
+# def setup_module():
+#     print("teardown_module():每个模块（文件）之后执行")
+#     driver.close()
     
     
 data=[("http://www.baidu.com","百度搜索"),("http://www.bing.com","必应搜索")]
