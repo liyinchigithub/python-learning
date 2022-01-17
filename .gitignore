@@ -30,3 +30,5 @@ HELP.md
 .idea/workspace.xml
 
 ./history
+__pycache__
+.pytest_cache

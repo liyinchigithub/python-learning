@@ -9,7 +9,7 @@ import sys;
 import stat;
 import xlsxwriter;
 import xlwt;
- 
+import pytest
 
 
 '''
@@ -17,8 +17,8 @@ import xlwt;
     使用当前的uid/gid尝试访问路径。大部分操作使用有效的 uid/gid, 因此运行环境可以在 suid/sgid 环境尝试。
 '''
 
-
-def osAccess():
+@pytest.mark.test
+def test_osAccess():
     result = os.access('./chromedriver', os.F_OK)  # 是否存在
     print("os.F_OK:", result)
 
@@ -39,14 +39,14 @@ def osAccess():
     在Unix, Windows中有效
 '''
 
-
-def removeFile():
+@pytest.mark.test
+def test_removeFile():
     # 删除文件前，判断是否存在
-    if(os.access('aa.txt', os.F_OK)):
+    if(os.access('./file/aa.txt', os.F_OK)):
         print("文件存在执行删除")
-        os.remove("aa.txt")
+        os.remove("./file/aa.txt")
         # 删除完成，判断是否存在
-        if(os.access("aa.txt",os.F_OK)):
+        if(os.access("./file/aa.txt",os.F_OK)):
             print("文件失败成功");
         else:
             print("文件删除成功");
@@ -58,7 +58,8 @@ def removeFile():
 '''
     os.listdir(os.getcwd()) 列出目录
 '''
-def dirFiles():
+@pytest.mark.test
+def test_dirFiles():
     print ("目录为: %s" %os.listdir(os.getcwd()))# 输出：['test19.py', 'favicon.ico', 'test-client-http-request.py', 'requirements.txt', 'test-pytesseract.py', 'test-client-http-urllib.py', 'test17.py', 'test.csv', 'test13.py', 'test-csv.py', 'test1.py', 'test12.py', 'tutorial-env', 'test-mongodb.py', 'test16.py', '.history', 'test2.py', 'test-class-object.py', 'README.md', 'test11.py', 'test-client-http-requests.py', 'test6.py', 'test15.py', 'test.xlsx', '.gitignore', 'test7.py', 'test20.py', 'test14.py', 'test-server-http.py', 'test3.py', 'test10.py', 'test-file.py', 'test8.py', 'chromedriver', '.git', 'test-selenium.py', 'test-server-socket.py', 'test-mysql.py', 'demo01.txt', 'coverage', 'demo02.txt', 'test18-os.py', 'test9.py']
 
 # dirFiles()
@@ -68,12 +69,13 @@ def dirFiles():
     os.rmdir(path) 删除空目录
     方法用于删除指定路径的目录。仅当这文件夹是空的才可以, 否则, 抛出OSError。
 '''
-
-def removeEmpty(path):
+@pytest.mark.skip
+@pytest.mark.parametrize("path",['./chromedriver'])
+def test_removeEmpty(path):
     try:
         os.rmdir(path); # 目录必须是空的
     except OSError:
-        print("出错了，非空目录")
+        print("出错了，非空目录"+OSError)
 # removeEmpty("chromedriver")
 
 '''
@@ -81,8 +83,9 @@ def removeEmpty(path):
     像rmdir(), 如果子文件夹成功删除, removedirs()才尝试它们的父文件夹,直到抛出一个error(它基本上被忽略,因为它一般意味着你文件夹不为空)。
     https://www.runoob.com/python3/python3-os-removedirs.html
 '''
-
-def removeDirs(path):
+@pytest.mark.test
+@pytest.mark.parametrize("path",['./file/a'])
+def test_removeDirs(path):
     try:
         os.removedirs(path); # 目录必须是空的
     except OSError:
@@ -94,8 +97,9 @@ def removeDirs(path):
     如果文件是一个目录则返回一个错误。
     https://www.runoob.com/python3/python3-os-unlink.html
 '''
-
-def unlink(path):
+@pytest.mark.test
+@pytest.mark.parametrize("path",['./file/aaa.txt'])
+def test_unlink(path):
     try:
         os.unlink(path); # 目录必须是空的
         # 删除后的目录
@@ -107,7 +111,7 @@ def unlink(path):
         else:
             print(path+"已经不存在")
         # 创建文件夹
-        os.mkdir("aaa.txt")    
+        os.mkdir(path)    
     except OSError:
         print("出错了")
 # unlink("aaa.txt")
@@ -122,9 +126,11 @@ def unlink(path):
 '''
     创建文件
 '''
-def createFile(fileName):
+@pytest.mark.test
+@pytest.mark.parametrize("fileName",['text'])
+def test_createFile(fileName):
     
-    file1 = open("./a/"+fileName + '.txt','w');# 指定路径下
+    file1 = open("./file/"+fileName + '.txt','w');# 指定路径下
     file2 = open(fileName + '.txt','w');
     file1.close()
     file2.close()
@@ -136,9 +142,9 @@ def createFile(fileName):
     如果第一个参数 path 只有一级，则 mkdir() 函数相同。
     https://www.runoob.com/python3/python3-os-makedirs.html
 '''
-
-def mkdir(path):
- 
+@pytest.mark.test
+@pytest.mark.parametrize("path",['a/test/'])
+def test_mkdir(path):
 	folder = os.path.exists(path)
 	if not folder:                   #判断是否存在文件夹如果不存在则创建为文件夹
 		os.makedirs(path)            #makedirs 创建文件时如果路径不存在会创建这个路径
@@ -147,7 +153,7 @@ def mkdir(path):
 	else:
 		print("---  There is this folder!  ---")
 		
-file = "a/test/" # 要创建的文件夹路径
+# file = "a/test/" # 要创建的文件夹路径
 # mkdir(file) 
 
 
@@ -155,12 +161,13 @@ file = "a/test/" # 要创建的文件夹路径
     在指定文件夹中创建txt文件，并写入内容
 '''
 
-
-def txt(name,text):
+@pytest.mark.test
+@pytest.mark.parametrize("filename,text",[('test','hello,python')])
+def test_txt(filename,text):
     file = os.getcwd()[:-4] + 'new'
     if not os.path.exists(file):     # 判断当前路径是否存在，没有则创建new文件夹
         os.makedirs(file)
-        xxoo = file + name + '.txt'    # 在当前py文件所在路径下的new文件中创建txt
+        xxoo = file + filename + '.txt'    # 在当前py文件所在路径下的new文件中创建txt
         file = open(xxoo,'w')
         file.write(text)        # 写入内容信息
         file.close()
@@ -170,9 +177,10 @@ def txt(name,text):
 '''
     创建Excel
 '''
-def createExcel():
+@pytest.mark.test
+def test_createExcel():
  
-    workbook = xlsxwriter.Workbook('test-1.xlsx')
+    workbook = xlsxwriter.Workbook('./file/test-1.xlsx')
             #在G盘xxoo文件下创建103的excel
     worksheet = workbook.add_worksheet('s001')
             #103的excel的sheet页名称为s001
@@ -186,20 +194,21 @@ def createExcel():
 '''
     创建Excel
 '''
-def createExcel2():
+@pytest.mark.test
+def test_createExcel2():
     wb = xlwt.Workbook()
     ws = wb.add_sheet('s001')# 指定sheet
     ws.write(0,0,452)
     ws.write(1,4,6868)
     ws.write(2,3,6666)
-    wb.save('103.xlsx')
+    wb.save('./file/103.xlsx')
 # createExcel2()
 
 '''
     os.getcwd() 返回当前工作目录。
 '''
-    
-def getDir():
+@pytest.mark.test
+def test_getDir():
     result=os.getcwd();
     print("os.getcwd():",result);
 
@@ -208,8 +217,8 @@ def getDir():
 '''
     os.system("pwd") 执行cmd命令。
 '''
-    
-def execCMD():
+@pytest.mark.test
+def test_execCMD():
     result=os.system("node -v");
     print("os.system():",result);
 
@@ -220,14 +229,18 @@ def execCMD():
     Unix 系统可用。
     https://www.runoob.com/python3/python3-os-chmod.html
 '''
-
-def chmod():
+@pytest.mark.skip
+def test_chmod():
     # 假定 /tmp/foo.txt 文件存在，设置文件可以通过用户组执行
-    os.chmod("/tmp/foo.txt", stat.S_IXGRP)
+    os.chmod("./file/aa.txt", stat.S_IXGRP)
     # 设置文件可以被其他用户写入
-    os.chmod("/tmp/foo.txt", stat.S_IWOTH)
+    os.chmod("./file/aa.txt", stat.S_IWOTH)
     
     
 '''
     切换目录
 '''
+
+
+if __name__=="__main__":
+    pytest.main();

@@ -21,6 +21,13 @@ Python 的 time 模块下有很多函数可以转换常见日期格式。如函�
 
 import time  # 引入time模块
 import datetime
+import pytest
 
-ticks = time.time()
-print ("当前时间戳为:", ticks)
+@pytest.mark.test
+def test_datatime():
+    ticks = time.time()
+    print ("当前时间戳为:", ticks)  
+
+
+if __name__=="__main__":
+    pytest.main();
