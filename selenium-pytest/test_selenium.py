@@ -34,7 +34,8 @@ driver=any
     CSS_SELECTOR = "css selector"
 '''
 def driverInit():
-        # 设置默认下载目录
+    # chrome options https://note.youdao.com/s/ER8jfnYo
+    # 设置默认下载目录
     download_file_path = './download_file/'
     prefs = {
         "download.prompt_for_download": False,
@@ -42,16 +43,11 @@ def driverInit():
     }
 
     options = webdriver.ChromeOptions()
-    # 谷歌浏览器驱动路径
-    options.binary_location = '/usr/bin/google-chrome-stable'
-    # 实例化ChromeOptions
-    options = webdriver.ChromeOptions()
-    # 关闭浏览器提示信息
-    options.add_argument('disable-infobars')
-    # 浏览器全屏
-    options.add_argument('start-fullscreen')
-    # 无头模式
-    # options.add_argument('--headless')
+    options.binary_location = '/usr/bin/google-chrome-stable' # 谷歌浏览器驱动路径
+    options = webdriver.ChromeOptions() # 实例化ChromeOptions
+    options.add_argument('disable-infobars')# 关闭浏览器提示信息
+    options.add_argument('start-fullscreen')# 浏览器全屏
+    # options.add_argument('--headless')# 无头模式
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-gpu')
     options.add_argument('--disable-setuid-sandbox')
