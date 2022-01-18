@@ -1,19 +1,19 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 # 文件名：test23-golb.py
-# Python 文件通配符
-# 
+# Python 通配符
+# https://note.youdao.com/s/KO8xvnYy
+
 from glob import glob
 import pytest
 import string
 import glob
 '''
-    全局变量是定义在函数外面的变量
-    局部变量就是定义在一个函数体内部的变量
+    文件通配符
 '''
 @pytest.mark.test
 def test_glob():
-    files =glob.glob('*.py')
+    files =glob.glob('*.py');# 过滤，只搜索以py结尾的文件
     print(files)
     
 '''
@@ -22,3 +22,24 @@ test23-golb.py::test_glob ['test7-list.py', 'test_class-object.py', 'test19.py',
 '''
 
 
+'''
+listglob1 = glob.glob("/Users/my_python/*.py")
+# 过滤，只搜索以py结尾的文件。
+print(listglob1)
+
+listglob2 = glob.glob("/Users/my_python/0?.py")
+print(listglob2)
+
+listglob3 = glob.glob("/Users/my_python/0[0,1,2].py")
+print(listglob3)
+
+listglob4 = glob.glob("/Users/my_python/0[0-3].py")
+print(listglob4)
+
+listglob5 = glob.iglob("/Users/my_python/0[a-z].py")
+print(listglob5)
+
+
+for item in listglob1:
+    print(item)
+'''
