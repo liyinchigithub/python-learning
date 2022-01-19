@@ -8,41 +8,46 @@
  f.read()
  读取文本文件
 '''
-def txtRead():
+import pytest;
+
+@pytest.mark.test
+def test_txtRead():
     try:
-        f=open("./demo01.txt","r")
+        f=open("./file/demo01.txt","r")
         print('''txtRead():'''+f.read())
     finally:
         if f:
-            f.close
+            f.close # 没有使用with as 则需要执行f.close()来关闭文件
         else:
             print("出错了");
+
 # 调用方法
-txtRead()
+# txtRead()
 
 '''
  f.read() with
  读取文本文件
 '''
-def txtReadWith():
+@pytest.mark.test
+def test_txtReadWith():
     try:
-        with open("./demo01.txt","r") as f:
+        with open("./file/demo01.txt","r") as f:
             print('''txtReadWith():'''+f.read())
     finally:
         if f:
             f.close
         else:
-            print("出错了");
-# 调用方法
-txtReadWith()
+            print("出错了");# 没有使用with as 则需要执行f.close()来关闭文件
+
 
 '''
  f.readlines()
  一次读取多行另外，调用readline()可以每次读取一行内容，调用readlines()一次读取所有内容并按行返回list
 '''
-def txtReadWithReadlines():
+@pytest.mark.test
+def test_txtReadWithReadlines():
     try:
-        with open("./demo01.txt","r") as f:
+        with open("./file/demo01.txt","r") as f:
             for line in f.readlines():
                 print('''txtReadWithReadlines():'''+line.strip()) # 把末尾的'\n'删掉  
     finally:
@@ -50,20 +55,35 @@ def txtReadWithReadlines():
             f.close
         else:
             print("出错了")
-# 调用方法
-txtReadWithReadlines()
+
 
 
 '''
  f.write()
  写入文本文件
 '''
-def txtWrite():
+@pytest.mark.test
+def test_txtWrite():
     try:
-        f = open('./demo02.txt', 'w')
-        f.write('Hello, world!')
-        f.close()
-    finally:
-        print("出错了")
+        with open('./file/demo02.txt', 'w') as f:
+            f.write('Hello, world!')
+            # f.close() # 使用with as 就不用再执行f.close
+    except FileNotFoundError:
+        print("出错了:",FileNotFoundError)
+'''
+    追加的方式打开文件，如果文件存在则在尾部进行追加输入
+    a 追加方式
+    a+ 读写的模式追加
+'''
 
-txtWrite()
+@pytest.mark.test
+def test_textAddpen():
+    try:
+        with open("./file/text.txt","a+") as fw: # 既要读
+            fw.write("测试测试下，");
+        with open("./file/text.txt","r+") as fr: # 又要写
+            result=fr.read()
+            print(type(result))
+            print("内容是",result)
+    except FileNotFoundError:
+         print("出错了:",FileNotFoundError)
