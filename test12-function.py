@@ -49,7 +49,18 @@ def test_print_welcome(w,h):
     print("width =", int(w), " height =", int(h), " area =", area(int(w), int(h)))
  
 
-
+'''
+    不定长参数
+    [示例]
+    定义函数:
+        def test_nolong(arg1,*vartuple):
+            print(arg1)
+            print(vartuple)\
+                
+    调用时test_nolong(1,2,3,4)
+     输出:  arg1为1 vartuple为(2,3,4) 即元组
+    
+'''
 
 
 
