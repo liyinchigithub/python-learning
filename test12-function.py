@@ -1,9 +1,9 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
-# 文件名：test12.py
-# Python 函数
+# 文件名：test12-function.py
+# Python 自定义函数函数
 # https://www.runoob.com/python3/python3-function.html
-
+import pytest
 '''
 函数是组织好的，可重复使用的，用来实现单一，或相关联功能的代码段。
 
@@ -20,38 +20,36 @@
 * 函数内容以冒号 : 起始，并且缩进。
 * return [表达式] 结束函数，选择性地返回一个值给调用方，不带表达式的 return 相当于返回 None。
 '''
-def hello() :
+@pytest.mark.test
+def test_hello():
     print("Hello World!")
 
-# hello()
 
 '''
 更复杂点的应用，函数中带上参数变量
 '''
 # 封装一个自定义函数，比较两个入参大小
-def max(a, b):
+@pytest.mark.test
+@pytest.mark.parametrize("a,b",[(4,5)])
+def test_max(a, b):
     if a > b:
         return str(a)+"大于"+str(b)
     else:
         return str(a)+"小于"+str(b)
- 
-a = 4
-b = 5
-# 调用函数
-# print(max(a, b))
 
 
 # 计算面积函数
+
 def area(width, height):
     return width * height
+
+@pytest.mark.test
+@pytest.mark.parametrize("w,h",[("4","5")]) # 入参数据类型字符串转数值
+def test_print_welcome(w,h):
+    print("width =", int(w), " height =", int(h), " area =", area(int(w), int(h)))
  
-def print_welcome(name):
-    print("Welcome", name)
- 
-print_welcome("Runoob")
-w = 4
-h = 5
-print("width =", w, " height =", h, " area =", area(w, h))
+
+
 
 
 
@@ -65,11 +63,15 @@ print("width =", w, " height =", h, " area =", area(w, h))
 '''
 
 # 定义函数
+@pytest.mark.test
+@pytest.mark.parametrize("str",["我要调用用户自定义函数!","再次调用同一函数"])
 def printme( str ):
    # 打印任何传入的字符串
    print (str)
    return
  
-# 调用函数
-printme("我要调用用户自定义函数!")
-printme("再次调用同一函数")
+
+
+'''
+    pytest test12-function.py
+'''
