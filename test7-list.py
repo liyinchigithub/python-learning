@@ -31,7 +31,7 @@ list4 = ['red', 'green', 'blue', 'yellow', 'white', 'black']
 
 
 '''
-   索引下标
+   [索引下标]
    https://www.runoob.com/python3/python3-list.html
 '''
 def listIndex():
@@ -49,7 +49,8 @@ def listIndex():
 # listIndex()
 
 '''
-更新列表
+[更新列表]
+append()
 '''
 def updateList():
    list = ['Google', 'Runoob', 1997, 2000]
@@ -66,6 +67,7 @@ def updateList():
 
 '''
    删除列表值
+   del 
 '''
 def delList():
    list = ['Google', 'Runoob', 1997, 2000]
@@ -76,7 +78,8 @@ delList()
 
 
 '''
-   合并列表值
+   [合并列表值]
+   +
 '''
 def listMerge():
    # 列表
@@ -86,8 +89,20 @@ def listMerge():
 
 # listMerge()
 
+
 '''
-嵌套列表
+   [列表截取与拼接]
+'''
+def test_():
+   L=['Google', 'Runoob', 'Taobao']
+   print(L[2])
+   print(L[-2])
+   print(L[1:])
+   print(L[:2])
+   
+   
+'''
+   [嵌套列表]
 [['a', 'b', 'c'], [1, 2, 3]]
 
 列表函数
@@ -100,7 +115,7 @@ def listMerge():
 序号	方法
 1	   list.append(obj)  在列表末尾添加新的对象
 2	   list.count(obj)   统计某个元素在列表中出现的次数
-3	   list.extend(seq)  在列表末尾一次性追加另一个序列中的多个值（用新列表扩展原来的列表）
+3	   list.extend(seq)  在列表末尾一次性追加另一个序列中的多个值（用新列表扩展原来的列表） 合并列表？？？
 4	   list.index(obj)   从列表中找出某个值第一个匹配项的索引位置
 5	   list.insert(index, obj) 将对象插入列表
 6	   list.pop([index=-1]) 移除列表中的一个元素（默认最后一个元素），并且返回该元素的值
