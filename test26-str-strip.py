@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding: UTF-8 -*-
 # 文件名：test26-str-strip.py
 # Python 删除字符串头尾和尾部指定字符或字符序列

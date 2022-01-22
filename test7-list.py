@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding: UTF-8 -*-
 # 文件名：test0.py
 # Python 列表
@@ -80,6 +80,7 @@ delList()
 '''
    [合并列表值]
    +
+   也可以用list1.extend(list2)
 '''
 def listMerge():
    # 列表

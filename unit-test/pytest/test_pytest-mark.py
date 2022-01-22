@@ -1,5 +1,5 @@
 
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding: UTF-8 -*-
 # 文件名：test-pytest-mark.py
 # pytest smoke
