@@ -4,6 +4,7 @@
 # 文件名：test07.py
 # selenium
 # https://selenium-python-zh.readthedocs.io/en/latest/
+# https://selenium-python-zh.readthedocs.io/en/latest/locating-elements.html
 
 import requests
 import time
@@ -23,7 +24,7 @@ from webdriver_manager.chrome import ChromeDriverManager  # 自动更新下载ch
 driver=any
 
 '''
-    By 类的一些可用属性
+    [By类]的一些可用属性
     ID = "id"
     XPATH = "xpath"
     LINK_TEXT = "link text"
@@ -32,6 +33,25 @@ driver=any
     TAG_NAME = "tag name"
     CLASS_NAME = "class name"
     CSS_SELECTOR = "css selector"
+    
+    find_element_by_id
+    find_element_by_name
+    find_element_by_xpath
+    find_element_by_link_text
+    find_element_by_partial_link_text
+    find_element_by_tag_name
+    find_element_by_class_name
+    find_element_by_css_selector
+
+    [一次查找多个元素 (这些方法会返回一个list列表)]:
+
+    find_elements_by_name
+    find_elements_by_xpath
+    find_elements_by_link_text
+    find_elements_by_partial_link_text
+    find_elements_by_tag_name
+    find_elements_by_class_name
+    find_elements_by_css_selector
 '''
 def driverInit():
     # chrome options https://note.youdao.com/s/ER8jfnYo
