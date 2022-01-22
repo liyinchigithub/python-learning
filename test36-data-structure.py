@@ -330,17 +330,20 @@ def test_dict03():
 '''
  [列表]
  要反向遍历一个序列，首先指定这个序列，然后调用 reversed() 函数：
-
->>> for i in reversed(range(1, 10, 2)):
-...     print(i)
+ 
+ 倒序函数[sorted()]
 ...
 9
 7
 5
 3
 1
-
 '''
+@pytest.mark.test
+def test_dict04():
+        for i in reversed(range(1, 10, 2)): # 1 到10 步长  输出：1、3、5、7、9 然后再倒序
+         print(i)
+
 
 '''
 要按顺序遍历一个序列，使用 sorted() 函数返回一个已排序的序列，并不修改原值：
