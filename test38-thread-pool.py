@@ -15,7 +15,7 @@ from utils.save import SaveToSqlite
 '''
 @pytest.mark.test
 def test_thread01():
-    print("生成 0 ~ 9 之间的随机数:".format())
+    print("".format())
 
 
 '''
@@ -23,5 +23,5 @@ def test_thread01():
 '''
 @pytest.mark.test
 def test_thread02():
-    print("生成 0 ~ 9 之间的随机数:".format())
+    print("".format())
 
