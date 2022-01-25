@@ -54,3 +54,9 @@ tutorial-env\Scripts\activate.bat
 * 如果安装新的第三方库或者更新的版本号都要手动执行pip freeze > requirements.txt比较麻烦，可能造成忘记更新requirements.txt文件。
 * requirements.txt会记录安装的第三方库所依赖的第三方库。
 * Virtualenv会在项目中生成一个venv目录，venv包含了所有第三方库及Python环境，会造成项目比较大。
+
+
+#### 冻结第三方库，就是将所有第三方库及版本号保存到requirements.txt文本文件中
+```shell
+pip freeze > requirements.txt
+```
