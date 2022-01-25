@@ -318,7 +318,16 @@ def test_post_json_01():
     json = {'age': '22'}  # 请求body
     response = requests.post("http://httpbin.org/post", json=json)
     print(response.text)
-
+    
+'''
+    json
+'''
+@pytest.mark.skip
+def test_post_json_02():
+    response = requests.get("http://httpbin.org/get")
+    print(type(response.text))
+    print(response.json())
+    print(json.loads(response.text))
 
 '''
     [POST] 
