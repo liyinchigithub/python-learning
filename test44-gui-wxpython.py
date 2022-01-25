@@ -2,8 +2,8 @@
 # -*- coding: UTF-8 -*-
 # test44-gui-wxpython.py
 # Python GUI
-# https://blog.csdn.net/qq_15158911/article/details/87600828
-# https://xufive.blog.csdn.net/article/details/82665460
+# https://blog.csdn.net/chenghit/article/details/50421090
+
 import pytest
 import wx
 
