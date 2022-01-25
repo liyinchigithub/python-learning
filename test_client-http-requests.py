@@ -4,6 +4,7 @@
 # requests库
 # http://www.zzvips.com/article/150840.html
 # https://mp.weixin.qq.com/s/ZUCx7_sOGtPYDNMlx5I7IQ
+# https://blog.csdn.net/qq_43645530/article/details/104088859   
 # [代码可以通过postman生python code]
 
 from os import error
