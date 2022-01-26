@@ -38,11 +38,29 @@ def test_iter02():
    for x in it:
       print (x, end=" ") # 1 2 3 4
       
+# for输出的是同行，而next输出的是同列      
+      
+      
 '''
    不使用迭代器
 '''
 @pytest.mark.test
 def test_iter03():
    list=[1,2,3,4]
+   # for 遍历
    for x in list:
       print (x, end=" ") # 1 2 3 4
+      
+      
+'''
+   结束迭代器
+'''
+@pytest.mark.test
+def test_stop_iter():
+   l=[1,2,3,4,5] # 迭代器可迭代 元组、数组、字符串
+   try:
+      while True:
+         it=iter(l)
+         print(next(it))
+   except IndentationError:
+      sys.exit()
