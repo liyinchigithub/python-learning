@@ -1,7 +1,7 @@
 
 #!/usr/bin/python3
 # -*- coding: UTF-8 -*-
-# 文件名：test07.py
+# 文件名：test_selenium.py
 # selenium
 # https://selenium-python-zh.readthedocs.io/en/latest/
 # https://selenium-python-zh.readthedocs.io/en/latest/locating-elements.html
