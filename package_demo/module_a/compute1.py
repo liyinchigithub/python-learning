@@ -16,4 +16,5 @@ class compute:
 
 
 if __name__ == "__main__":
+    # 模块被其他模块引入调用时候，这边便会输出
     print("package_demo.module_b.compute.py __init__")
