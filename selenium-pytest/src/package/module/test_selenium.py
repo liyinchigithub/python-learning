@@ -9,19 +9,12 @@
 import requests
 import time
 import pytest
-# import pytesseract # 验证码识别
-# from selenium.webdriver import Remote
-# import json
 from selenium import webdriver
-from PIL import Image, ImageEnhance
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
-from webdriver_manager.chrome import ChromeDriverManager  # 自动更新下载chromedriver
-# driver = webdriver.Chrome(ChromeDriverManager().install())# 自动更新下载chromedriver
-# driver = webdriver.Chrome("./chromedriver/chromedriver")# 手动指定chromedriver
-driver=any
+from driver_init import *
+# import pytesseract # 验证码识别
+# import json
+# 实例化/初始化
+driver=DriverConfig.driver_config(webdriver)
 
 '''
     [By类]的一些可用属性
@@ -53,33 +46,7 @@ driver=any
     find_elements_by_class_name
     find_elements_by_css_selector
 '''
-def driverInit():
-    # chrome options https://note.youdao.com/s/ER8jfnYo
-    # 设置默认下载目录
-    download_file_path = './download_file/'
-    prefs = {
-        "download.prompt_for_download": False,
-        "download.default_directory": download_file_path
-    }
-
-    options = webdriver.ChromeOptions()
-    options.binary_location = '/usr/bin/google-chrome-stable' # 谷歌浏览器驱动路径
-    options = webdriver.ChromeOptions() # 实例化ChromeOptions
-    options.add_argument('disable-infobars')# 关闭浏览器提示信息
-    options.add_argument('start-fullscreen')# 浏览器全屏
-    # options.add_argument('--headless')# 无头模式
-    options.add_argument('--no-sandbox')
-    options.add_argument('--disable-gpu')
-    options.add_argument('--disable-setuid-sandbox')
-    options.add_experimental_option('prefs', prefs)
-    # 获取谷歌浏览器所有控制台信息
-    des = DesiredCapabilities.CHROME
-    des['loggingPrefs'] = {'performance': 'ALL'}
-    # 浏览器驱动 executable_path=chromedriver
-    global driver # 对全局变量给了重新的指向
-    # 通过global关键字表示我在函数里面的这个变量是使用的全局那个
-    driver = webdriver.Chrome(ChromeDriverManager().install(
-    ), options=options, desired_capabilities=options.to_capabilities())
+    
     
 
 def setup_module():
@@ -96,7 +63,6 @@ def teardown_class():
 
 def setup_function():
     print("setup_function():非类中的方法，每个方法之前执行")
-    driverInit()
 
 
 def teardown_function():
@@ -110,6 +76,10 @@ def teardown_method():
 
 
 def setup_module():
+    print("teardown_module():每个模块（文件）之后执行")
+
+def teardown_module():
+    driver.close()
     print("teardown_module():每个模块（文件）之后执行")
 
 
