@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: UTF-8 -*-
-# 文件名：test20.py
-# Python 日期和时间
+# 文件名：test20-time.py
+# Python 日期、时间
 # https://www.runoob.com/python3/python3-date-time.html 
 
 import time  # 引入time模块
@@ -32,11 +32,39 @@ def test_datatime():
     print ("当前时间戳为:", ticks)  
 
 '''
-    [获取年-月-日 时:分:秒]
+    [格式化]
+    年-月-日 时:分:秒
 '''
 @pytest.mark.test
-def test_get_year_month_day_hours_mi():
-    print()
+def test_strftime():
+    print("格式化",time.strftime("%Y-%m-%d %H:%M:%S",time.localtime()))# 输出：2022-01-29 20:53:13
+    print("星期完整：",time.strftime("%A",time.localtime()))# 输出：Saturday
+    print("星期简化",time.strftime("%a",time.localtime()))# 输出：Sat
+
+'''
+    符号    含义             范围        示例
+    %y      年份            0-99        22
+    %Y      年份           000-999      2022  
+    %m      月份            01-12        1
+    %d      每月中的某天     0-31         29
+    %H      小时（24）      0-23         16
+    %I      小时（12）      0-11          1
+    %M      分钟            0-59         59
+    %S      秒              0-59         59   
+    %a      星期（简化）                  Sat
+    %A      星期（完整）                  Saturday
+    %b      月份（简化）
+    %B      月份（完整）
+    %c      对应日期和时间表示
+    %j      全年某一天      001-365       250
+    %U      一年中的星期数,周日开始 00-53
+    %w      星期            0-6         6即星期天
+    %W      一年中的星期数，周一开始 00-53
+    %x      日期表示
+    %X      时间表示
+    %Z      时区
+    %%      %号
+'''
 
 
 '''
@@ -55,6 +83,7 @@ def test_localtime():
     print("test_localtime:{}".format(localtime.tm_hour))# 获取 时
     print("test_localtime:{}".format(localtime.tm_min))# 获取 分
     print("test_localtime:{}".format(localtime.tm_sec))# 获取 秒
+    # 获取每个key值
     t="{}-{}-{} {}:{}:{}".format(localtime.tm_year,localtime.tm_mon,localtime.tm_mday,localtime.tm_hour,localtime.tm_min,localtime.tm_sec)
     print("现在是:{}".format(t)) # 输出:现在是:2022-1-24 11:16:15  注意：这边数据类型字符串
 
@@ -83,7 +112,7 @@ def test_format_time():
     # 格式化成Sat Mar 28 22:24:24 2016形式
     print (time.strftime("%a %b %d %H:%M:%S %Y", time.localtime()))# 输出:Mon Jan 24 11:19:47 2022
     
-    # 将格式字符串转换为时间戳
+    # 将格式字符串转换为时间戳 这边使用strptime()
     a = "Sat Mar 28 22:24:24 2016"
     print (time.mktime(time.strptime(a,"%a %b %d %H:%M:%S %Y"))) # 输出:1459175064.0
 
