@@ -9,7 +9,7 @@ import yaml
 import datetime
 import pytz
 import os
-from ruamel import yaml
+from ruamel import yaml     # pip3 install ruamel.yaml
 
 '''
     [安装依赖]
@@ -38,9 +38,10 @@ from ruamel import yaml
 
 
 '''
-    load()示例：返回一个对象
+    load()示例:
+    返回一个对象
 '''
-@pytest.mark.test
+@pytest.mark.skip
 def test_():
     yaml_str = """
     name: 一条大河
@@ -53,14 +54,15 @@ def test_():
 
 
 '''
-    load_all()示例
+    load_all()
     [生成一个迭代器]
     如果string或文件包含几块yaml文档，可以使用yaml.load_all来解析全部的文档。
     yaml_test.yaml文件内容：
 '''
 
-@pytest.mark.test
-def test_yaml():
+@pytest.mark.skip
+def test_yaml_all():
+    # 通过open方式读取文件数据，再通过load_all函数将数据转化为列表或字典
     with open("./yaml/yaml_test.yaml", 'r', encoding='utf-8') as f:
         cfg = yaml.load_all(f, Loader=yaml.SafeLoader)
         for data in cfg:
@@ -69,23 +71,55 @@ def test_yaml():
 
 
 '''
-    dump()示例：将一个python对象生成为yaml文档
+    dump()
+    [对象转yaml（生成yaml文件）]
+    将一个python对象生成为yaml文档
 '''
+@pytest.mark.test
+def test_json_to_yaml():
+    json_data = {'name': '一条大河',
+                'age': 1956,
+                'job': ['Singer','Dancer']}
 
+    y = yaml.dump(json_data, default_flow_style=False).encode('utf-8').decode('unicode_escape')
+    print(y)
 
 
 
 '''
     使用dump()传入参数，可以直接把内容写入到yaml文件：
 '''
+@pytest.mark.test
+def test_json_to_yaml_save():
+    json_data = {'name': '一条大河',
+                'age': 1956,
+                'job': ['Singer', 'Dancer']}
+    with open('./yaml/yaml_write.yaml', 'w+') as f:
+        # json数据转成yaml并将yaml内容写入文件中
+        y = yaml.dump(json_data, f)
+        print(y)
 
 
 
 
 '''
-    yaml.dump_all()示例：将多个段输出到一个文件中
+    yaml.dump_all()
+    [将多个段输出到一个文件中]
 '''
-
+@pytest.mark.test
+def test_yaml_write_all():
+    obj1 = {"name": "river", "age": 2019}
+    obj2 = ["Lily", 1956]
+    obj3 = {"gang": "ben", "age": 1963}
+    obj4 = ["Zhuqiyu", 1994]
+    # 写入yaml文件中
+    with open('./yaml/yaml_write_all.yaml', 'w', encoding='utf-8') as f:
+        y = yaml.dump([obj1, obj2, obj3, obj4], f)
+        print(y)
+    # 读取yaml文件
+    with open('./yaml/yaml_write_all.yaml', 'r') as r:
+        y1 = yaml.load(r, Loader=yaml.SafeLoader)
+        print(y1)
 
 
 
@@ -96,10 +130,8 @@ def test_yaml():
 '''
 
 
-
-
 '''
-    YAML的[语法规则]和[]数据结构
+    YAML的[语法规则]和[数据结构]
 
     看完了以上4个简单的示例，现在就来总结下YAML语言的基本语法
 
@@ -133,75 +165,69 @@ def test_yaml():
     yaml_test_data.yaml的内容：
 '''
 
-@pytest.mark.test
-def test_data_yaml():
-        yaml_data = {
-        "str": "Big River",
-        "int": 1548,
-        "float": 3.14,
-        'boolean': True,
-        "None": None,
-        'time': datetime.datetime.now(tz=pytz.timezone('UTC')).isoformat(),
-        'date': datetime.datetime.today()
-    }
+# @pytest.mark.skip
+# def test_data_yaml():
+#         yaml_data = {
+#         "str": "Big River",
+#         "int": 1548,
+#         "float": 3.14,
+#         'boolean': True,
+#         "None": None,
+#         'time': datetime.datetime.now(tz=pytz.timezone('UTC')).isoformat(),
+#         'date': datetime.datetime.today()
+#     }
 
-        with open('./yaml/yaml_test.yml', 'w') as f:
-            y = yaml.dump(yaml_data, f)
-            print(y)
+#         with open('./yaml/yaml_test.yml', 'w') as f:
+#             y = yaml.dump(yaml_data, f)
+#             print(y)
 
-        with open('./yaml/yaml_test.yml', 'r') as r:
-            y1 = yaml.load(r, Loader=yaml.SafeLoader)
-            print(y1)
+#         with open('./yaml/yaml_test.yml', 'r') as r:
+#             y1 = yaml.load(r, Loader=yaml.SafeLoader)
+#             print(y1)
 
 
 
 '''
+    yaml.dump()
     [python对象生成yaml文档]
-
-    1、yaml.dump()方法
 '''
-# @pytest.mark.test
-def generate_yaml_doc(yaml_file):
+@pytest.mark.test
+def test_generate_yaml_doc():
+        current_path = os.path.abspath(".")
+        yaml_path = os.path.join(current_path, "generate.yaml")
         py_object = {'school': 'zhu',
                     'students': ['a', 'b']}
-        file = open(yaml_file, 'w', encoding='utf-8')
+        file = open(yaml_path, 'w', encoding='utf-8')
         yaml.dump(py_object, file)
         file.close()
 
-current_path = os.path.abspath(".")
-yaml_path = os.path.join(current_path, "generate.yaml")
-generate_yaml_doc(yaml_path)
+
 
 '''
+    使用ruamel模块中的yaml方法生成标准的yaml文档
     [python对象生成yaml文档]
-
-    2、使用ruamel模块中的yaml方法生成标准的yaml文档
 '''
-# @pytest.mark.test
-def generate_yaml_doc_ruamel(yaml_file):
+@pytest.mark.test
+def test_generate_yaml_doc_ruamel():
+    current_path = os.path.abspath(".")
+    yaml_path = os.path.join(current_path, "generate.yaml")
     py_object = {'school': 'zhu',
                  'students': ['a', 'b']}
-    file = open(yaml_file, 'w', encoding='utf-8')
+    file = open(yaml_path, 'w', encoding='utf-8')
     yaml.dump(py_object, file, Dumper=yaml.RoundTripDumper)
     file.close()
 
-current_path = os.path.abspath(".")
-yaml_path = os.path.join(current_path, "generate.yaml")
-generate_yaml_doc_ruamel(yaml_path)
-
 
 '''
-    使用ruamel模块中的yaml方法读取yaml文档（用法与单独import yaml模块一致）
+    [ruamel模块中的yaml方法读取yaml文档]
+    （用法与单独import yaml模块一致）
 '''
-def get_yaml_data_ruamel(yaml_file):
-    file = open(yaml_file, 'r', encoding='utf-8')
-    data = yaml.load(file, Loader=yaml.Loader)
-    file.close()
-    print(data)
-
-current_path = os.path.abspath(".")
-yaml_path = os.path.join(current_path, "generate.yaml")
-get_yaml_data_ruamel(yaml_path)
+def test_get_yaml_data_ruamel():
+    current_path = os.path.abspath(".")
+    yaml_path = os.path.join(current_path, "generate.yaml")
+    with open(yaml_path, 'r', encoding='utf-8') as f:
+        data = yaml.load(f, Loader=yaml.Loader)
+        print(data)
 
 
 
