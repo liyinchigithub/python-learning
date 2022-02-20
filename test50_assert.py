@@ -28,3 +28,9 @@ if not expression:
 def test_assert():
     # 断言当前运行平台
     assert ('darwin' in sys.platform), "该代码只能在 Mac 下执行（Linux、Windows）"
+    
+    assert(1>2) # AssertionError
+    
+'''
+    运行命令行：pytest test50_assert.py
+'''
