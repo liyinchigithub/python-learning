@@ -6,7 +6,7 @@
 
 
 '''
-    类(Class): 用来描述具有相同的属性和方法的对象的集合。它定义了该集合中每个对象所共有的属性和方法。对象是类的实例。
+    类(Class): 用来描述具有相同的属性和方法的对象的集合，它定义了该集合中每个对象所共有的属性和方法，对象是类的实例。
     [方法]类中定义的函数。
     [类变量]类变量在整个实例化的对象中是公用的。类变量定义在类中且在函数体之外。类变量通常不作为实例变量使用。
     [数据成员]类变量或者实例变量用于处理类及其实例对象的相关的数据。
@@ -190,7 +190,9 @@ class speaker():
 class sample(speaker,student):
     a =''
     def __init__(self,n,a,w,g,t):
+        # 子类调用父类构造函数
         student.__init__(self,n,a,w,g)
+        # 子类调用父类构造函数
         speaker.__init__(self,n,t)
  
 test = sample("Tim",25,80,4,"Python")
@@ -207,7 +209,7 @@ class Parent:        # 定义父类
       print ('调用父类方法')
  
 class Child(Parent): # 定义子类
-   def myMethod(self):
+   def myMethod(self):# 子类中使用和父类同名称就是重写方法？？？
       print ('调用子类方法')
  
 c = Child()          # 子类实例
