@@ -14,8 +14,9 @@ import json
 
 '''
     [pip命令安装]
-    windows系统下只需要在命令行输入命令 'pip install requests'
-    linux、mac系统下，只需要输入命令 'sudo pip install requests'
+    windows系统下，输入命令 'pip install requests'
+    linux、mac系统下，输入命令 'sudo pip install requests'
+    
     [下载安装包安装（手动安装）]
     由于pip命令可能安装失败所以有时我们要通过下载第三方库文件来进行安装。
     在github上的地址为：https://github.com/requests/requests 下载文件到本地之后，解压到python安装目录。
@@ -24,7 +25,7 @@ import json
 '''
 
 '''
-    [requests库7个主要方法]
+    [requests]7个主要方法
             方法	        解释
     requests.request()	构造一个请求，支持以下各种方法
     requests.get()	获取html的主要方法
@@ -36,7 +37,7 @@ import json
 '''
 
 '''
-    [response属性]
+    [response]
             属性	            说明
     response.status_code	    http请求的返回[状态码]，若为200则表示请求成功。
     response.text	            http响应内容的[字符串形式]，即返回的页面内容

@@ -1,0 +1,13 @@
+<!doctype html>
+
+<title>Hello Flask Sample demo</title>
+{% from 'macros.html' import form_field %}
+
+{% extends 'base.html' %}
+{% block content %}
+    <form method="post" enctype="multipart/form-data">
+        {{ form.csrf_token }}
+        {{ form_field(form.photo) }}<br>
+        {{ form.submit }}<br>
+    </form>
+{% endblock %}
