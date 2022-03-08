@@ -60,3 +60,10 @@ tutorial-env\Scripts\activate.bat
 ```shell
 pip freeze > requirements.txt
 ```
+
+
+### 单元测试
+
+```shell
+pytest
+```
