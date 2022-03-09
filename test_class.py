@@ -30,3 +30,26 @@ def  test_sin_father_class():
     运行脚本：
     pytest test_class.py
 '''
+
+
+'''
+[如何从python中的其他文件夹导入类?]
+common/src/validation/file1.py
+在common / src / validation文件夹中，定义了“ _init_ ”。
+
+common/test/validation/file2.py
+common/test/validation/case/file3.py
+在file2.py和file3.py中，我想从file1.py导入类。
+
+我在file2.py和file3.py中给出以下行：
+
+from file1 import class1  
+我目前收到错误消息：
+
+#ImportError: No module named file1
+sys.path.append应该是什么？
+
+解决办法：
+sys.path.append('/src/validation/')
+from file1 import class1
+'''
