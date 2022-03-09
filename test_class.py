@@ -50,6 +50,10 @@ from file1 import class1
 sys.path.append应该是什么？
 
 解决办法：
+第一种
+点阵方式，例如：from  api.log import log
+api文件夹下有个log.py log.py中封装log类，使用类方法log().方法名()
+第二种
 sys.path.append('/src/validation/')
 from file1 import class1
 '''
