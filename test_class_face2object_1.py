@@ -243,7 +243,7 @@ counter = JustCounter()
 counter.count()
 counter.count()
 print (counter.publicCount)
-print (counter.__secretCount)  # 报错，实例不能访问私有变量
+# print (counter.__secretCount)  # 报错，实例不能访问私有变量
 
 # 类私有方法
 class Site:
@@ -265,4 +265,4 @@ class Site:
 x = Site('菜鸟教程', 'www.runoob.com')
 x.who()        # 正常输出
 x.foo()        # 正常输出
-x.__foo()      # 报错
+# x.__foo()      # 报错

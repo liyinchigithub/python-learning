@@ -58,3 +58,9 @@ class Test_class_02(unittest.TestCase):
 if __name__ == '__main__':
     suite = unittest.TestLoader().discover('.')# 批量执行测试文件，在当前目录
     unittest.TextTestRunner(verbosity=2).run(suite)
+    
+            
+'''
+    执行测试用例:
+    python -m unittest -v test53_unittest02
+'''

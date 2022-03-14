@@ -87,3 +87,11 @@ def test_textAddpen():
             print("内容是",result)
     except FileNotFoundError:
          print("出错了:",FileNotFoundError)
+         
+         
+         
+'''
+    命令行执行：pytest test_file_pytest.py --reruns 2
+    --reruns x 即失败重试x次
+    --reruns-delay 重试间隔时间
+'''

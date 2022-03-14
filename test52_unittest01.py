@@ -88,3 +88,9 @@ if __name__ == '__main__':
         suite.addTest(Test_class_02("test_02_02_sum"))# 添加测试用例到测试集，测试用例 导入另一个测试文件测试类的测试用例
         suite.addTest(Test_class_02("test_02_01_sum"))# 添加测试用例到测试集，测试用例 导入另一个测试文件测试类的测试用例
         unittest.TextTestRunner().run(suite)# 运行测试集
+        
+        
+'''
+    执行测试用例:
+    python -m unittest -v test52_unittest01
+'''
