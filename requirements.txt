@@ -119,3 +119,5 @@ xmltodict==0.12.0
 yarg==0.1.9
 yarl==1.7.2
 zipp==3.7.0
+ddt==1.4.4
+parameterized==0.8.1

@@ -19,6 +19,7 @@ import numpy as np
     去除隐藏文件，即以“.”开头的文件；
 '''
 
+
 def traverse_dir_files(root_dir, ext=None):
     """
     列出文件夹中的文件, 深度遍历
@@ -50,6 +51,7 @@ def traverse_dir_files(root_dir, ext=None):
         当文件夹存在时，根据参数，是否删除文件夹；
 '''
 
+
 def mkdir_if_not_exist(dir_name, is_delete=False):
     """
     创建文件夹
@@ -62,7 +64,7 @@ def mkdir_if_not_exist(dir_name, is_delete=False):
             if os.path.exists(dir_name):
                 shutil.rmtree(dir_name)
                 print('[INFO] 文件夹 "%s" 存在, 删除文件夹.' % dir_name)
- 
+
         if not os.path.exists(dir_name):
             os.makedirs(dir_name)
             print('[INFO] 文件夹 "%s" 不存在, 创建文件夹.' % dir_name)
@@ -70,7 +72,8 @@ def mkdir_if_not_exist(dir_name, is_delete=False):
     except Exception as e:
         print('[Exception] %s' % e)
         return False
-    
+
+
 '''
     [文件读取]
     文件读取函数提供的功能和扩展，如下：
@@ -78,6 +81,8 @@ def mkdir_if_not_exist(dir_name, is_delete=False):
         当参数mode是one时，读取1行；
         当参数mode是more时，读取多行；
 '''
+
+
 def read_file(data_file, mode='more'):
     """
     读文件, 原文件和数据文件
@@ -95,13 +100,16 @@ def read_file(data_file, mode='more'):
                 return list()
     except IOError:
         return list()
-    
+
+
 '''
     [时间可读]
     可读时间函数提供的功能和扩展，如下：
     输入时间戳（如time.time()），输出可读时间str；
     输出格式是年-月-日 时:分:秒；
 '''
+
+
 def timestamp_2_readable(time_stamp):
     """
     时间戳转换为可读时间
@@ -111,24 +119,25 @@ def timestamp_2_readable(time_stamp):
     return datetime.fromtimestamp(time_stamp).strftime('%Y-%m-%d %H:%M:%S')
 
 
-
-    
 '''
     [时间统计]
     时间统计函数提供的功能和扩展，如下：
     显示起始和结束时间；
     统计执行的秒数，可以用于统计单次耗时；
 '''
+
+
 def time_count():
     start_time = datetime.now()  # 起始时间
     print("[INFO] 当前时间: %s" % timestamp_2_readable(time.time()))
-    
+
     time.sleep(10)
-    
+
     print("[INFO] 结束时间: %s" % timestamp_2_readable(time.time()))
     elapsed_time = (datetime.now() - start_time).total_seconds()  # 终止时间
     print("[INFO] 耗时: %s (秒)" % elapsed_time)
- 
+
+
 '''
     [安全除法]
     安全除法函数提供的功能和扩展，如下：
@@ -136,6 +145,7 @@ def time_count():
     转换为浮点数（float）；
     避免除数为0，当除数为0时，直接返回0.0；
 '''
+
 
 def safe_div(x, y):
     """
@@ -158,6 +168,8 @@ def safe_div(x, y):
         同时排序列表1和列表2；
         两个列表的对应顺序不变；
 '''
+
+
 def sort_two_list(list1, list2):
     """
     排序两个列表
@@ -172,11 +184,11 @@ def sort_two_list(list1, list2):
 '''
     [配置读取]
     配置读取函数提供的功能和扩展，如下：
-        配置文件是JSON格式；
-        配置文件转换为配置类和配置字典
+    配置文件是JSON格式；
+    配置文件转换为配置类和配置字典
 '''
 
- 
+
 def get_config_from_json(json_file):
     """
     将配置文件转换为配置类
@@ -190,14 +202,32 @@ def get_config_from_json(json_file):
 
 
 '''
+    [json转字典]
+    多层嵌套json转字典
+    参考：https://www.cnblogs.com/dayiran1222/p/8744624.html
+'''
+
+
+def get_multiple_json():
+    v = {"a": {"a1": 1, "a2": 2},
+         "b": {"b1": 1, "b2": 2}}
+    hjson = json.loads(v.read())
+    print(hjson['a'])
+    print(hjson['a']['a1'])
+    print(hjson['b']['b1'])
+
+
+'''
     [Numpy判空]
     空的NdArray可以用于异常处理；
     当NdArray的属性size值为0时，NdArray为空。
 '''
+
+
 def is_empty():
 
     a = np.array([])
-    print(a.size) # 0
+    print(a.size)  # 0
 
 
 '''
@@ -205,10 +235,9 @@ def is_empty():
     当执行Python脚本时，路径未包含当前工程，需要强制指定文件夹位置（dirname），否则无法找到同工程中的其他类。
     以下是二层路径的实现，当层次较多时，嵌套多次os.path.dirname即可。
 '''
+
+
 def script_path():
     p = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     if p not in sys.path:
         sys.path.append(p)
-    '''
-
-'''

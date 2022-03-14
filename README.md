@@ -64,6 +64,11 @@ pip freeze > requirements.txt
 
 ### 单元测试
 
+* pytest
 ```shell
 pytest
+
+* unittest
+```shell
+python -m unittest -v test52_unittest01.py
 ```
