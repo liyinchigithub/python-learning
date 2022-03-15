@@ -72,3 +72,14 @@ pytest
 ```shell
 python -m unittest -v test52_unittest01.py
 ```
+
+* pytest 测试报告 pytest-html
+```shell
+
+```
+
+* pytest 测试报告 allure-pytest
+```shell
+cd allure-2.17.2/bin
+
+```

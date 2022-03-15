@@ -3,60 +3,73 @@
 # 文件名:test56_pytest.py
 
 import pytest
+import logging
+# 日志级别、时间格式配置
+logging.basicConfig(level=logging.DEBUG,
+                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)# 实例化
 
-# def setup_function() -> None:
-#         print("不在类中，每个测试用例执行之前")
-        
-# def teardown_function() -> None:
-#         print("不在类中， 每个测试用例执行之后")
+def setup_function() -> None:
+        print("不在类中，每个测试用例执行之前")
 
-# @pytest.mark.test
-# @pytest.mark.L1
-# def test_not_class_function():
-#     print("test_not_class_function 不在类中，测试用例")
+def teardown_function() -> None:
+        print("不在类中， 每个测试用例执行之后")
+
+@pytest.mark.test
+@pytest.mark.L1
+def test_not_class_function():
+    print("test_not_class_function 不在类中，测试用例")
 
 
 class Test():
     def setup_class(self) -> None:
-        print("setup_class 整个类之前")
-        
+        logger.debug("setup_class 整个类之前")
+
     def teardown_class(self) -> None:
         print("teardown_class 整个类之后")
-        
+
     def setup_method(self) -> None:
         print("Test_class_01 类中每个测试用例执行之前")
-        
+
     def teardown_method(self) -> None:
         print("Test_class_01 类中每个测试用例执行之后")
-        
+
     def setUp(self) -> None:
         print("setUp 每个测试用例执行之前")
-        
+
     def tearDown(self) -> None:
         print("tearDown 每个测试用例执行之后")
-    
+
     @pytest.mark.L1
     def test_01(self) -> None:
         print("test_01 测试用例")
-        
+
     @pytest.mark.L2
     def test_02(self) -> None:
-        
+
         print("test_02 测试用例")
-        
+
     @pytest.mark.skip(reason="跳过用例")
     @pytest.mark.L3
     def test_03(self) -> None:
         print("test_03 测试用例")
+    # 参数化
 
-                
+    @pytest.mark.L4
+    @pytest.mark.test
+    @pytest.mark.parametrize(("A", "B", "C"), [("张三", "李四", "王五"), ("赵钱", "孙李", "周庄")])
+    def test_04(self, A, B, C):
+        print("A:{},B:{},C:{}".format(A, B, C))
+
+
 if __name__ == '__main__':
-        pytest.main(["-s","test56_pytest.py","--html=./reports/report.html"])# 运行指定文件
-        
+    pytest.main(["-s", "test56_pytest.py",
+                "--html=./reports/report.html"])  # 运行指定文件
+
 '''
     运行脚本：
     pytest -v test56_pytest_test.py
-'''      
+'''
 
 '''
     注意事项：

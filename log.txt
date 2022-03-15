@@ -1,0 +1,8 @@
+2022-03-15 11:42:23,049 - test48-logging - INFO - Start print log
+2022-03-15 11:42:23,049 - test48-logging - WARNING - Something maybe fail.
+2022-03-15 11:43:39,638 - test48-logging - INFO - Start print log
+2022-03-15 11:43:39,639 - test48-logging - WARNING - Something maybe fail.
+2022-03-15 11:44:37,146 - test48-logging - INFO - Start print log
+2022-03-15 11:44:37,147 - test48-logging - WARNING - Something maybe fail.
+2022-03-15 11:44:47,509 - test48-logging - INFO - Start print log
+2022-03-15 11:44:47,509 - test48-logging - WARNING - Something maybe fail.

@@ -1,0 +1,65 @@
+2022-03-15 11:42:23,042 - test48-logging - INFO - Start print log
+2022-03-15 11:42:23,042 - test48-logging - WARNING - Something maybe fail.
+2022-03-15 11:42:23,042 - test48-logging - INFO - Finish
+2022-03-15 11:42:23,044 - test48-logging - INFO - Start print log
+2022-03-15 11:42:23,044 - test48-logging - INFO - Start print log
+2022-03-15 11:42:23,045 - test48-logging - WARNING - Something maybe fail.
+2022-03-15 11:42:23,045 - test48-logging - WARNING - Something maybe fail.
+2022-03-15 11:42:23,049 - test48-logging - INFO - Start print log
+2022-03-15 11:42:23,049 - test48-logging - INFO - Start print log
+2022-03-15 11:42:23,049 - test48-logging - WARNING - Something maybe fail.
+2022-03-15 11:42:23,049 - test48-logging - WARNING - Something maybe fail.
+2022-03-15 11:43:39,629 - test48-logging - INFO - Start print log
+2022-03-15 11:43:39,629 - test48-logging - WARNING - Something maybe fail.
+2022-03-15 11:43:39,629 - test48-logging - INFO - Finish
+2022-03-15 11:43:39,632 - test48-logging - INFO - Start print log
+2022-03-15 11:43:39,632 - test48-logging - INFO - Start print log
+2022-03-15 11:43:39,633 - test48-logging - WARNING - Something maybe fail.
+2022-03-15 11:43:39,633 - test48-logging - WARNING - Something maybe fail.
+2022-03-15 11:43:39,638 - test48-logging - INFO - Start print log
+2022-03-15 11:43:39,638 - test48-logging - INFO - Start print log
+2022-03-15 11:43:39,639 - test48-logging - WARNING - Something maybe fail.
+2022-03-15 11:43:39,639 - test48-logging - WARNING - Something maybe fail.
+2022-03-15 11:44:37,140 - test48-logging - INFO - Start print log
+2022-03-15 11:44:37,141 - test48-logging - WARNING - Something maybe fail.
+2022-03-15 11:44:37,141 - test48-logging - INFO - Finish
+2022-03-15 11:44:37,143 - test48-logging - INFO - Start print log
+2022-03-15 11:44:37,143 - test48-logging - INFO - Start print log
+2022-03-15 11:44:37,143 - test48-logging - WARNING - Something maybe fail.
+2022-03-15 11:44:37,143 - test48-logging - WARNING - Something maybe fail.
+2022-03-15 11:44:37,146 - test48-logging - INFO - Start print log
+2022-03-15 11:44:37,146 - test48-logging - INFO - Start print log
+2022-03-15 11:44:37,147 - test48-logging - WARNING - Something maybe fail.
+2022-03-15 11:44:37,147 - test48-logging - WARNING - Something maybe fail.
+2022-03-15 11:44:47,503 - test48-logging - INFO - Start print log
+2022-03-15 11:44:47,503 - test48-logging - WARNING - Something maybe fail.
+2022-03-15 11:44:47,504 - test48-logging - INFO - Finish
+2022-03-15 11:44:47,506 - test48-logging - INFO - Start print log
+2022-03-15 11:44:47,506 - test48-logging - INFO - Start print log
+2022-03-15 11:44:47,506 - test48-logging - WARNING - Something maybe fail.
+2022-03-15 11:44:47,506 - test48-logging - WARNING - Something maybe fail.
+2022-03-15 11:44:47,509 - test48-logging - INFO - Start print log
+2022-03-15 11:44:47,509 - test48-logging - INFO - Start print log
+2022-03-15 11:44:47,509 - test48-logging - WARNING - Something maybe fail.
+2022-03-15 11:44:47,509 - test48-logging - WARNING - Something maybe fail.
+2022-03-15 11:45:23,868 - test56_pytest_test - INFO - 不在类中，每个测试用例执行之前
+2022-03-15 11:45:23,869 - test56_pytest_test - INFO - test_not_class_function 不在类中，测试用例
+2022-03-15 11:45:23,869 - test56_pytest_test - INFO - 不在类中， 每个测试用例执行之后
+2022-03-15 11:45:23,871 - test56_pytest_test - INFO - setup_class 整个类之前
+2022-03-15 11:45:23,871 - test56_pytest_test - INFO - Test_class_01 类中每个测试用例执行之前
+2022-03-15 11:45:23,872 - test56_pytest_test - INFO - test_01 测试用例
+2022-03-15 11:45:23,872 - test56_pytest_test - INFO - Test_class_01 类中每个测试用例执行之后
+2022-03-15 11:45:23,874 - test56_pytest_test - INFO - Test_class_01 类中每个测试用例执行之前
+2022-03-15 11:45:23,874 - test56_pytest_test - INFO - test_02 测试用例
+2022-03-15 11:45:23,875 - test56_pytest_test - INFO - Test_class_01 类中每个测试用例执行之后
+2022-03-15 11:45:23,878 - test56_pytest_test - INFO - Test_class_01 类中每个测试用例执行之前
+2022-03-15 11:45:23,879 - test56_pytest_test - INFO - 参数化输出   A:张三,B:李四,C:王五
+2022-03-15 11:45:23,880 - test56_pytest_test - INFO - Test_class_01 类中每个测试用例执行之后
+2022-03-15 11:45:23,881 - test56_pytest_test - INFO - Test_class_01 类中每个测试用例执行之前
+2022-03-15 11:45:23,883 - test56_pytest_test - INFO - 参数化输出   A:赵钱,B:孙李,C:周庄
+2022-03-15 11:45:23,884 - test56_pytest_test - INFO - Test_class_01 类中每个测试用例执行之后
+2022-03-15 11:45:23,884 - test56_pytest_test - INFO - teardown_class 整个类之后
+2022-03-15 11:46:03,459 - test56_pytest_test - INFO - test_01 测试用例
+2022-03-15 11:46:03,462 - test56_pytest_test - INFO - test_02 测试用例
+2022-03-15 11:46:03,470 - test56_pytest_test - INFO - 参数化输出   A:张三,B:李四,C:王五
+2022-03-15 11:46:03,473 - test56_pytest_test - INFO - 参数化输出   A:赵钱,B:孙李,C:周庄
