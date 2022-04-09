@@ -122,3 +122,4 @@ zipp==3.7.0
 ddt==1.4.4
 parameterized==0.8.1
 pytest-rerunfailurs==2.4.7
+redis==4.2.2
