@@ -274,10 +274,17 @@ class Test():
     # 61.zip() 字符串转字典
     @pytest.mark.L2
     def testing_61_zip(self) -> None:
+        # 定义一个字符串，内容是字典格式
         str = "{'a':1,'b':2,'c':3}"
+        # 将字符串转换成字典
         print(zip(str))
+        # 判断是否是字典类型
         print(type(zip(str)))
 
+    '''
+        列表、元素、字符串，需要先转成结合，才能进行差集、并集、交集等操作
+        字典可以直接进行差集、并集、交集等操作，无需转换成集合。 a.items() a.keys() a.values()
+    '''
     # 62.差集 -     a-b a有的b没有 b-a b有的a没有（a没有的b有）
     @pytest.mark.L2
     def test_62_difference(self) -> None:
