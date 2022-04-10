@@ -3,6 +3,8 @@
 # 文件名:test57_method.py
 
 from ast import Str
+from base64 import decode
+from cgi import print_arguments
 from unittest import skip
 import numpy as np
 import pytest
@@ -60,11 +62,12 @@ class Test():
         print("str()", str('100'))  # 100
         print("repr()", repr('100'))  # '100' 带单引号
 
-    # 3.strip() 过滤空格、符号、换行符
+    # 3.strip() 过滤符号、空格、换行符
     @pytest.mark.L2
     def test_03(self) -> None:
-        text = "*+_/ hello world *)_+("
-        print("strip()", text.strip("*+_/()"))
+        text = " *+_/ hello world *)_+( "
+        print("strip()", text.strip("*+_/()")) # hello world 
+        print("rstrip()", text.rstrip("*+_/()"))#  从右边开始查找字符串
 
     # 4.split() 字符串分割
     @pytest.mark.L2
@@ -78,45 +81,83 @@ class Test():
             print("str.split(',')不是一个列表")
 
     # 5.join() 字符串连接
-    # @pytest.mark.L2
-    # def test_05_join(self) -> None:
-    #     str="a","b","c","d","e","f"
-    #     print("str.join('-')",str.join('-'))
-    #     print(type(str.join('-'))) # <class 'str'>
+    @pytest.mark.L2
+    def test_05_join(self) -> None:
+        seq1=("a","b","c","d","e","f") # join元组
+        seq2=["1","2","3","4","5","6"] # 这边列表不能使用[1,2,3,4,5,6] 因为python数字和字符串不能直接拼接，需要进行转换。元素类型都需要为字符串或字符
+        seq3={"a":1,"b":2,"c":3,"d":4,"e":5,"f":6}# join字典
+        seq4={"1","2","3","4","5","6"}  #join集合
+        s1="-"
+        s2="="
+        s3="@"
+        print("s1.join(seq1)",s1.join(seq1))# a-b-c-d-e-f
+        print("s2.join(seq2)",s2.join(seq1))# a=b=c=d=e=f
+        print("s3.join(seq3)",s3.join(seq1))# a@b@c@d@e@f
+        print("s1.join(seq2)",s1.join(seq2))# a-b-c-d-e-f
+        print("s2.join(seq2)",s2.join(seq2))# a=b=c=d=e=f
+        print("s3.join(seq2)",s3.join(seq2))# a@b@c@d@e@f
+        print("s1.join(seq3)",s1.join(seq3))# a-b-c-d-e-f 字典是去key进行拼接join符号
+        print("s2.join(seq3)",s2.join(seq3))# a=b=c=d=e=f
+        print("s3.join(seq3)",s3.join(seq3))# a@b@c@d@e@f
+        print("s1.join(seq4)",s1.join(seq4))# a-b-c-d-e-f
+        print("s2.join(seq4)",s2.join(seq4))# a=b=c=d=e=f
+        print("s2.join(seq4)",s3.join(seq4))# a@b@c@d@e@f
+        print(type(s1.join(seq1)))# <class 'str'>
 
     # 6.replace() 字符串替换
     @pytest.mark.L2
     def test_06_replace(self) -> None:
-       print("")
+       str="python3.X"
+       print("replace",str.replace("X","7"))# python3.7
 
     # 7.encode() 字符串编码
     @pytest.mark.L2
     def test_07_encode(self) -> None:
-        print("")
+        str="这是编码内容"
+        # 对内容进行编码
+        print("encode()",str.encode("utf-8"))# b'\xe8\xbf\x99\xe6\x98\xaf\xe7\xbc\x96\xe7\xa0\x81\xe5\x86\x85\xe5\xae\xb9'
 
     # 8.decode() 字符串解码
     @pytest.mark.L2
     def test_08_decode(self) -> None:
-        print("")
+        str=b'\xe8\xbf\x99\xe6\x98\xaf\xe7\xbc\x96\xe7\xa0\x81\xe5\x86\x85\xe5\xae\xb9'
+        print("str.decode()",str.decode(encoding='UTF-8',errors='strict'))# 这是解码内容
 
     # 9.format() 字符串格式化
     @pytest.mark.L2
     def test_09_format(self) -> None:
-        print("")
+        print("a={},b={},c={}".format("a","b","c"))
     # 10.isalpha() 字符串是否全部是字母
-
+    @pytest.mark.L2
+    def test_10_isalpha(self) -> None:
+        str="Python"
+        print(str.isalpha())# True
     # 11.isalnum() 字符串是否全部是字母和数字
-
-    # 12.isdigit() 字符串是否全部是数字
-
+    def test_11_isalnum(self) -> None:
+        str="Python3.0"
+        print(str.isalnum())# True
+    # 12.isdigit() 字符串是否有数字
+    def test_12_isdigit(self) -> None:
+        str="3.0"
+        print(str.isdigit())# True
+        str2="123456"
+        print(str2.isnumeric())# 字符串全数字  
     # 13.isspace() 字符串是否全部是空格
-
-    # 14.istitle() 字符串是否全部是标题
-
+    def test_13_isspace(self) -> None:
+        str="   "
+        print(str.isspace())# True
+    # 14.istitle() 字符串是否全部是标题 首字母大写，后面字母小写
+    def test_14_istitle(self) -> None:
+        str="Python3.0"
+        print(str.istitle())
     # 15.isupper() 字符串是否全部是大写
-
+    def test_15_isupper(self) -> None:
+        str="PYTHON"
+        print(str.isupper())
     # 16.islower() 字符串是否全部是小写
-
+    def test_16_islower(self) -> None:
+        str="python"
+        print(str.islower())
     # 17.isascii() 字符串是否全部是ASCII字符
 
     # 18.isdecimal() 字符串是否全部是十进制数字
@@ -147,7 +188,8 @@ class Test():
     # 26.capitalize() 字符串首字母大写
 
     # 27.title() 字符串首字母大写
-
+    @pytest.mark.L2
+    
     # 28.swapcase() 字符串大小写互换
 
     # 29.center() 字符串居中
@@ -254,7 +296,17 @@ class Test():
     # 51.issubclass() 判断是否是某种类型的子类
 
     # 52.len() 字符串长度
-
+    @pytest.mark.L2
+    def test_52_len(self) -> None:
+        list=[1,2,3,4,5]
+        tup=(1,2,3,4,5)
+        dict={'a':1,'b':2,'c':3}
+        col={1,2,3,4,5}
+        print("list长度",len(list))
+        print("tup长度",len(tup))
+        print("dict长度",len(dict))
+        print("col长度",len(col))
+        
     # 53.max() 字符串最大值
 
     # 54.min() 字符串最小值
@@ -433,7 +485,33 @@ class Test():
         b = [2,5,9]
         print("intersection()",list(set(a).intersection(set(b)))) # a和b中都有的  #[2, 5]
         print("intersection()",list(set(b).intersection(set(a)))) # a和b中都有的  #[2, 5]
-    
+        
+    # 68.count() 计算元素在集合中出现的次数
+    @pytest.mark.L2
+    def test_68_count(self) -> None:
+        str="abcdefgccc"
+        print("count()",str.count("d")) # 1
+        print("sub",str.count("c",3)) # 从第三个开始计算 sub 3
+        print("sub",str.count("c",3,8)) # 从第三个开始计算，到第八个结束 指定范围内出现的次数 sub 1
+        
+    # 69.find() 查找子字符串的位置
+    @pytest.mark.L2
+    def test_69_find_rfind(self) -> None:
+        str1="abcdefghijklmn"
+        str2="fgh"
+        str3="xyz"
+        print("find()",str1.find(str2)) # 6 子字符串在字符串中的位置
+        print("find()",str1.find(str3)) # -1 没有找到
+        str4="abcdefghijklmn"
+        # 从右边开始查找
+        print("rfind()",str4.rfind(str2,3)) # rfind() 5
+        
+    # 70.zfill() 字符串补全
+    @pytest.mark.L2
+    def test_70_zfill(self) -> None:
+        str="pytho"
+        print("zfill()",str.zfill(10)) # pytho0000000   
+        
 if __name__ == '__main__':
     pytest.main(["-s", "test56_pytest.py",
                 "--html=./reports/report.html"])  # 运行指定文件
