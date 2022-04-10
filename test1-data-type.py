@@ -52,13 +52,13 @@ def definitions():
 
 def split():
    s='abcdefg'
-   print('字符串abcdefg 截取s[1:5] 得到'+s[1:5])# 索引0开始，到5（不包含5） 输出：bcde   
+   print('字符串abcdefg 截取s[1:5] 得到'+s[1:5])# 切片 索引0开始，到5（不包含5） 输出：bcde   
 # split()
 
 def stringToNumber():
    # 数据类型转换
    str="1"
-   print(int(str)+1);# 字符串转数值 输出2
+   print(int(str)+1);# 字符串转数值 输出2 显示类型转换，由于python不会自动进行类型转换，比如数值+字符串，会报错，需要手动转换str(数值)+字符串
 # stringToNumber()
 
 '''
