@@ -23,7 +23,7 @@ def dict():
    print(tinydict)             # 输出完整的字典 输出：{'name': 'runoob','code':6734, 'dept': 'sales'}
    print(tinydict.keys())      # 输出所有键 输出：dict_keys(['name', 'code', 'dept'])
    print(tinydict.values())    # 输出所有值 输出：dict_values(['runoob', 6734, 'sales'])
-
+   print(tinydict.items())
 # dict()
 
 '''
@@ -92,7 +92,6 @@ def updateDict():
 '''
 删除字典元素
 能删单一的元素也能清空字典，清空只需一项操作。
-
 显示删除一个字典用del命令
 '''
 
@@ -108,6 +107,17 @@ def delDict():
    # print ("tinydict['School']: ", tinydict['School']) # 如果删除一个不存在的字典汇报异常
 
 delDict()
+
+def CreateDict():
+   # 关键字
+   dict1=dict(a=1,b=2,c=3)
+   print("=dict(a=1,b=2,c=3)",dict1)
+   # 可迭代
+   dict2=dict([('a',1),('b',2),('c',3)])
+   print("=dict([('a',1),('b',2),('c',3)])",dict2)
+   #  映射关系
+   dict3=dict(zip(['a','b','c'],[1,2,3]))
+   print("dict(zip(['a','b','c'],[1,2,3]))",dict3)
    
 '''
 字典键的特性
