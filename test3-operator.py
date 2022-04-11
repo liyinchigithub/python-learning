@@ -24,30 +24,25 @@ def sum():
    c = 0
    
    c = a + b
-   print("1 - c 的值为：", c)
+   print(r"a + b 的值为：", c)# 31
    
    c = a - b
-   print("2 - c 的值为：", c) 
+   print(r"a - b 的值为：", c) #  11
    
    c = a * b
-   print("3 - c 的值为：", c) 
+   print(r"a * b 的值为：", c) # 210
    
    c = a / b
-   print("4 - c 的值为：", c)
+   print(r"a / b 的值为：", c)# 2.1
    
    c = a % b
-   print("5 - c 的值为：", c)
+   print(r"a % b 的值为：", c)#  1
    
    # 修改变量 a 、b 、c
-   a = 2
-   b = 3
    c = a**b 
-   print("6 - c 的值为：", c)
-   
-   a = 10
-   b = 5
+   print("a**b 的值为：", c) #  2187
    c = a//b 
-   print("7 - c 的值为：", c)
+   print("a//b 的值为：", c)# 取整
 
 def compar01():
    # 比较运算符
@@ -66,7 +61,7 @@ def compar01():
    else:
       print("2 - a 等于 b")
 
-   # python3 已废弃。
+   # 注意：python3 已废弃 <> 运算符
    # if  a <> b :
    #    print("3 - a 不等于 b")
    # else:
@@ -126,9 +121,13 @@ def Assignment():
    c //= a
    print("7 - c 的值为：", c)
 
+   # 海象运算符，可在表达式内部为变量赋值(在这个示例中，赋值表达式可以避免调用 len() 两次)
+   if (n := len(a)) > 10:
+    print(f"List is too long ({n} elements, expected <= 10)")
+    
+    
 def logicOperation():
    # 逻辑运算符
-
    a = 10
    b = 20
    
@@ -160,7 +159,7 @@ def logicOperation():
       print( "5 - 变量 a 和 b 都为 true")
 
 def memberOperator():
-   # 成员运算符
+   # 成员运算符(in, not in) 可用于字符串、列表、集合、字典、元组等数据类型
 
    a = 10
    b = 20

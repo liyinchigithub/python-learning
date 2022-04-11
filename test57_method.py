@@ -541,7 +541,97 @@ class Test():
         str2=['a','a','b','c']
         print("set(str)",set(str)) # {'o', 'g', 'e', 'l'}
         print("set(str)",set(str2)) # {'b', 'a', 'c'}  注意：是无需的
+    '''
+        [推导式]
+        https://www.runoob.com/python3/python-comprehensions.html
+        推导式是一种独特的数据处理方式，可以从一个数据序列构建另一个新的数据序列的结构体。
         
+        [表达式 for 变量 in 列表] 
+        [out_exp_res for out_exp in input_list]
+
+        或者 
+
+        [表达式 for 变量 in 列表 if 条件]
+        [out_exp_res for out_exp in input_list if condition]
+        
+        out_exp_res：列表生成元素表达式，可以是有返回值的函数。
+        for out_exp in input_list：迭代 input_list 将 out_exp 传入到 out_exp_res 表达式中。
+        if condition：条件语句，可以过滤列表中不符合条件的值。
+
+    '''
+    # 72. 列表推导式    使用中括号
+    @pytest.mark.L2
+    def test_72_list_comprehension(self) -> None:
+        # 过滤掉长度小于或等于3的字符串列表，并将剩下的转换成大写字母：
+        name_list = ['Bob','Tom','alice','Jerry','Wendy','Smith']
+        new_list=[ name.lower() for name in name_list if len(name)<=3]
+        print("[ name.lower() for name in name_list if len(name)<=3]",new_list)# ['bob', 'tom']
+        
+        # 过滤大于5的
+        list=[1,2,3,4,5,6,7,8,9,10]
+        new_list=[num for num in list if num>5]
+        print("[num for num in list if num>5]",new_list)
+        # 仅保留能被3整除
+        multiples = [i for i in range(30) if i % 3 == 0]
+        print(multiples)# [3, 6, 9, 12, 15, 18, 21, 24, 27, 30]
+        #  仅保留指定字符内容
+        new_list='abracadabra'
+        print([i for i in new_list if i in 'ab'])# ['a', 'b']
+        
+    # 73. 元组推导式
+    @pytest.mark.L2
+    def test_73_tuple_comprehension(self) -> None:
+        '''
+        元组推导式可以利用 range 区间、元组、列表、字典和集合等数据类型，快速生成一个满足指定需求的元组。
+        [改格式]
+            (expression for item in Sequence )
+            或
+            (expression for item in Sequence if conditional )
+        '''
+        list1 = (x for x in range(1,10))# 返回的是生成器对象
+        # 使用 tuple() 函数，可以直接将生成器对象转换成元组
+        print(tuple(list1))
+ 
+    
+    # 74. 集合推导式       使用大括号
+    @pytest.mark.L2
+    def test_75_set_comprehension(self) -> None:
+        '''
+        [格式]
+            { expression for item in Sequence }
+            或
+            { expression for item in Sequence if conditional }
+        和字典推导式的区别，在集合没有key只有value
+        '''
+        # 计算数字 1,2,3 的平方数
+        setnew1 = {i**2 for i in (1,2,3,4,5,6,7,8,9,10)}
+        setnew2 = {i**2 for i in (1,2,3,4,5,6,7,8,9,10) if i%2==0}
+        print(setnew1)# {1, 4, 9, 16, 25, 36, 49, 64, 81, 100}
+        print(setnew2)# {4, 16, 36, 64, 100}
+        
+    # 75. 字典推导式    使用大括号
+    @pytest.mark.L2
+    def test_76_dict_comprehension(self) -> None:
+        '''
+        [格式]
+            { key_expr: value_expr for value in collection }
+            或
+            { key_expr: value_expr for value in collection if condition }
+        '''
+        
+        # 把列表元素作为字典key，列表元素长度作为字典value
+        list=["python","java","php","c++","c","c#"]
+        new_dict={i:len(i) for i in list if len(i)>2}
+        print("{i:len(i) for i in list if len(i)>1} 值为 ",new_dict)# {'python': 6, 'java': 4, 'php': 3, 'c++': 3}
+        # 提供三个数字，以三个数字为键，三个数字的平方为值来创建字典
+        list=[1,2,3]
+        new_dict={i:i**2 for i in list}
+        print("{i:i**2 for i in list} 值为 ",new_dict)# {1: 1, 2: 4, 3: 9}
+        #  仅保留指定字符内容
+        list1='abracadabra'
+        list2=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+        print({i for i in list1 if i in 'abzfs'})# 
+      
 if __name__ == '__main__':
     pytest.main(["-s", "test56_pytest.py",
                 "--html=./reports/report.html"])  # 运行指定文件
