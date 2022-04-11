@@ -247,10 +247,17 @@ class Test():
         print('映射函数方式来构造字典',dict(zip(['a','b','c'],[1,2,3])))# 映射函数方式来构造字典 {'a': 1, 'b': 2, 'c': 3}
 
     # 40.list() 字符串转列表 创建列表
-    # @pytest.mark.L2
-    # def test_40_list(self) -> None:
-    #     str="'a','b','c'"
-    #     print(list(str))
+    @pytest.mark.L2
+    def test_40_list(self) -> None:
+        str1="a,b,c"
+        str2="abc"
+        str3="a,b,c"
+        print("str.split(',')",str1.split(','))# 
+        print("type(str.split(','))",type(str1.split(',')))# <class 'list'>
+        print(list(str2))# ['a', 'b', 'c']
+        print("type(list(str))",type(list(str2)))# <class 'list'>
+        # 注意：逗号也会被当做列表元素
+        print(list(str3))# ['a', ',', 'b', ',', 'c']
 
     # 41.tuple() 字符串转元组 创建元组
     @pytest.mark.L2
