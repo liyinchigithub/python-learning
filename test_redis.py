@@ -32,13 +32,25 @@ def test_redis_Connection():
         r = redis.Redis(**redis_info,
                         decode_responses=True)
         r.set('name', 'runoob')  # 设置 name 对应的值
-        print(r.get('name'))  # 取出键 name 对应的值
-        print(type(r.get('name')))  # 查看类型
+        print("r.get('name')",r.get('name'))  # 取出键 name 对应的值
+        print(type(r.get('name')))  # 查看类型  <class 'str'>
+        
+        r.hmset('hash2',{"a":1,"b":2})  # 批量增加（取出）
+        print("r.hmget 批量取出所有key的value",r.hmget("hash2", "a", "b"))  # 批量取出"hash2"的key-a b对应的value --方式1  ['1', '2']
+        print("r.hget 单个取出指定key的value",r.hget("hash2", "a"))  # 单个取出"hash2"的key-k2对应的value 1
+        print("r.hgetall 获取所有键值对",r.hgetall("hash2"))# 获取所有键值对  {'a': '1', 'b': '2'}
+        print("r.hlen 得到所有键值对的格式 hash长度",r.hlen("hash2")) # 得到所有键值对的格式 hash长度 2
+        print("r.hkeys 得到所有的keys（类似字典的取所有keys）",r.hkeys("hash2"))# 得到所有的keys（类似字典的取所有keys） ['a', 'b']
+        print("r.hvals 得到所有的value（类似字典的取所有value）",r.hvals("hash2"))# 得到所有的value（类似字典的取所有value） ['1', '2']
+        print("r.hexists 判断成员是否存在（类似字典的in）",r.hexists("hash2", "c"))  # 判断成员是否存在（类似字典的in） False
+        
+        
         # key是"food" value是"mutton" 将键值对存入redis缓存
-        r.set('food', 'mutton', ex=3)
+        r.set('food', 'mutton', ex=3)# ex - 过期时间（秒）
         print(r.get('food'))  # mutton 取出键food对应的值
     except Exception as e:
         print(e)
+
 
 
 '''

@@ -223,15 +223,28 @@ class Test():
     # 39.dict() 字符串转字典 创建字典
     @pytest.mark.L2
     def test_39_dict(self) -> None:
+        # 创建字典 1.使用dict()函数
         d = dict()
         d['a'] = 1
         d['b'] = 2
         d['c'] = 3
         print("字典d为", d)  # {'a': 1, 'b': 2, 'c': 3}
-        print("type(d)", type(d))  # <class 'dict'>
-        print(d.keys())  # dict_keys(['a', 'b', 'c'])
-        print(d.values())  # dict_values([1, 2, 3])
-        print(d['c'])  # 3
+        print("type(d)", type(d))  # 判断类型 <class 'dict'>
+        print(d.keys())  # 获取字典所有key  dict_keys(['a', 'b', 'c'])
+        print(d.values())  # 获取字典所有value dict_values([1, 2, 3])
+        print(d['c'])  # 3 获取某个key的value
+        # 创建字典 2.使用dict()函数
+        numbers1 = dict({'x': 4, 'y': 5})
+        print('numbers1 =',numbers1)
+        # 创建字典  3.不使用dict()函数
+        numbers2 = {'x': 4, 'y': 5}
+        print('numbers2 =',numbers2)
+        # 创建字典  4.关键字
+        print('传入关键字',dict(a=1, b=2, c=3))  # 传入关键字 {'a': 1, 'b': 2, 'c': 3}
+        # 创建字典  5.可迭代对象
+        print("可迭代对象方式来构造字典",dict([('a', 1), ('b', 2), ('c', 3)]))  #  可迭代对象方式来构造字典 [('a', 1), ('b', 2), ('c', 3)]
+        # 创建字典 6.映射
+        print('映射函数方式来构造字典',dict(zip(['a','b','c'],[1,2,3])))# 映射函数方式来构造字典 {'a': 1, 'b': 2, 'c': 3}
 
     # 40.list() 字符串转列表 创建列表
     # @pytest.mark.L2
@@ -266,13 +279,15 @@ class Test():
         s.add('3')  # 元素加入集合中
         print(s)  # {1, 2, '3'}
 
-    # 45.eval(str) 字符串转表达式 字符串转对象
+    # 45.eval(str) 字符串转表达式（字符串转对象）
     @pytest.mark.L2
     def test_45_eval(self) -> None:
         str = "{'a':1,'b':2,'c':3}"
         print("str", eval(str))  # {'a': 1, 'b': 2, 'c': 3}
         print("type(str)", type(eval(str)))  # type(eval(str)) <class 'dict'>
-
+        #  eval 入参是一个字符串表达式
+        x=7
+        print("eval( '3 * x' ):",eval( '3 * x' ))# 21
     # 46.r = re.compile(pattern, flags=0) 字符串转正则表达式
 
     # 47.r 停止转义
@@ -511,6 +526,14 @@ class Test():
     def test_70_zfill(self) -> None:
         str="pytho"
         print("zfill()",str.zfill(10)) # pytho0000000   
+        
+    # 71.set() 用set方法删除重复元素
+    @pytest.mark.L2
+    def test_71_set(self) -> None:
+        str="googgle"
+        str2=['a','a','b','c']
+        print("set(str)",set(str)) # {'o', 'g', 'e', 'l'}
+        print("set(str)",set(str2)) # {'b', 'a', 'c'}  注意：是无需的
         
 if __name__ == '__main__':
     pytest.main(["-s", "test56_pytest.py",
