@@ -6,7 +6,7 @@ from ast import Str
 from base64 import decode
 from cgi import print_arguments
 from unittest import skip
-import numpy as np
+import random
 import pytest
 import logging
 # 日志级别、时间格式配置
@@ -56,6 +56,10 @@ class Test():
         str = str.format("a", "b", "c")
         print("字符串格式化'{} {} {}'.format('a','b','c')=", str)
 
+        #  f-string 是 python3.6 之后版本添加的，称之为字面量格式化字符串，是新的格式化字符串的语法。
+        name = 'Runoob'
+        print(f'My name is {name}')# My name is Runoob
+        
     # 2.srt()和repr() 数据类型转换为字符串
     @pytest.mark.L2
     def test_02(self) -> None:
@@ -632,6 +636,60 @@ class Test():
         list2=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
         print({i for i in list1 if i in 'abzfs'})# 
       
+    #  76.random()  随机生成下一个实数，它在[0,1)范围内。
+    @pytest.mark.L2
+    def test_76_random(self) -> None:
+        # 第一个随机数
+        print ("random() : ", random.random())# 0.988897
+        # 第二个随机数
+        print ("random() : ", int(random.random()*100))# 99
+        
+    #  77.choice()      从序列的元素中随机挑选一个元素，比如random.choice(range(10))，从0到9中随机挑选一个整数。
+    @pytest.mark.L2
+    def test_77_choice(self) -> None:
+        # 注意：choice()是不能直接访问的，需要导入 random 模块，然后通过 random 静态对象调用该方法。
+        print ("从 range(100) 返回一个随机数 : ",random.choice(range(100)))# 从 range(100) 返回一个随机数 : 84
+        print ("从列表中 [1, 2, 3, 5, 9]) 返回一个随机元素 : ", random.choice([1, 2, 3, 5, 9]))# 从列表中 [1, 2, 3, 5, 9] 返回一个随机元素 :  5
+        print ("从字符串中 'Runoob' 返回一个随机字符 : ", random.choice('Runoob'))# 从字符串中 'Runoob' 返回一个随机字符 : r
+        random
+    
+    #  78.seed()        x -- 改变随机数生成器的种子seed。如果你不了解其原理，你不必特别去设定seed，Python会帮你选择seed。
+    @pytest.mark.L2
+    def test_78_seed(self) -> None:
+        '''
+            我们调用 random.random() 生成随机数时，每一次生成的数都是随机的。但是，当我们预先使用 random.seed(x) 设定好种子之后，其中的 x 可以是任意数字，如10，这个时候，先调用它的情况下，使用 random() 生成的随机数将会是同一个。
+            注意：seed()是不能直接访问的，需要导入 random 模块，然后通过 random 静态对象调用该方法。
+        '''
+        random.seed()
+        print ("使用默认种子生成随机数：", random.random())
+        print ("使用默认种子生成随机数：", random.random())
+
+        random.seed(10)
+        print ("使用整数 10 种子生成随机数：", random.random())
+        random.seed(10)
+        print ("使用整数 10 种子生成随机数：", random.random())
+
+        random.seed("hello",2)
+        print ("使用字符串种子生成随机数：", random.random())
+    
+    #  79. randrange()   从指定范围内，按指定基数递增的集合中获取一个随机数，基数默认值为 1
+    @pytest.mark.L2
+    def test_79_randrange(self) -> None:
+        '''
+            random.randrange ([start,] stop [,step])
+                start -- 指定范围内的开始值，包含在范围内。
+                stop -- 指定范围内的结束值，不包含在范围内。
+                step -- 指定递增基数。
+                返回值：从给定的范围返回随机项
+        '''
+        # 从 1-100 中选取一个奇数
+        print ("randrange(1,100, 2) : ", random.randrange(1, 100, 2))
+        # 从 0-99 选取一个随机数
+        print ("randrange(100) : ", random.randrange(100))
+        
+    # 80. shuffle(lst)  将序列的所有元素随机排序
+    
+    # 89. uniform(x, y)     随机生成下一个实数，它在[x,y]范围内。   
 if __name__ == '__main__':
     pytest.main(["-s", "test56_pytest.py",
                 "--html=./reports/report.html"])  # 运行指定文件
