@@ -532,6 +532,13 @@ class Test():
         # 从右边开始查找
         print("rfind()",str4.rfind(str2,3)) # rfind() 5
         
+        # index()       str.index(str, beg=0, end=len(string))    返回如果包含子字符串返回开始的索引值，否则抛出异常。
+        str1 = "Runoob example....wow!!!"
+        str2 = "exam"
+        print (str1.index(str2)) # 4
+        print (str1.index(str2, 5))# 5
+        print (str1.index(str2, 10))# 10
+        
     # 70.zfill() 字符串补全
     @pytest.mark.L2
     def test_70_zfill(self) -> None:
@@ -690,6 +697,11 @@ class Test():
     # 80. shuffle(lst)  将序列的所有元素随机排序
     
     # 89. uniform(x, y)     随机生成下一个实数，它在[x,y]范围内。   
+    
+    # 90. 字符串内建函数
+    
+    
+    
 if __name__ == '__main__':
     pytest.main(["-s", "test56_pytest.py",
                 "--html=./reports/report.html"])  # 运行指定文件

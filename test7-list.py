@@ -55,13 +55,13 @@ append()
 def updateList():
    list = ['Google', 'Runoob', 1997, 2000]
  
-   print ("第三个元素为 : ", list[2])
+   print ("第三个元素为 : ", list[2])#  输出：第三个元素为 :  1997
    list[2] = 2001
-   print ("更新后的第三个元素为 : ", list[2])
+   print ("更新后的第三个元素为 : ", list[2])# 输出：更新后的第三个元素为 :  2001
    
    list1 = ['Google', 'Runoob', 'Taobao']
    list1.append('Baidu')
-   print ("更新后的列表 : ", list1)
+   print ("更新后的列表 : ", list1) # 输出：更新后的列表 :  ['Google', 'Runoob', 'Taobao', 'Baidu']
 
 # updateList()
 
@@ -71,9 +71,9 @@ def updateList():
 '''
 def delList():
    list = ['Google', 'Runoob', 1997, 2000]
-   print ("原始列表 : ", list)
-   del list[2]
-   print ("删除第三个元素 : ", list)
+   print ("原始列表 : ", list)# 输出：原始列表 :  ['Google', 'Runoob', 1997, 2000]
+   del list[2]# 删除第三个元素
+   print ("删除第三个元素 : ", list)# 输出：['Google', 'Runoob', 2000]
 delList()
 
 
@@ -88,6 +88,10 @@ def listMerge():
    tinylist = [123, 'john']
    print(list + tinylist)    # 打印组合的列表 输出：[ 'runoob', 786 , 2.23, 'john', 70.2, 123, 'john' ]
 
+   # 列表去重后再合并
+   list1=[1,2,3,4,5,6]
+   list2=[3,4,5,6,7,8]
+   print(list(set(list1)&set(list2))) # 输出：[3, 4, 5, 6]
 # listMerge()
 
 
@@ -96,10 +100,10 @@ def listMerge():
 '''
 def test_():
    L=['Google', 'Runoob', 'Taobao']
-   print(L[2])
-   print(L[-2])
-   print(L[1:])
-   print(L[:2])
+   print(L[2])#  输出第三个元素
+   print(L[-2])# 输出倒数第二个元素
+   print(L[1:])# 输出从第二个元素开始的所有元素
+   print(L[:2])# 输出前两个元素
    
    
 '''
@@ -116,7 +120,7 @@ def test_():
 序号	方法
 1	   list.append(obj)  在列表末尾添加新的对象
 2	   list.count(obj)   统计某个元素在列表中出现的次数
-3	   list.extend(seq)  在列表末尾一次性追加另一个序列中的多个值（用新列表扩展原来的列表） 合并列表？？？
+3	   list.extend(seq)  在列表末尾一次性追加另一个序列中的多个值（用新列表扩展原来的列表） 合并列表？？？ +号可以合并类表，合并列表并去重使用set()将2个列表转成集合在进行交集操作最后转回列表
 4	   list.index(obj)   从列表中找出某个值第一个匹配项的索引位置
 5	   list.insert(index, obj) 将对象插入列表
 6	   list.pop([index=-1]) 移除列表中的一个元素（默认最后一个元素），并且返回该元素的值
