@@ -31,7 +31,7 @@ async def send_msg(websocket):
 
 # 客户端主逻辑
 async def main_logic():
-    async with websockets.connect('ws://10.10.6.91:5678') as websocket:
+    async with websockets.connect('ws://127.0.0.1:5678') as websocket:
         await auth_system(websocket)
 
         await send_msg(websocket)

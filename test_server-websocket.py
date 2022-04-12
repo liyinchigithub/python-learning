@@ -4,7 +4,7 @@
 # socket 服务端
 # https://www.cnblogs.com/lsdb/p/10949766.html
 # https://www.cnblogs.com/sincere-ye/p/14500200.html
-
+# https://websockets.readthedocs.io/en/stable/
 import asyncio
 import websockets
 
@@ -36,7 +36,7 @@ async def main_logic(websocket, path):
     await recv_msg(websocket)
 
 # 把ip换成自己本地的ip
-start_server = websockets.serve(main_logic, '10.10.6.91', 5678)
+start_server = websockets.serve(main_logic, '127.0.0.1', 5678)
 # 如果要给被回调的main_logic传递自定义参数，可使用以下形式
 # 一、修改回调形式
 # import functools
