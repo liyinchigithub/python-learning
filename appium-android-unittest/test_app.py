@@ -16,7 +16,7 @@ class MyTests(unittest.TestCase):
     def setUp(self):
         desired_caps = {'platformName': 'Android', # 平台名称
                         'platformVersion': '10.0',  # 系统版本号
-                        'deviceName': '4c50413241583398',  # 设备名称 在'设置->关于手机->设备名称'里查看 或 adb devices
+                        'deviceName': 'D3H0218307002126',  # 设备名称 在'设置->关于手机->设备名称'里查看 或 adb devices
                         'app':'/Users/liyinchi/workspace/python/python-learning/appium-android-unittest/apk/com.youdao.calculator-2.0.0.apk',# 
                         # 'browserName':'Chrome',# 'Safari' 对应 iOS，'Chrome', 'Chromium', 或 'Browser' 则对应 Android
                         'appPackage': 'com.youdao.calculator',  # apk的包名
@@ -32,8 +32,11 @@ class MyTests(unittest.TestCase):
                         'adbPort':5037, # 	用来连接 ADB 服务器的端口（默认值为 5037）
                         'androidScreenshotPath':'/sdcard/screenshots/' # 	在设备中截图被保存的目录名。默认值为 /data/local/tmp
                         }
-        self.driver = webdriver.Remote("http://127.0.0.1:4723/wd/hub", desired_caps)  # 连接Appium server
-        self.driver.implicitly_wait(8)
+        try:
+            self.driver = webdriver.Remote("http://127.0.0.1:4723/wd/hub", desired_caps)  # 连接Appium server
+            self.driver.implicitly_wait(8)
+        except Exception as e:
+            print(e)
 
     def test_(self):
         
