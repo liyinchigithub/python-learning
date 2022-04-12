@@ -134,7 +134,13 @@ def tupCreateDict():
    dict2=dict.fromkeys(seq,10) # value -- 可选参数, 设置键序列（seq）对应的值，默认为 None。
    print(dict2)# {'age': 10, 'name': 10, 'sex': 10}
 
-   
+# dict.items()
+
+def forDict():
+   tinydict = {'Name': 'Runoob', 'Age': 7, 'Class': 'First'}
+   print(tinydict.items())# 返回可视图对象。
+
+
 '''
 字典键的特性
 字典值可以是任何的 python 对象，既可以是标准的对象，也可以是用户定义的，但键不行。
