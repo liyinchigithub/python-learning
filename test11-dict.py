@@ -127,7 +127,12 @@ def delDict():
 
 delDict()
   
-   
+def tupCreateDict():
+   seq = ('name', 'age', 'sex')
+   dict1=dict.fromkeys(seq) # seq -- 字典键值列表。
+   print(dict1)# {'age': None, 'name': None, 'sex': None}
+   dict2=dict.fromkeys(seq,10) # value -- 可选参数, 设置键序列（seq）对应的值，默认为 None。
+   print(dict2)# {'age': 10, 'name': 10, 'sex': 10}
 
    
 '''
