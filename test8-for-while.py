@@ -122,3 +122,57 @@ def for011():
         time.sleep(1) # import time 库
         print("等待了",i,"秒")
 # for011()
+
+def wheileElse():
+    count = 0
+    while count < 5:
+        print (count, " 小于 5")# 当 count 小于 5 时，执行该语句
+        count = count + 1
+    else:
+        print (count, " 大于或等于 5")# 当 count 大于或等于 5 时，执行该语句，也就是不满足条件时会执行一次else语句
+
+def forElse():
+    sites = ["Baidu", "Google","Runoob","Taobao"]
+    for site in sites:
+        if site == "Runoob":
+            print("菜鸟教程!")
+            break
+        print("循环数据 " + site)
+    else:
+        print("没有循环数据了!")# 循环正常结束后执行该语句，也就是循环结束后会再执行一次else语句
+    print("完成循环!")
+    
+# range()函数
+def range():
+    for i in range(5):
+        print(i)
+    
+    for i in range(5,9) :# 参数5为开始数，参数8为结束数（不含9）
+        print(i)
+        
+    for i in range(0, 10, 3) :# 参数0为开始数，参数10为结束数（不含10），参数3为步长
+        print(i)
+
+# for while 使用else
+def for_while_else():
+    # 循环语句可以有 else 子句，它在穷尽列表(以for循环)或条件变为 false (以while循环)导致循环终止时被执行，但循环被 break 终止时不执行
+    for n in range(2, 10):
+        for x in range(2, n):
+            if n % x == 0:
+                print(n, '等于', x, '*', n//x)
+                break
+        else:
+            # 循环中没有找到元素
+            print(n, ' 是质数')
+            
+        '''
+        输出：
+        2  是质数
+        3  是质数
+        4 等于 2 * 2
+        5  是质数
+        6 等于 2 * 3
+        7  是质数
+        8 等于 2 * 4
+        9 等于 3 * 3
+        '''
