@@ -58,6 +58,25 @@ def reCreateDict():
    # 查看类型
    print(type(emptyDict))
    
+   #  创建-空字典
+   dict0=dict()
+   print("=dict():",dict0)
+   dict0={}
+   print("{}:",dict0)
+   dict0={"a":1,"b":2}
+   print('{"a":1,"b":2}',dict0)
+   #  创建-关键字
+   dict1=dict(a=1,b=2,c=3)
+   print("=dict(a=1,b=2,c=3)",dict1)
+   #  创建-可迭代
+   dict2=dict([('a',1),('b',2),('c',3)])
+   print("=dict([('a',1),('b',2),('c',3)])",dict2)
+   #  创建-映射关系
+   dict3=dict(zip(['a','b','c'],[1,2,3]))
+   print("dict(zip(['a','b','c'],[1,2,3]))",dict3)
+   
+   
+   
 # reCreateDict()
 
 '''
@@ -99,33 +118,17 @@ def updateDict():
 
 def delDict():
    tinydict = {'Name': 'Runoob', 'Age': 7, 'Class': 'First'}
-   del tinydict['Name'] # 删除键 'Name'
-   
-   # tinydict.clear()     # 清空整个字典
-   # del tinydict         # 删除整个字典
+   del tinydict['Name'] # 删除字典中某某个键 'Name'
+   tinydict.clear()     # 清空整个字典
+   del tinydict         # 删除整个字典
    
    print ("tinydict['Age']: ", tinydict['Age'])
    # print ("tinydict['School']: ", tinydict['School']) # 如果删除一个不存在的字典汇报异常
 
 delDict()
+  
+   
 
-def CreateDict():
-   #  空字典
-   dict0=dict()
-   print("=dict():",dict0)
-   dict0={}
-   print("{}:",dict0)
-   dict0={"a":1,"b":2}
-   print("{"a":1,"b":2}:",dict0)
-   # 关键字
-   dict1=dict(a=1,b=2,c=3)
-   print("=dict(a=1,b=2,c=3)",dict1)
-   # 可迭代
-   dict2=dict([('a',1),('b',2),('c',3)])
-   print("=dict([('a',1),('b',2),('c',3)])",dict2)
-   #  映射关系
-   dict3=dict(zip(['a','b','c'],[1,2,3]))
-   print("dict(zip(['a','b','c'],[1,2,3]))",dict3)
    
 '''
 字典键的特性
