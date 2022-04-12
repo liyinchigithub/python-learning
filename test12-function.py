@@ -73,15 +73,125 @@ def test_print_welcome(w,h):
 如下实例调用了 printme() 函数：
 '''
 
-# 定义函数
+# [定义函数]
 @pytest.mark.test
 @pytest.mark.parametrize("str",["我要调用用户自定义函数!","再次调用同一函数"])
 def printme( str ):
    # 打印任何传入的字符串
    print (str)
    return
- 
 
+# 传不可变对象实例
+@pytest.mark.test
+def test_change(a):
+    print(id(a))   # 指向的是同一个对象
+    a=10
+    print(id(a))   # 一个新对象
+    # 可以看见在调用函数前后，形参和实参指向的是同一个对象（对象 id 相同），在函数内部修改形参后，形参指向的是不同的 id。
+    
+# 传可变对象实例
+@pytest.mark.test
+def changeme( mylist ):
+   "修改传入的列表"
+   mylist.append([1,2,3,4])
+   print ("函数内取值: ", mylist)
+   return
+# 传入函数的和在末尾添加新内容的对象用的是同一个引用
+ 
+# 调用changeme函数
+mylist = [10,20,30]
+
+# [必需参数]
+def printme1( str ):
+   "打印任何传入的字符串"
+   print (str)
+   return
+
+@pytest.mark.test
+def test_orintme1():
+    # printme()# 不传必要参数会报错
+    printme1("我要调用用户自定义函数!")
+
+
+# [关键字参数]
+def printme2( str ):
+   "打印任何传入的字符串"
+   print (str)
+   return
+# 顺序可以不一样
+def printinfo( name, age ):
+   "打印任何传入的字符串"
+   print ("名字: ", name)
+   print ("年龄: ", age)
+   return
+ 
+@pytest.mark.test
+def test_orintme2():
+    printme2( str = "菜鸟教程")
+    printinfo( age=50, name="runoob" )
+
+# [默认参数]
+def printinfo3( name, age = 35 ):
+   "打印任何传入的字符串"
+   print ("名字: ", name)
+   print ("年龄: ", age)
+   return
+
+# 调用函数时，如果没有传递参数，则会使用默认参数
+@pytest.mark.test
+def test_orintme3():
+    printinfo3( age=50, name="runoob" )
+    print ("------------------------")
+    printinfo3( name="runoob" )
+
+# [不定长参数]  *号
+def printinfo4( arg1, *vartuple ):
+   "打印任何传入的参数"
+   print ("输出: ")
+   print (arg1)
+   print (vartuple)
+   
+@pytest.mark.test
+def test_orintme4():
+    # 调用printinfo 函数
+    printinfo4( 70, 60, 50 ) # 可变参数  第二个之后的参数，将被作为一个tuple传入
+
+# 如果在函数调用时没有指定参数，它就是一个空元组。我们也可以不向函数传递未命名的变量
+def printinfo5( arg1, *vartuple ):
+   "打印任何传入的参数"
+   print ("输出: ")
+   print (arg1)
+   for var in vartuple:
+      print (var)
+   return
+
+@pytest.mark.test
+def test_orintme5():
+    printinfo5( 10 )# 不传入参数
+
+
+# [不定长参数] 两个星号 ** 的参数会以字典的形式导入
+
+def printinfo6( arg1, **vardict ):
+   "打印任何传入的参数"
+   print ("输出: ")
+   print (arg1)
+   print (vardict)# 字典形式输出 {'a': 2, 'b': 3}
+ 
+@pytest.mark.test
+def test_orintme6():
+    printinfo6(1, a=2,b=3)# 第二个参数之后的参数，将被作为一个字典传入
+
+
+# 声明函数时，参数中[星号 *] 可以单独出现（如果单独出现星号 * 后的参数必须用关键字传入）
+
+def f(a,b,*,c):
+     return a+b+c
+
+@pytest.mark.test
+def test_orintme7():
+    f(1,2,c=3)# 只能传入关键字参数
+    # f(1,2,3)   # 报错
 
 '''
     pytest test12-function.py
