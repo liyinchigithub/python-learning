@@ -5,11 +5,12 @@
 # https://www.runoob.com/python3/python3-dictionary.html
 
 '''
-字典是另一种可变容器模型，且可存储任意类型对象。
+[字典]是另一种可变容器模型，且可存储任意类型对象。
+   字典的每个键值 key=>value 对用冒号 : 分割，每个对之间用逗号(,)分割，整个字典包括在花括号 {} 中 ,格式如下所示：
+   d = {key1 : value1, key2 : value2, key3 : value3 }
+   键必须是唯一的，但值则不必。
+   值可以取任何数据类型，但键必须是不可变的，如字符串，数字。
 
-字典的每个键值 key=>value 对用冒号 : 分割，每个对之间用逗号(,)分割，整个字典包括在花括号 {} 中 ,格式如下所示：
-
-d = {key1 : value1, key2 : value2, key3 : value3 }
 '''
 
 def dict():
@@ -90,9 +91,9 @@ def updateDict():
 # updateDict()
 
 '''
-删除字典元素
-能删单一的元素也能清空字典，清空只需一项操作。
-显示删除一个字典用del命令
+删除字典元素 del
+   能删单一的元素也能清空字典，清空只需一项操作。
+   显示删除一个字典用del命令
 '''
 
 
@@ -100,8 +101,8 @@ def delDict():
    tinydict = {'Name': 'Runoob', 'Age': 7, 'Class': 'First'}
    del tinydict['Name'] # 删除键 'Name'
    
-   # tinydict.clear()     # 清空字典
-   # del tinydict         # 删除字典
+   # tinydict.clear()     # 清空整个字典
+   # del tinydict         # 删除整个字典
    
    print ("tinydict['Age']: ", tinydict['Age'])
    # print ("tinydict['School']: ", tinydict['School']) # 如果删除一个不存在的字典汇报异常
@@ -109,6 +110,13 @@ def delDict():
 delDict()
 
 def CreateDict():
+   #  空字典
+   dict0=dict()
+   print("=dict():",dict0)
+   dict0={}
+   print("{}:",dict0)
+   dict0={"a":1,"b":2}
+   print("{"a":1,"b":2}:",dict0)
    # 关键字
    dict1=dict(a=1,b=2,c=3)
    print("=dict(a=1,b=2,c=3)",dict1)
