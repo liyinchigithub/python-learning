@@ -23,7 +23,11 @@ def dict():
    print(dict[2])              # 输出键为 2 的值 输出:"This is two"
    print(tinydict)             # 输出完整的字典 输出：{'name': 'runoob','code':6734, 'dept': 'sales'}
    print(tinydict.keys())      # 输出所有键 输出：dict_keys(['name', 'code', 'dept'])
+   list=list(tinydict.keys())# 字典中所有key值转换成列表
+   print(list)
    print(tinydict.values())    # 输出所有值 输出：dict_values(['runoob', 6734, 'sales'])
+   list=list(tinydict.values())# 字典中所有value值转换成列表
+   print(list)
    print(tinydict.items())
 # dict()
 
