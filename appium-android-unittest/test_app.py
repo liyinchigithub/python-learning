@@ -15,9 +15,9 @@ class MyTests(unittest.TestCase):
     # 测试开始前执行的方法
     def setUp(self):
         desired_caps = {'platformName': 'Android', # 平台名称
-                        'platformVersion': '10.0',  # 系统版本号
-                        'deviceName': 'D3H0218307002126',  # 设备名称 在'设置->关于手机->设备名称'里查看 或 adb devices
-                        'app':'/Users/liyinchi/workspace/python/python-learning/appium-android-unittest/apk/com.youdao.calculator-2.0.0.apk',# 
+                        'platformVersion': '6.0',  # 系统版本号
+                        'deviceName': '1ce884567d53',  # 设备名称 在'设置->关于手机->设备名称'里查看 或 adb devices
+                        # 'app':'/Users/liyinchi/workspace/python/python-learning/appium-android-unittest/apk/com.youdao.calculator-2.0.0.apk',# 
                         # 'browserName':'Chrome',# 'Safari' 对应 iOS，'Chrome', 'Chromium', 或 'Browser' 则对应 Android
                         'appPackage': 'com.youdao.calculator',  # apk的包名
                         'appActivity': 'com.youdao.calculator.activities.MainActivity',  # activity 名称
@@ -39,8 +39,8 @@ class MyTests(unittest.TestCase):
             print(e)
 
     def test_(self):
-        
-        self.driver.find_element_by_id('').click()
+        pass
+        # self.driver.find_element_by_id('').click()
         
     # def test_calculator(self, t=500, n=4):
     #     """计算器测试"""
@@ -67,6 +67,9 @@ class MyTests(unittest.TestCase):
     def tearDown(self):
         self.driver.quit()
 
+    '''
+        运行脚本：python -m unittest -v test_app.py
+    '''
 
 
 if __name__=="__main__":
