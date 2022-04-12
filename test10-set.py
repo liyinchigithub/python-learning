@@ -113,24 +113,24 @@ def test_():
 '''
 集合内置方法完整列表
 
-方法	描述
-集合.add()	为集合添加元素，添加后元素位置不一定在最后一位，因为集合是无序
-集合.clear()	移除集合中的所有元素
-集合.copy()	拷贝一个集合 x=y.copy()
-集合.difference()	返回多个集合的差集  相当于set()-set()
-集合.difference_update()	移除集合中的元素，该元素在指定的集合也存在。
-集合.intersection()	返回集合的交集 相当于set()&set()
-集合.intersection_update()	返回集合的交集。
-集合.isdisjoint()	判断两个集合是否包含相同的元素，如果没有返回 True，否则返回 False。 x = {"apple", "banana", "cherry"} y = {"google", "runoob", "apple"} x.isdisjoint(y) # False   注意：如果包含返回 False：
-集合.issubset()	判断指定集合是否为该方法参数集合的子集。
-集合.issuperset()	判断该方法的参数集合是否为指定集合的子集
-集合.pop()	[随机]移除元素    set 集合的 pop 方法会对集合进行无序的排列，然后将这个无序排列集合的左面第一个元素进行删除。
-集合.remove(集合元素名称)	移除[指定]元素，如果元素不存在，则会发生错误。想不报错则使用discard()方法
-集合.discard()	删除集合中[指定]的元素    thisset = set(("Google", "Runoob", "Taobao"))       thisset.discard("Facebook")  # 不存在不会发生错误
-symmetric_difference()	返回两个集合中不重复的元素集合。
+        方法	                                描述
+集合.add(集合元素名称)	           为集合添加元素，添加后元素位置不一定在最后一位，因为集合是无序
+集合.update(集合元素名称)	       给集合添加元素
+集合.pop()                      [随机]移除元素    set 集合的 pop 方法会对集合进行无序的排列，然后将这个无序排列集合的左面第一个元素进行删除。
+集合.remove(集合元素名称)	       移除[指定]元素，如果元素不存在，则会发生错误。想不报错则使用discard()方法
+集合.discard(集合元素名称)	       删除集合中[指定]的元素    thisset = set(("Google", "Runoob", "Taobao"))       thisset.discard("Facebook")  # 不存在不会发生错误
+集合.clear()	                移除集合中的所有元素
+集合.copy()	                    拷贝一个集合 x=y.copy()
+集合.difference()               返回多个集合的差集  相当于set()-set()
+集合.difference_update()        移除集合中的元素，该元素在指定的集合也存在。
+集合.intersection()	            返回集合的交集 相当于set()&set()
+集合.intersection_update()	    返回集合的交集。
+集合.isdisjoint()	            判断两个集合是否包含相同的元素，如果没有返回 True，否则返回 False。 x = {"apple", "banana", "cherry"} y = {"google", "runoob", "apple"} x.isdisjoint(y) # False   注意：如果包含返回 False：
+集合.issubset()	                判断指定集合是否为该方法参数集合的子集。
+集合.issuperset()	            判断该方法的参数集合是否为指定集合的子集
+symmetric_difference()	        返回两个集合中不重复的元素集合。
 symmetric_difference_update()	移除当前集合中在另外一个指定集合相同的元素，并将另外一个指定集合中不同的元素插入到当前集合中。
-union()	返回两个集合的并集
-update()	给集合添加元素
+union()	                        返回两个集合的并集
 '''
 
 '''
