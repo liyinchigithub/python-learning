@@ -104,8 +104,14 @@ def test_():
    print(L[-2])# 输出倒数第二个元素
    print(L[1:])# 输出从第二个元素开始的所有元素
    print(L[:2])# 输出前两个元素
-   
-   
+ 
+#  [同时遍历两个或更多的序列，可以使用 zip() 组合]
+def for_more_list():
+   questions = ['name', 'quest', 'favorite color']
+   answers = ['lancelot', 'the holy grail', 'blue']
+   for q, a in zip(questions, answers):
+      print('What is your {0}?  It is {1}.'.format(q, a))   
+
 '''
    [嵌套列表]
 [['a', 'b', 'c'], [1, 2, 3]]

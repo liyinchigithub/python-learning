@@ -144,6 +144,11 @@ def forDict():
    tinydict = {'Name': 'Runoob', 'Age': 7, 'Class': 'First'}
    print(tinydict.items())# 返回可视图对象。
 
+# 遍历字典     使用items()
+def for_dict():
+   knights = {'gallahad': 'the pure', 'robin': 'the brave'}
+   for k, v in knights.items():
+       print(k, v)
 
 '''
 字典键的特性
