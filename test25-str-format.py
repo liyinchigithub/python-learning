@@ -28,6 +28,12 @@ def test_str_format03():
     print("{0}+{1}={2:>2}".format(1,2,1+2));# 输出 1+2= 3 注意：3前面有2个单位的空格
     # :2 表示索引2的值（即1+2的结果）向右对齐2个单位
 
+# f
+@pytest.mark.test
+def test_f_format():
+    a=1000
+    print(f"a为{a}") # 输出:a为1000
+
 
 '''
     pytest test25-str-format.py
