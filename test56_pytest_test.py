@@ -69,6 +69,7 @@ if __name__ == '__main__':
 '''
     运行脚本：
     pytest -v test56_pytest_test.py
+    pytest -v -run=test_not_class_function test56_pytest_test.py
 '''
 
 '''
