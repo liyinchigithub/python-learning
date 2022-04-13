@@ -28,7 +28,7 @@ class Test_class_03(unittest.TestCase):
         self.assertFalse(1=="1")
         print("test_02_01_sum 测试用例")
         
-    # @unittest.skip("跳过用例")    
+    @unittest.skip("跳过用例")    
     def test_02_02_sum(self):
         self.assertEqual(2,2)
         self.assertNotEqual(2,"2")
@@ -36,7 +36,7 @@ class Test_class_03(unittest.TestCase):
         self.assertFalse(2=="2")
         print("test_02_02_sum 测试用例")
             
-    # @unittest.skip("跳过用例")   # skiIf 满足条件跳过； skipUnless 不满足条件跳过； skip 无条件跳过 
+    @unittest.skip("跳过用例")   # skiIf 满足条件跳过； skipUnless 不满足条件跳过； skip 无条件跳过 
     def test_02_03_sum(self):
         self.assertEqual(3,3)
         self.assertNotEqual(3,"3")

@@ -34,7 +34,7 @@ def test_iter02():
    list=[1,2,3,4]
    it = iter(list)    # 创建迭代器对象
    for x in it:
-      print (x, end=" ") # 1 2 3 4
+      print (x, end=" ") # 1 2 3 4 end=" "表示不换行
       
 # for输出的是同行，而next输出的是同列      
       
@@ -86,8 +86,7 @@ class MyNumbers:
 @pytest.mark.test
 def test_class_iter():
 # 创建一个返回数字的迭代器，初始值为 1，逐步递增 1：
-   myclass = MyNumbers()
-   myiter = iter(myclass)
+   myiter = iter(MyNumbers())# 创建一个迭代器
    print(next(myiter))
    print(next(myiter))
    print(next(myiter))
