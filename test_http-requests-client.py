@@ -125,11 +125,10 @@ def test_requests_request():
 @pytest.mark.skip
 def test_get_01():
     response = requests.get('http://httpbin.org/get')
-    print(response.text)
-    print(type(response.text))
+    print(response.text)# 返回的是json格式的数据
+    print(type(response.text))# 返回的是str类型
     # 字符串转字典 str转dict
-    print(eval(response.text))
-
+    print(eval(response.text))# 字符串转字典
 
 '''
     [GET]
@@ -140,11 +139,11 @@ def test_get_01():
 def test_get_02():
     response = requests.get("https://www.csdn.net")
     # 输出response的类型、状态码、响应体的类型、内容以及 Cookies
-    print(type(response))
+    print(type(response))# <class 'requests.models.Response'>
     print(response.status_code)  # 响应状态码
     print(response.headers)  # 响应头
     print(response.request.headers)  # 获取发送给服务器的头文件信息
-    print(type(response. text))  # 响应body类型
+    print(type(response.text))  # 响应body类型
     print(response.text)  # 响应body
     # 响应cookies  urllib 处理过 Cookies，写法比较复杂，而有了 requests，获取和设置 Cookies 只需 一步即可完成
     print(response.cookies)
@@ -170,7 +169,7 @@ def test_get_03():
         'name': 'germey',
         'age': '22'
     }
-    response = requests.get('http://httpbin.org/get', params=p)
+    response = requests.get('http://httpbin.org/get', params=p)# 参数是一个字典，相当于response = requests.get('http://httpbin.org/get?name=germey&age=22')
     print(response.text)
 
 
@@ -188,6 +187,7 @@ def test_get_04():
     }
     response = requests.get("https://www.zhihu.com/", headers=headers)
     print(response.text)
+    print(eval(response.text))# 字符串转字典
 
 
 '''
@@ -198,7 +198,8 @@ def test_get_04():
 
 @pytest.mark.skip
 def test_get_05():
-    response = requests.get("https://github.com/favicon.ico")
+    response = requests.get("https://github.com/favicon.ico")# 获取图片
+    # 保存图片
     with open('favicon.ico', 'wb') as f:
         f.write(response.content)  # 保存本地
 
@@ -293,7 +294,7 @@ def test_get_timeout_10():
 @pytest.mark.skip
 def test_get_auth_11():
     response = requests.get(
-        'http://110.40.156.59:8000/api/json?pretty=true', auth=('admin', 'xxxx'))
+        'http://110.40.xxx.59:8000/api/json?pretty=true', auth=('admin', 'xxxx'))
     print(response.status_code)  # 响应状态码
 
 
@@ -313,7 +314,7 @@ def test_post_01():
     data = {'age': '22'}  # 请求body
     response = requests.post("http://httpbin.org/post", data=data) #向url post 一个字符串，自动编码为data
     print(response.text)
-
+    print(eval(response.text)['form'])#转换为字典
 
 @pytest.mark.skip
 def test_post_json_01():
@@ -327,9 +328,9 @@ def test_post_json_01():
 @pytest.mark.skip
 def test_post_json_02():
     response = requests.get("http://httpbin.org/get")
-    print(type(response.text))
-    print(response.json())
-    print(json.loads(response.text))
+    print(type(response.text))# <class 'str'>
+    print(response.json())# <class 'dict'>
+    print(json.loads(response.text)) # <class 'dict'>
 
 '''
     [POST] 
@@ -350,7 +351,7 @@ def test_post_02():
 '''
     [POST] 
     [Content-Type:multipart/form-data]
-    文件上传
+    [文件上传/上传文件]
 '''
 @pytest.mark.skip
 def test_fileUpdate():
