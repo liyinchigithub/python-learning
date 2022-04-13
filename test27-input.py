@@ -19,8 +19,8 @@ def test_input():
 '''
 @pytest.mark.skip
 def test_raw_input():
-   value=raw_input("请输入内容") # Python3将raw_input和input进行整合成了input....去除了raw_input()函数
-   print("你输入的内容是:{}".format(value))
+   value=input("请输入内容") # Python3将raw_input和input进行整合成了input....去除了raw_input()函数
+   print("你输入的内容是:{}".format(int(value)))
    print("输入的内容数据类型是:",type(value))
 '''
     pytest test27-input.py

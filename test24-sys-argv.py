@@ -23,7 +23,7 @@ import pytest;
 @pytest.mark.skip
 def test_argv():
     print('文件名为{}，第一个参数{}，第二个参数{}，第三个参数{}'.format(sys.argv[0],sys.argv[1],sys.argv[2],sys.argv[3]))
-    
+    print(f"{sys.argv[0]},{sys.argv[1]},{sys.argv[2]},{sys.argv[3]}")
 # test_argv()
 
 '''
