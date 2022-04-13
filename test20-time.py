@@ -28,7 +28,7 @@ Python 的 time 模块下有很多函数可以转换常见日期格式。如函�
 '''
 @pytest.mark.test
 def test_datatime():
-    ticks = time.time()
+    ticks = time.time() # 获取当前时间戳
     print ("当前时间戳为:", ticks)  
 
 '''
