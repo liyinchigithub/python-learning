@@ -6,8 +6,8 @@
 import pytest
 import string
 '''
-    全局变量是定义在函数外面的变量
-    局部变量就是定义在一个函数体内部的变量
+    [全局变量]是定义在函数外面的变量
+    [局部变量]就是定义在一个函数体内部的变量
 '''
 @pytest.mark.test
 def test_golbal_var01():
@@ -43,7 +43,7 @@ def test_golbal_var02():
         global g_a # 重新指向 全局变量
         g_a = 2 # 赋值给全局变量
     t1()
-    print(g_a)
+    print(g_a)# 2 这个是全局变量 因为重新指向了全局变量在函数里面
 
 
 if __name__=="__main__":

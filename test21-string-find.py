@@ -12,7 +12,7 @@ import pytest
 def test_string_include01():
     s='nihao,shijie'
     t='nihao'
-    result = t in s
+    result = t in s 
     print(result) #True
 
 
@@ -25,9 +25,9 @@ def test_string_include01():
 def test_string_incloud02():
     s='nihao,shijie'
     t='nihao'
-    result2 = string.rfind(s,t)!=-1
+    result2 = string.rfind(s,t)!=-1 # True
     print(result2) #True
-    result3 = string.rfind(s,t)!=-1
+    result3 = string.rfind(s,t)!=-1 # True
     print(result3) #True
 
 
