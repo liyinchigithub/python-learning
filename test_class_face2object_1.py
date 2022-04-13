@@ -25,9 +25,11 @@ from typing_extensions import Self
 
 
 class test:
+    # 类变量
+    c=100
     # 构造函数（在类被实例化时候被调用）
     def __init__(self, a, b):
-        self.a = a
+        self.a = a #  实例变量
         self.b = b
     # 类中函数，第一个参数必须是self
     def sum(self):
@@ -46,7 +48,7 @@ print(result.sum())# 并引用其自定义方法，入参在实例化便传入�
 
 class MyClass:
     """一个简单的类实例"""
-    i = 12345 # 类变量
+    i = 12345 # 类变量，类变量在整个实例化的对象中是公用的。类变量定义在类中且在函数体之外。类变量通常不作为实例变量使用。
     def f(self):
         return 'hello world'
 # 实例化类
