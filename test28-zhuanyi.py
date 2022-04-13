@@ -60,3 +60,9 @@ def test_danyinhao():
 @pytest.mark.test
 def test_shuangyinhao():
    print("这是一个\" 转义符") # 输出：这是一个" 转义符
+'''
+   r 不转义
+'''
+@pytest.mark.test
+def test_():
+   print(r"这是一个\n转义符") # 输出：这是一个\n转义符 注意：不转义
