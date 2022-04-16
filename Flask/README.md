@@ -39,11 +39,15 @@ def af_request(resp):
 ### 获取请求参数方式
 
 * 1.request.form['key']
+
+针对 request body json 或 form-data
 ```python
     data = request.form['data']  # 获取值
     return json.dumps(data, ensure_ascii=False)
 ```
-* 2.request.get_data
+* 2.request.get_data    
+
+针对 request body json
 ```python
     # 获取请求参数
     request_data = request.get_data() 
@@ -58,8 +62,12 @@ def af_request(resp):
 
 * 3.request.form['key']
 
+针对 request url params
 ```python
-request.form['username']
+    get_data = request.args.to_dict()# 获取传入的params参数
+    username = get_data.get('username')
+    password = get_data.get('password')
+    return {"msg": "success", "status": 200, "data": {"username":username,"password":password}}
 ```
 
 ### 重定向到指定路由函数
