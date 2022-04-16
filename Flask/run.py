@@ -71,7 +71,7 @@ def root():
 @app.route('/login', methods=['post'])
 def login():
     # 获取请求参数
-    request_data = request.get_data()
+    request_data = request.get_data() # 对于前端POST请求发送过来的json数据，Flask后台可使用 request.get_data() 来接收数据，数据的格式为 bytes；再使用 json.loads() 方法就可以转换字典。
     # 将bytes类型转换为json数据
     request_json_data = json.loads(request_data)# 将json字符串数据转换为字典
     username = request_json_data.get('username')# 获取num1
@@ -79,20 +79,25 @@ def login():
     # return json.dumps({"username":username,"password":password})# 将字典转换为json字符串
     return {"username":username,"password":password }# 返回json数据
 
-@app.route('/login2', methods=['POST', 'GET'])
+@app.route('/login2', methods=['GET'])
 def login2():
-    # 判断请求方式
-    if request.method == 'POST':
-        # 获取请求参数
-        if request.form['user'] == 'admin':
-            # 重定向到首页
-            return 'Admin login successfully!'
-        else:
-            return 'No such user!'  # 显示提示信息
-    #
-    title = request.args.get('title', 'Default')  # 获取请求参数
-    #  返回视图模板给客户端浏览器
-    return render_template('login.html', title=title)  # 渲染模板
+    try:
+        # 判断请求方式
+        if request.method == 'GET':
+            # 获取请求参数
+            if request.form['username'] == 'liyinchi': # postman body raw json
+                # 重定向到首页
+                return 'welcome liyinchi!'
+            else:
+                return 'No such user!'  # 显示提示信息
+        #
+        title = request.args.get('title', 'Default')  # 获取请求参数
+        #  返回视图模板给客户端浏览器
+        return render_template('login.html', title=title)  # 渲染模板
+    except Exception as e:
+        return {"code":"1","msg":"发生错误","data":str(e)}  # 重定向到指定路由
+        # return redirect(url_for('home'))  # 重定向到指定路由
+        print(e)
 
 
 
