@@ -65,9 +65,13 @@ def upload():
 @app.route('/')
 #  每个路由对应一个函数（路由映射函数）
 def root():
-    return {"msg": "success", "status": 200, "data": "成功"}
+    return redirect(url_for('home'))# 重定向到home路由
 
+@app.route('/home')
+def home():
+    return render_template('home.html', title="欢迎")
 
+# request body json
 @app.route('/login', methods=['post'])
 def login():
     try:
@@ -82,13 +86,15 @@ def login():
     except Exception as e:
         return {"msg": "error", "status": 500, "data":  str(e)}
 
+
+# request body form-data
 @app.route('/login2', methods=['GET'])
 def login2():
     try:
         # 判断请求方式
         if request.method == 'GET':
             # 获取请求参数
-            if request.form['username'] == 'liyinchi': # postman body raw json
+            if request.form['username'] == 'liyinchi': # request body form-data
                 # 重定向到首页
                 return 'welcome liyinchi!'
             else:
@@ -102,12 +108,23 @@ def login2():
         return  {"msg": "error", "status": 500, "data": str(e)}  # 重定向到指定路由
         # return redirect(url_for('home'))  # 重定向到指定路由
 
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    # 数据库插入数据 TODO
+    
+    return {"msg": "success", "status": 200, "data": "注册成功"}
 
+@app.route('/logout')
+def logout():
+    # 清除token
+    return {"msg": "success", "status": 200, "data": "退出成功"}
 
-
-@app.route('/home')
-def home():
-    return render_template('home.html', title="欢迎")
+@app.route('/find', methods=['GET', 'POST'])
+def find():
+    get_data = request.args.to_dict()# 获取传入的params参数
+    username = get_data.get('username')
+    password = get_data.get('password')
+    return {"msg": "success", "status": 200, "data": {"username":username,"password":password}}
 
 
 # 对请求的Response header中加入header
@@ -124,11 +141,9 @@ def af_request(resp):
     resp.headers['Access-Control-Allow-Headers'] = 'x-requested-with,content-type'
     return resp
 
-# form
 
-# json
 
-# 文件上传
+
 
 # 错误处理
 @app.errorhandler(404)
@@ -168,4 +183,4 @@ def exception():
 # 端口号，默认是5000
 # 是否自动重启代码
 if __name__ == "__main__":
-    app.run(debug=True, host="127.0.0.1", port=5001, use_reloader=True)  # 启动程序
+    app.run(debug=True, host="127.0.0.1", port=5876, use_reloader=True)  # 启动程序
