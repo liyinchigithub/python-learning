@@ -75,19 +75,15 @@ def upload():
             print(request.files['file'])# 
             filename = random_filename(f)
             f.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
-            return 'file uploaded successfully'
-    
-            f = request.files['file']
-            print(request.files)
-            # 获取文件名
-            filename = random_filename(f)
-            # 保存文件
-            f.save(os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(f.filename)))
-            flash('Upload success.')  # 显示提示信息
-            #
-            session['filenames'] = [filename]
-            #
-            return redirect(url_for('show_images'))  # 重定向到上传成功的页面
+            # 显示提示信息
+            # flash('Upload success.')  
+            # 会话设置
+            # session['filenames'] = [filename]
+            # 返回上传成功的文件名
+            return {"msg": "success", "status": 200, "data": filename}
+            # return redirect(url_for('show_images'))  # 重定向到上传成功的页面
+
+            
     except Exception as e:
         print(e)
         return {'code': 500, 'msg': 'fail',"data":e}
