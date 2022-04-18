@@ -20,18 +20,25 @@ app = Flask(__name__, template_folder='./myProject/templates/',static_folder="**
 # [允许跨域]
 CORS(app, supports_credentials=True)
 
-# [文件上传]
+# [动态路由参数]正则表达式
+class RegexConver(BaseConverter):
+    def __init__(self,url_map,*items):
+        super(RegexConver,self).__init__(url_map)
+        self.regex = items[0]
+        
+app.url_map.converters['regex'] = RegexConver
+
+# [文件上传]文件类型限制
 class UploadForm():
     photo = FileField('Upload Image', validators=[FileRequired(), FileAllowed(['jpg', 'jpeg', 'png', 'gif'])])# 允许上传文件类型
-    # submit = SubmitField()
+    # 使用时  form = UploadForm()
     
-# 配置[文件上传]存放路径
+# [文件存放位置]
 print("上传文件存放路径为",os.path.dirname(os.path.abspath(__file__)))
-# app.config['UPLOAD_PATH'] = 'upload'# 存放路径
-app.config['UPLOAD_FOLDER'] = 'upload/' # upload 前面不能加“/”
-# 配置[文件上传]的最大大小
+app.config['UPLOAD_FOLDER'] = 'upload/' # 注意 ：upload 前面不能加“/”
+# [文件大小限制]
 app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024 # 10M
-# 配置[文件上传]重命名
+# [文件重命名]
 def random_filename(f):
    try:
         # 获取文件扩展名
@@ -45,35 +52,18 @@ def random_filename(f):
    except Exception as e:
        print(e)
 
-# [动态路由参数]正则表达式
-class RegexConver(BaseConverter):
-    def __init__(self,url_map,*items):
-        super(RegexConver,self).__init__(url_map)
-        self.regex = items[0]
-        
-app.url_map.converters['regex'] = RegexConver
-
-# 定义[上传文件]的路径
-@app.route('/uploaded-images')
-def show_images():
-    return render_template('uploaded.html')
-
-# 定义[上传文件]的路径
-@app.route('/uploads/<path:filename>')
-def get_file(filename):
-    return send_from_directory(app.config['UPLOAD_PATH'], filename)
-
-# 定义[上传文件]的路径
+# [文件上传接口]
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
     try:
         # 判断是否是POST请求
-        form = UploadForm()
-        # 
         if request.method == 'POST':
-            f = request.files['file']# 获取上传的文件
-            print(request.files['file'])# 
+            # 获取上传的文件
+            f = request.files['file']
+            print(request.files['file'])# <FileStorage: 'upload.jpg' ('image/jpeg')>
+            # 重命名文件
             filename = random_filename(f)
+            # 保存文件
             f.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
             # 显示提示信息
             # flash('Upload success.')  
@@ -82,44 +72,54 @@ def upload():
             # 返回上传成功的文件名
             return {"msg": "success", "status": 200, "data": filename}
             # return redirect(url_for('show_images'))  # 重定向到上传成功的页面
-
-            
     except Exception as e:
         print(e)
-        return {'code': 500, 'msg': 'fail',"data":e}
+        return {'code': 401, 'msg': 'fail',"data":e}
+
+# [文件上传]渲染页面
+@app.route('/uploaded-images')
+def show_images():
+    return render_template('uploaded.html')
+
+# [上传文件]文件名通过url参数传递 /a/b/1.txt
+@app.route('/uploads/<path:filename>')
+def get_file(filename):
+    return send_from_directory(app.config['UPLOAD_PATH'], filename)
+
 
 # [静态路由]
 @app.route('/')
 #  每个路由对应一个函数（路由映射函数）
 def root():
     return redirect(url_for('home'))# 重定向到home路由
+
 # 后端渲染模板（前端页面）
 @app.route('/home')
 def home():
     return render_template('home.html', title="欢迎") # 模板内容进行渲染返回
 
-# [动态路由]参数为默认为字符串
+# [动态路由]参数name在url中，数据类型默认为字符串
 @app.route('/user/<name>', methods=['GET', 'POST'])
 def user(name):
     return  {"msg": "success", "status": 200, "data": name} 
 
-# [动态路由]参数为整型
+# [动态路由]限制参数类型为整型
 @app.route('/user_int/<int:id>', methods=['GET', 'POST'])
 def user_int(id):
     print(id)
     return  {"msg": "success", "status": 200, "data": id}  #
 
-# [动态路由]参数为浮点型
+# [动态路由]限制参数类型为浮点型
 @app.route('/user_float/<float:score>', methods=['GET', 'POST'])
 def user_float(score):
     return  {"msg": "success", "status": 200, "data": score} 
 
-# [动态路由]参数为字符串
+# [动态路由]限制参数类型为字符串
 @app.route('/user_string/<string:name>', methods=['GET', 'POST'])
 def user_string(name):
     return {"msg": "success", "status": 200, "data": name}
 
-# [动态路由]参数为
+# [动态路由]限制参数类型为
 @app.route('/user_any/<any(a,b,c):name>', methods=['GET', 'POST'])
 def user_any(name):
     return {"msg": "success", "status": 200, "data": name}
@@ -135,26 +135,8 @@ def user_regex(name):
     request.cookies.get('username')
     return {"msg": "success", "status": 200, "data": name}
 
-# # 动态路由-参数为列表
-# @app.route('/user_list/<list:name>')
-# def user_list(name):
-#     return {"msg": "success", "status": 200, "data": name}
-# # 动态路由-参数为元组
-# @app.route('/user_tuple/<tuple:name>')
-# def user_tuple(name):
-#     return {"msg": "success", "status": 200, "data": name}
-# #  动态路由-参数为集合
-# @app.route('/user_set/<set:name>')
-# def user_set(name):
-#     return {"msg": "success", "status": 200, "data": name}
-# #  动态路由-参数为字典
-# @app.route('/user_dict/<dict:name>')
-# def user_dict(name):
-#     return {"msg": "success", "status": 200, "data": name}
 
-
-
-# request body json
+# [request body json]  多方式：request.json.get('key')、request.get_data()、
 @app.route('/login', methods=['post'])
 def login():
     try:
@@ -170,13 +152,12 @@ def login():
         return {"msg": "error", "status": 500, "data":  str(e)}
 
 
-# 获取form-data参数
-@app.route('/login2', methods=['GET'])
+# [request body form-data]  request.form['key']
 def login2():
     try:
         # 判断请求方式
         if request.method == 'POST':
-            # 获取请求参数
+            # 获取form-data 请求参数
             if request.form['username'] == 'liyinchi': # request body form-data
                 # 重定向到首页
                 return 'welcome liyinchi!'
@@ -192,18 +173,7 @@ def login2():
         return  {"msg": "error", "status": 500, "data": str(e)}  # 重定向到指定路由
         # return redirect(url_for('home'))  # 重定向到指定路由
 
-@app.route('/register', methods=['GET', 'POST'])
-def register():
-    # 数据库插入数据 TODO
-    
-    return {"msg": "success", "status": 200, "data": "注册成功"}
-
-@app.route('/logout')
-def logout():
-    # 清除token
-    return {"msg": "success", "status": 200, "data": "退出成功"}
-
-# 获取url ? 后面的参数
+# [获取url ? 后面的参数]    request.args.to_dict()
 @app.route('/find', methods=['GET', 'POST'])
 def find():
     get_data = request.args.to_dict()# 获取传入的params参数
@@ -212,7 +182,20 @@ def find():
     return {"msg": "success", "status": 200, "data": {"username":username,"password":password}}
 
 
-# 对请求的Response header中加入header
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    # 数据库插入数据 TODO 判断是否存在同名账号，如果存在，接口返回账号重复 200
+    return {"msg": "success", "status": 200, "data": "注册成功"}
+
+@app.route('/logout')
+def logout():
+    # 清除服务端 token TODO 下次的访问接口返回需要登录token 校验失败
+    return {"msg": "success", "status": 200, "data": "退出成功"}
+
+
+
+# [后置处理]针对所有请求，对请求的Response header中加入header
 @app.after_request
 def after_request(resp):
     """
@@ -220,23 +203,25 @@ def after_request(resp):
     :param resp:
     :return:
     """
+    # 
     resp = make_response(resp)
+    # 允许跨域访问
     resp.headers['Access-Control-Allow-Origin'] = '*'
     resp.headers['Access-Control-Allow-Methods'] = 'GET,POST,PUT,DELETE,OPTIONS'
     resp.headers['Access-Control-Allow-Headers'] = 'x-requested-with,content-type'
+    # 设置cookie
     resp.set_cookie("cookie_key", "cookie_value", max_age=3600)
     return resp
 
 
 
-
-
-# 错误处理
+# [错误处理]
 @app.errorhandler(404)
 def page_not_found(error):
-    return render_template('404.html'), 404
+    # return render_template('404.html'), 404
+    return {"msg": "fial", "status": 201, "data": error}
 
-# 启动服务器
+# [启动服务器]
 class InvalidUsage(Exception):  # 继承父类Exception
     # 定义异常类
     status_code = 400
@@ -248,8 +233,8 @@ class InvalidUsage(Exception):  # 继承父类Exception
         self.message = message
         self.status_code = status_code
 
-# 定义路由
-@app.errorhandler(InvalidUsage)# 定义错误处理
+# [错误处理]
+@app.errorhandler(InvalidUsage)
 def invalid_usage(error):
     #  构造响应  返回错误异常内容给客户端
     response = make_response(error.message)
@@ -257,16 +242,17 @@ def invalid_usage(error):
     response.status_code = error.status_code
     return response
 
-# 定义路由
+# [异常处理]
 @app.route('/exception')
 def exception():
     #  抛出异常
     raise InvalidUsage('No privilege to access the resource', status_code=403)
 
 
-# 设置调试模式，生产模式的时候要关掉debug
-# 主机地址
-# 端口号，默认是5000
-# 是否自动重启代码
+# [启动服务器]
 if __name__ == "__main__":
-    app.run(debug=True, host="127.0.0.1", port=5876, use_reloader=True)  # 启动程序
+    # debug=True        设置调试模式，生产模式的时候要关掉debug
+    # host              主机地址
+    # port              端口号，默认是5000
+    # use_reloader=True 是否自动重启代码
+    app.run(debug=True, host="127.0.0.1", port=5876, use_reloader=True)
