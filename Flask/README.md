@@ -48,7 +48,7 @@ def af_request(resp):
 
 * 1.request.form['key']
 
-针对 request body json 或 form-data
+>针对 request body json 或 form-data
 ```python
     data = request.form['data']  # 获取值
     return json.dumps(data, ensure_ascii=False)
@@ -104,6 +104,12 @@ get_data=request.form['username']# request form-data
     return {"msg": "success", "status": 200, "data": {"username":username,"password":password}}
 ```
 
+```python
+    request_data = request.json
+    print("request.json",request.json)
+    return {"msg": "success", "status": 200, "data": request_data}
+```
+
 
 ### 重定向到指定路由函数
 
@@ -140,3 +146,31 @@ cd Flask/app/tests/test_.py
 pytest
 ```
 
+
+
+
+
+# 常见问题
+
+* 1.
+原因：
+
+解决办法：
+
+* 2.
+原因：
+
+解决办法：
+
+* 3.
+原因：
+
+解决办法：
+
+
+
+# 参考
+
+[Flask 蓝图](https://www.cnblogs.com/jackadam/p/8684148.html)
+
+[w3school Flask](https://www.w3school.com.cn/python/python_flask.asp)

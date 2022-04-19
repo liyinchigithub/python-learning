@@ -4,7 +4,7 @@
 # 引入了Flask类
 from crypt import methods
 from importlib.resources import path
-from flask import Flask, url_for, request, render_template, redirect, flash, session, make_response
+from flask import Flask, url_for, request, render_template, redirect, flash, session, make_response,Blueprint
 from flask_wtf.file import FileField, FileRequired, FileAllowed  # 文件上传
 from flask import send_from_directory  # 发送静态文件
 from flask_cors import CORS  # 跨域访问
@@ -13,12 +13,29 @@ from werkzeug.routing import BaseConverter # 正则表达式
 import os
 import uuid  # 生成随机字符串
 import json
+from api.login import * # [蓝图]模块化
+from api.upload import * # [蓝图]模块化
+from api.logout import * # [蓝图]模块化
+from api.register import * # [蓝图]模块化
 
 # 实例化Flask对象 app
 app = Flask(__name__, template_folder='./myProject/templates/',static_folder="****")
 
 # [允许跨域]
 CORS(app, supports_credentials=True)
+
+# 注册路由（蓝图）
+app.register_blueprint(login,url_prefix='/login')
+app.register_blueprint(upload,url_prefix='/upload')
+app.register_blueprint(logout,url_prefix='/logout')
+app.register_blueprint(register,url_prefix='/register')
+
+
+# [文件上传]存放位置
+print("上传文件存放路径为",os.path.dirname(os.path.abspath(__file__)))
+app.config['UPLOAD_FOLDER'] = 'upload/' # 注意 ：upload 前面不能加“/”
+# [文件上传文件大小限制
+app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024 # 10M
 
 # [动态路由参数]正则表达式
 class RegexConver(BaseConverter):
@@ -27,64 +44,6 @@ class RegexConver(BaseConverter):
         self.regex = items[0]
         
 app.url_map.converters['regex'] = RegexConver
-
-# [文件上传]文件类型限制
-class UploadForm():
-    photo = FileField('Upload Image', validators=[FileRequired(), FileAllowed(['jpg', 'jpeg', 'png', 'gif'])])# 允许上传文件类型
-    # 使用时  form = UploadForm()
-    
-# [文件存放位置]
-print("上传文件存放路径为",os.path.dirname(os.path.abspath(__file__)))
-app.config['UPLOAD_FOLDER'] = 'upload/' # 注意 ：upload 前面不能加“/”
-# [文件大小限制]
-app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024 # 10M
-# [文件重命名]
-def random_filename(f):
-   try:
-        # 获取文件扩展名
-        ext = secure_filename(f.filename).split('.')[-1]
-        print("secure_filename(filename)为：",secure_filename(f.filename))# secure_filename(filename)为：upload.jpg
-        print(ext)# jpg
-        # 重新生成文件名
-        new_filename = uuid.uuid4().hex +"." +ext
-        # 返回文件名
-        return new_filename
-   except Exception as e:
-       print(e)
-
-# [文件上传接口]
-@app.route('/upload', methods=['GET', 'POST'])
-def upload():
-    try:
-        # 判断是否是POST请求
-        if request.method == 'POST':
-            # 获取上传的文件
-            f = request.files['file']
-            print(request.files['file'])# <FileStorage: 'upload.jpg' ('image/jpeg')>
-            # 重命名文件
-            filename = random_filename(f)
-            # 保存文件
-            f.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
-            # 显示提示信息
-            # flash('Upload success.')  
-            # 会话设置
-            # session['filenames'] = [filename]
-            # 返回上传成功的文件名
-            return {"msg": "success", "status": 200, "data": filename}
-            # return redirect(url_for('show_images'))  # 重定向到上传成功的页面
-    except Exception as e:
-        print(e)
-        return {'code': 401, 'msg': 'fail',"data":e}
-
-# [文件上传]渲染页面
-@app.route('/uploaded-images')
-def show_images():
-    return render_template('uploaded.html')
-
-# [上传文件]文件名通过url参数传递 /a/b/1.txt
-@app.route('/uploads/<path:filename>')
-def get_file(filename):
-    return send_from_directory(app.config['UPLOAD_PATH'], filename)
 
 
 # [静态路由]
@@ -136,42 +95,7 @@ def user_regex(name):
     return {"msg": "success", "status": 200, "data": name}
 
 
-# [request body json]  多方式：request.json.get('key')、request.get_data()、
-@app.route('/login', methods=['post'])
-def login():
-    try:
-        # 获取请求参数
-        request_data = request.get_data() # 对于前端POST请求发送过来的json数据，Flask后台可使用 request.get_data() 来接收数据，数据的格式为 bytes；再使用 json.loads() 方法就可以转换字典。
-        # 将bytes类型转换为json数据
-        request_json_data = json.loads(request_data)# 将json字符串数据转换为字典
-        username = request_json_data.get('username')# 获取num1
-        password = request_json_data.get('password')# 
-        # return json.dumps({"username":username,"password":password})# 将字典转换为json字符串
-        return {"username":username,"password":password }# 返回json数据
-    except Exception as e:
-        return {"msg": "error", "status": 500, "data":  str(e)}
 
-
-# [request body form-data]  request.form['key']
-def login2():
-    try:
-        # 判断请求方式
-        if request.method == 'POST':
-            # 获取form-data 请求参数
-            if request.form['username'] == 'liyinchi': # request body form-data
-                # 重定向到首页
-                return 'welcome liyinchi!'
-            else:
-                return 'No such user!'  # 显示提示信息
-        else:
-            title = request.args.get('title', 'Default')  # request url query string
-            #  返回视图模板给客户端浏览器
-            return render_template('login.html', title=title)  # 渲染模板
-        
-    except Exception as e:
-        print(e)
-        return  {"msg": "error", "status": 500, "data": str(e)}  # 重定向到指定路由
-        # return redirect(url_for('home'))  # 重定向到指定路由
 
 # [获取url ? 后面的参数]    request.args.to_dict()
 @app.route('/find', methods=['GET', 'POST'])
@@ -180,18 +104,6 @@ def find():
     username = get_data.get('username')
     password = get_data.get('password')
     return {"msg": "success", "status": 200, "data": {"username":username,"password":password}}
-
-
-
-@app.route('/register', methods=['GET', 'POST'])
-def register():
-    # 数据库插入数据 TODO 判断是否存在同名账号，如果存在，接口返回账号重复 200
-    return {"msg": "success", "status": 200, "data": "注册成功"}
-
-@app.route('/logout')
-def logout():
-    # 清除服务端 token TODO 下次的访问接口返回需要登录token 校验失败
-    return {"msg": "success", "status": 200, "data": "退出成功"}
 
 
 
@@ -251,6 +163,9 @@ def exception():
 
 # [启动服务器]
 if __name__ == "__main__":
+    # 打印路由
+    print(app.url_map)
+    
     # debug=True        设置调试模式，生产模式的时候要关掉debug
     # host              主机地址
     # port              端口号，默认是5000
