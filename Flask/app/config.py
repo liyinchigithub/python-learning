@@ -5,7 +5,7 @@ from datetime import timedelta
 # jwt scret key
 JWT_SECRET_KEY = "liyinchi1234567890" # 
 # jwt 过期时间
-JWT_EXPIRATION_DELTA = timedelta(seconds=3600*48)
+JWT_EXPIRATION_DELTA = timedelta(seconds=3600*48) # 
 # jwt 校验的声明
 JWT_VERIFY_CLAIMS = ['signature', 'exp', 'iat']
 # jwt 必须的声明

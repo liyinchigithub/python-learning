@@ -12,8 +12,9 @@ from werkzeug.routing import BaseConverter # 正则表达式
 import os
 import uuid  # 生成随机字符串
 import json
+import jwt
 from flask import current_app as app # 让蓝图可以使用app对象
-
+from  config import * # JWT参数配置文件
 # 创建蓝图对象
 login=Blueprint('login',__name__)
 
@@ -34,23 +35,11 @@ def login_api():
 
 
 # [request body form-data]  request.form['key']
-@login.route('/2', methods=['post'])
-def login_api2():
+@login.route('/getToken', methods=['get'])
+def get_token():
     try:
-        # 判断请求方式
-        if request.method == 'POST':
-            # 获取form-data 请求参数
-            if request.form['username'] == 'liyinchi': # request body form-data
-                # 重定向到首页
-                return 'welcome liyinchi!'
-            else:
-                return 'No such user!'  # 显示提示信息
-        else:
-            title = request.args.get('title', 'Default')  # request url query string
-            #  返回视图模板给客户端浏览器
-            return render_template('login.html', title=title)  # 渲染模板
-        
+       token = jwt.encode({'some': 'payload','exp':JWT_EXPIRATION_DELTA}, JWT_SECRET_KEY, algorithm='HS256')   
+       return {"token":token}
     except Exception as e:
         print(e)
-        return  {"msg": "error", "status": 500, "data": str(e)}  # 重定向到指定路由
-        # return redirect(url_for('home'))  # 重定向到指定路由
+        return  {"msg": "error", "status": 500, "data": e}  # 重定向到指定路由
