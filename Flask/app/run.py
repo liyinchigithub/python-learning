@@ -4,7 +4,7 @@
 # 引入了Flask类
 from crypt import methods
 from importlib.resources import path
-from flask import Flask, url_for, request, render_template, redirect, flash, session, make_response,Blueprint
+from flask import Flask, url_for, request, render_template, redirect, flash, session, make_response,Blueprint,jsonify
 from flask_wtf.file import FileField, FileRequired, FileAllowed  # 文件上传
 from flask import send_from_directory  # 发送静态文件
 from flask_cors import CORS  # 跨域访问
@@ -36,6 +36,11 @@ print("上传文件存放路径为",os.path.dirname(os.path.abspath(__file__)))
 app.config['UPLOAD_FOLDER'] = 'upload/' # 注意 ：upload 前面不能加“/”
 # [文件上传文件大小限制
 app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024 # 10M
+# [jwt配置]
+app.config["JWT_SECRET"] = JWT_SECRET_KEY
+# app.config["JWT_EXPIRY_HOURS"] = 15
+app.config["JWT_EXPIRY_MINUTES"] = 1 
+app.config["JWT_REFRESH_DAYS"] = 1
 
 # [动态路由参数]正则表达式
 class RegexConver(BaseConverter):
@@ -94,9 +99,6 @@ def user_regex(name):
     request.cookies.get('username')
     return {"msg": "success", "status": 200, "data": name}
 
-
-
-
 # [获取url ? 后面的参数]    request.args.to_dict()
 @app.route('/find', methods=['GET', 'POST'])
 def find():
@@ -104,6 +106,33 @@ def find():
     username = get_data.get('username')
     password = get_data.get('password')
     return {"msg": "success", "status": 200, "data": {"username":username,"password":password}}
+
+# 每个请求前执行
+@app.before_request
+def jwt_authentication():
+    """
+    1.获取请求头Authorization中的token
+    2.判断是否以 Bearer开头
+    3.使用jwt模块进行校验
+    4.判断校验结果,成功就提取token中的载荷信息,赋值给g对象保存
+    """
+    # 获取请求头Authorization中的token
+    auth = request.headers.get('Authorization')
+    # 判断是否以 Bearer开头
+    if auth and auth.startswith('Bearer '):
+        "提取token 0-6 被Bearer和空格占用 取下标7以后的所有字符"
+        token = auth[7:]
+        "校验token"
+        payload = verify_jwt(token)
+        "判断token的校验结果"
+        g.user_id = None
+        g.refresh = None
+        if payload:
+            "获取载荷中的信息赋值给g对象"
+            g.user_id = payload.get('user_id')
+            g.refresh = payload.get('refresh')
+    else:
+        return jsonify({"msg": "登录超时，请重新登录", "status": 401}) 
 
 
 
@@ -121,8 +150,11 @@ def after_request(resp):
     resp.headers['Access-Control-Allow-Origin'] = '*'
     resp.headers['Access-Control-Allow-Methods'] = 'GET,POST,PUT,DELETE,OPTIONS'
     resp.headers['Access-Control-Allow-Headers'] = 'x-requested-with,content-type'
+    # 生成token
+    token,refresh_token=generate_token("1000")
     # 设置cookie
-    resp.set_cookie("cookie_key", "cookie_value", max_age=3600)
+    resp.set_cookie("token", token, max_age=3600)
+    resp.set_cookie("refresh_token", refresh_token, max_age=3600)
     return resp
 
 
@@ -159,6 +191,90 @@ def invalid_usage(error):
 def exception():
     #  抛出异常
     raise InvalidUsage('No privilege to access the resource', status_code=403)
+
+
+
+def generate_token(user_id, need_refresh_token=True):
+    """
+    生成token 和refresh_token
+    :param user_id: 用户id
+    :return: token2小时, refresh_token14天
+    """
+    pass
+    '生成时间信息'
+    current_time = datetime.utcnow()
+    '指定有效期  业务token -- 2小时,我们这里测试所以设置的秒数'
+    expire_time = current_time + \
+        timedelta(seconds=app.config['JWT_EXPIRY_MINUTES'])
+
+    '生成业务token  refresh 标识是否是刷新token'
+    token = generate_jwt(
+        {'user_id': user_id, 'refresh': False}, expiry=expire_time)
+
+    '给刷新token设置一个默认值None'
+    refresh_token = None
+    '根据传入的参数判断是否需要生成刷新token'
+    '不需要生成的传入need_refresh_token=False,需要的传入True或不传使用默认值'
+    if need_refresh_token:
+        '指定有效期  刷新token -- 14天,我们这里测试所以设置的秒数'
+        refresh_expires = current_time + \
+            timedelta(seconds=app.config['JWT_REFRESH_DAYS'])
+        '生成刷新token'
+        refresh_token = generate_jwt(
+            {'user_id': user_id, 'refresh': True}, expiry=refresh_expires)
+    '返回这两个token'
+    return token, refresh_token
+
+def login_required(f):
+    '让装饰器装饰的函数属性不会变 -- name属性'
+    '第1种方法,使用functools模块的wraps装饰内部函数'
+
+    @functools.wraps(f)
+    def wrapper(*args, **kwargs):
+        if not g.user_id:
+            return {'message': 'User must be authorized.'}, 401
+        elif g.refresh:
+            return {'message': 'Do not use refresh token.'}, 403
+        else:
+            return f(*args, **kwargs)
+
+    '第2种方法,在返回内部函数之前,先修改wrapper的name属性'
+    # wrapper.__name__ = f.__name__
+    return wrapper
+
+def generate_jwt(payload, expiry, secret=None):
+    """
+    生成jwt
+    :param payload: dict 载荷
+    :param expiry: datetime 有效期
+    :param secret: 密钥
+    :return: jwt
+    """
+    _payload = {'exp': expiry}
+    _payload.update(payload)
+
+    if not secret:
+        secret = app.config['JWT_SECRET']
+
+    token = jwt.encode(_payload, secret, algorithm='HS256')
+    return token
+
+
+def verify_jwt(token, secret=None):
+    """
+    检验jwt
+    :param token: jwt
+    :param secret: 密钥
+    :return: dict: payload
+    """
+    if not secret:
+        secret = app.config['JWT_SECRET']
+    try:
+        payload = jwt.decode(token, secret, algorithms=['HS256'])
+    except jwt.PyJWTError:
+        payload = None
+
+    return payload
 
 
 # [启动服务器]

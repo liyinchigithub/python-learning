@@ -7,17 +7,24 @@ cd /Flask/app
 python run.py
 ```
 
+## 查看项目所有接口
 
+```shell
+# run.py
+if __name__ == "__main__":
+    # 打印路由
+    print(app.url_map)
+    
+    app.run(debug=True, host="127.0.0.1", port=5876, use_reloader=True)
+```
 
-## Flask JWT
+## Flask 允许跨域
 
-
-## Flask 跨域
-
+* 安装flask-cors
 ```shell
 pip install flask-cors
 ```
-
+* run.py
 ```python
 from flask_cors import CORS
  
@@ -28,7 +35,7 @@ if __name__ == "__main__":
     app.run()
 ```
 
-Response header中加入header
+* Response header中加入header
 ```python
 @app.after_request
 def af_request(resp):     
@@ -48,11 +55,18 @@ def af_request(resp):
 
 * 1.request.form['key']
 
->针对 request body json 或 form-data
+>针对 request body form-data
 ```python
     data = request.form['data']  # 获取值
     return json.dumps(data, ensure_ascii=False)
 ```
+
+```python
+    data =request.values
+    username=data["username"]
+    password=data["password"]
+```
+
 * 2.request.get_data    
 
 >针对 POST request body json
@@ -148,6 +162,15 @@ pytest
 
 
 
+## Flask JWT
+
+### 生成token
+
+### 校验token
+
+### 销毁token
+
+### 更新token
 
 
 # 常见问题
