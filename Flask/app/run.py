@@ -3,6 +3,7 @@
 
 # 引入了Flask类
 from crypt import methods
+from encodings import utf_8
 from importlib.resources import path
 from flask import Flask, url_for, request, render_template, redirect, flash, session, make_response,Blueprint,jsonify
 from flask_wtf.file import FileField, FileRequired, FileAllowed  # 文件上传
@@ -19,7 +20,7 @@ from api.logout import * # [蓝图]模块化
 from api.register import * # [蓝图]模块化
 
 # 实例化Flask对象 app
-app = Flask(__name__, template_folder='./myProject/templates/',static_folder="****")
+app = Flask(__name__, template_folder='./myProject/templates/',static_folder="./static/") # 访问静态文件夹下的文件 http://127.0.0.1:5876/static/文件名.jpg
 
 # [允许跨域]
 CORS(app, supports_credentials=True)
@@ -37,9 +38,8 @@ app.config['UPLOAD_FOLDER'] = 'upload/' # 注意 ：upload 前面不能加“/�
 # [文件上传文件大小限制
 app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024 # 10M
 # [jwt配置]
-app.config["JWT_SECRET"] = JWT_SECRET_KEY
-# app.config["JWT_EXPIRY_HOURS"] = 15
-app.config["JWT_EXPIRY_MINUTES"] = 1 
+app.config["JWT_SECRET"] = "JWT_SECRET_KEY"
+app.config["JWT_EXPIRY_HOURS"] = 60
 app.config["JWT_REFRESH_DAYS"] = 1
 
 # [动态路由参数]正则表达式
@@ -110,29 +110,41 @@ def find():
 # 每个请求前执行
 @app.before_request
 def jwt_authentication():
-    """
-    1.获取请求头Authorization中的token
-    2.判断是否以 Bearer开头
-    3.使用jwt模块进行校验
-    4.判断校验结果,成功就提取token中的载荷信息,赋值给g对象保存
-    """
-    # 获取请求头Authorization中的token
-    auth = request.headers.get('Authorization')
-    # 判断是否以 Bearer开头
-    if auth and auth.startswith('Bearer '):
-        "提取token 0-6 被Bearer和空格占用 取下标7以后的所有字符"
-        token = auth[7:]
-        "校验token"
-        payload = verify_jwt(token)
-        "判断token的校验结果"
-        g.user_id = None
-        g.refresh = None
-        if payload:
-            "获取载荷中的信息赋值给g对象"
-            g.user_id = payload.get('user_id')
-            g.refresh = payload.get('refresh')
+    # 判断是否为登录请求
+    print(request.url)
+    if ('login' in request.url):
+        print("登录接口不进行token验证，只进行token生成")
+        return
     else:
-        return jsonify({"msg": "登录超时，请重新登录", "status": 401}) 
+        """
+        1.获取请求头Authorization中的token
+        2.判断是否以 Bearer开头
+        3.使用jwt模块进行校验
+        4.判断校验结果,成功就提取token中的载荷信息,赋值给g对象保存
+        """
+        # 获取请求头Authorization中的token
+        auth = request.headers.get('Authorization')
+        # 判断是否以 Bearer开头
+        if auth and auth.startswith('Bearer '):
+            "提取token 0-6 被Bearer和空格占用 取下标7以后的所有字符"
+            token = auth[7:]
+            print("token:",token)
+            "校验token"
+            payload = verify_jwt(token)
+            print("payload:",payload)
+            if payload!=None:
+                "判断token的校验结果"
+                g.user_id = None
+                g.refresh = None
+                if payload:
+                    "获取载荷中的信息赋值给g对象"
+                    g.user_id = payload.get('user_id')
+                    g.refresh = payload.get('refresh')
+            else:
+                # 校验失败  例如：Signature has expired 签名过期
+                return jsonify({"msg": "登录超时，请重新登录", "status": 401}) 
+        else:
+            return jsonify({"msg": "登录超时，请重新登录", "status": 401}) 
 
 
 
@@ -151,10 +163,12 @@ def after_request(resp):
     resp.headers['Access-Control-Allow-Methods'] = 'GET,POST,PUT,DELETE,OPTIONS'
     resp.headers['Access-Control-Allow-Headers'] = 'x-requested-with,content-type'
     # 生成token
-    token,refresh_token=generate_token("1000")
-    # 设置cookie
-    resp.set_cookie("token", token, max_age=3600)
-    resp.set_cookie("refresh_token", refresh_token, max_age=3600)
+    token,refresh_token=generate_token("1000")# TODO 获取请求头userid
+    resp.headers['token'] = token
+    resp.headers['refresh_token'] = refresh_token
+    # 设置cookie，也可以把token放入cookie中
+    # resp.set_cookie("token", token, max_age=3600)
+    # resp.set_cookie("refresh_token", refresh_token, max_age=3600)
     return resp
 
 
@@ -193,7 +207,7 @@ def exception():
     raise InvalidUsage('No privilege to access the resource', status_code=403)
 
 
-
+# 生成token
 def generate_token(user_id, need_refresh_token=True):
     """
     生成token 和refresh_token
@@ -205,7 +219,7 @@ def generate_token(user_id, need_refresh_token=True):
     current_time = datetime.utcnow()
     '指定有效期  业务token -- 2小时,我们这里测试所以设置的秒数'
     expire_time = current_time + \
-        timedelta(seconds=app.config['JWT_EXPIRY_MINUTES'])
+        timedelta(seconds=app.config['JWT_EXPIRY_HOURS'])
 
     '生成业务token  refresh 标识是否是刷新token'
     token = generate_jwt(
@@ -271,9 +285,9 @@ def verify_jwt(token, secret=None):
         secret = app.config['JWT_SECRET']
     try:
         payload = jwt.decode(token, secret, algorithms=['HS256'])
-    except jwt.PyJWTError:
+    except jwt.PyJWTError as e:
+        print("jwt.PyJWTError：",e)
         payload = None
-
     return payload
 
 
