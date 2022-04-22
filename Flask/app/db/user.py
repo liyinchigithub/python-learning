@@ -2,7 +2,8 @@
 # -*- coding: UTF-8 -*-
 # https://docs.sqlalchemy.org/en/14/orm/quickstart.html
 # SQLAlchemy
-from sqlalchemy import Column, ForeignKey, Integer, String, Boolean, DateTime, Date, Time, DECIMAL, Text, create_engine
+from unittest import result
+from sqlalchemy import Column, ForeignKey, Integer, String, Boolean, DateTime, Date, Time, DECIMAL, Text, create_engine,and_, or_, func
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm import declarative_base
 from sqlalchemy.orm import relationship
@@ -50,16 +51,79 @@ engine = create_engine(
 DBSession = sessionmaker(bind=engine)
 # 创建session对象:
 session = DBSession()
-# 循环
-for i in range(10):
-    #  创建新User对象:
-    user = User(username=f"user{'liyinchi'+str(i)}",
-                        password='123456', type='1', is_delete=False)
-    # 
-    print(user)
-    # [添加到session]
-    session.add(user)
-    # user01=User(name='user01',uid=2.232,is_delete=True,gender="男",time=datetime(2020,10,31,17,38,30),longtext="xxxxxxxxxxx")
-#  [提交到session]
+# # 循环
+# for i in range(10):
+#     #  创建新User对象:
+#     user = User(username=f"{'liyinchi'+str(i)}",
+#                         password='123456', type='1', is_delete=False)
+#     # 
+#     print(f"{user.username},{user.password},{user.type},{user.is_delete}")
+#     # [添加到session]
+#     session.add(user)
+#     # user01=User(name='user01',uid=2.232,is_delete=True,gender="男",time=datetime(2020,10,31,17,38,30),longtext="xxxxxxxxxxx")
+# #  [提交到session]
+# session.commit()
+
+
+# 精确查询
+result1=session.query(User).filter(User.username=="liyinchi1").all()
+for r in result1:
+    print("r.username",r.username)
+    print("r.id:",r.id)
+print("精确查询======================")
+session.commit()
+    
+# 模糊查询
+result2=session.query(User).filter(User.username.like('%liyinchi%')).all()
+for r in result2:
+    print("r.username",r.username)
+    print("r.id:",r.id)
+print("模糊查询======================")
 session.commit()
 
+
+# 多值匹配（包含）
+result3 =session.query(User).filter(User.username.in_(['liyinchi1','liyinchi2'])).all()
+for r in result3:
+    print("r.username",r.username)
+    print("r.id:",r.id)
+print("多值匹配======================")
+
+# 多值不匹配（不包含）
+result4 =session.query(User).filter(~User.username.in_(['liyinchi1','liyinchi2'])).all()
+for r in result4:
+    print("r.username",r.username)
+    print("r.id:",r.id)
+print("多值不匹配======================")
+
+
+# is null
+result5 =session.query(User).filter(User.username.is_(None)).all()
+for r in result5:
+    print("r.username",r.username)
+    print("r.id:",r.id)
+print("为空======================")
+
+# is not null
+result6 =session.query(User).filter(User.username.isnot(None)).all()
+for r in result6:
+    print("r.username",r.username)
+    print("r.id:",r.id)
+print("不为空======================")
+
+# and
+result7 =session.query(User).filter(User.username.like('%liyinchi%'),User.id>5).all()# 方法一
+result7 =session.query(User).filter(and_(User.username.like('%liyinchi%'),User.id>5)).all()# 方法二
+result7 =session.query(User).filter(User.username.like('%liyinchi%')).filter(User.id>5).all()# 方法三
+
+for r in result7:
+    print("r.username",r.username)
+    print("r.id:",r.id)
+print("多条件  且 and======================")
+
+# or
+result8 =session.query(User).filter(or_(User.username.like('%liyinchi%'),User.id>5)).all()# 方法二
+for r in result8:
+    print("r.username",r.username)
+    print("r.id:",r.id)
+print("或 or======================")
