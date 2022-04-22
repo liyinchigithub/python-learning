@@ -127,3 +127,13 @@ for r in result8:
     print("r.username",r.username)
     print("r.id:",r.id)
 print("或 or======================")
+
+'''
+func.count:统计行的数量。
+func.avg:求平均值。
+func.max:求最大值。
+func.min:求最小值。
+func.sum:求和。
+func.distinct:求不重复的值。
+func.
+'''
