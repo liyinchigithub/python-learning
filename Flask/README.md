@@ -165,13 +165,20 @@ pytest
 ## Flask JWT
 
 ### 生成token
-
+```python
+```
+s
 ### 校验token
+```python
+```
 
 ### 销毁token
+```python
+```
 
 ### 更新token
-
+```python
+```
 
 # 常见问题
 

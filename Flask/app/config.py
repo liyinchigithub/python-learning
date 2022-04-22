@@ -20,3 +20,10 @@ JWT_LEEWAY = timedelta(seconds=10)
 JWT_AUTH_HEADER_PREFIX = 'JWT'
 # jwt 不是在之前
 JWT_NOT_BEFORE_DELTA = timedelta(seconds=0)
+
+# 数据库配置
+DB_USERNAME = 'root'
+DB_PASSWORD = 'lyc123456'
+DB_HOST = '127.0.0.1'
+DB_PORT = '3306'
+DB_NAME='flask_demo'
