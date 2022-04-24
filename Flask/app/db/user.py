@@ -108,6 +108,8 @@ result2=session.query(User).filter(User.username.like('%liyinchi%')).all()
 for r in result2:
     print("r.username",r.username)
     print("r.id:",r.id)
+result = session.query(func.count(User.id),func.count(User.username)).group_by(User.id).all()
+print("func.count(User.id):",result)#  [(1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1)]
 print("模糊查询======================")
 session.commit()
 
@@ -190,22 +192,41 @@ print("result",result)# [(1, 1, 1), (1, 1, 1)]
 print("分组======================")
 
 # [连表]
-result = session.query(User).join(UserType, isouter=True)
-print("result",result)# [(1, 'liyinchi1', '1', '1'), (2, 'liyinchi2', '1', '1'), (3, 'liyinchi3', '1', '1')]
-print("连表======================")
-result = session.query(User).outerjoin(UserType)
-print("result",result)# [(1, 'liyinchi1', '1', '1'), (2, 'liyinchi2', '1', '1'), (3, 'liyinchi3', '1', '1')]
-print("连表======================")
+# result = session.query(User).join(UserType, isouter=True) # 内连接取外表的交集   isouter=True表示可以不存在关联的数据
+# print("result",result)# [(1, 'liyinchi1', '1', '1'), (2, 'liyinchi2', '1', '1'), (3, 'liyinchi3', '1', '1')]
+# print("连表======================")
+# result = session.query(User).outerjoin(UserType)# 外连接取外表的并集
+# print("result",result)# [(1, 'liyinchi1', '1', '1'), (2, 'liyinchi2', '1', '1'), (3, 'liyinchi3', '1', '1')]
+# print("连表======================")
+
+'''
+
+https://www.runoob.com/mysql/mysql-join.html
+'''
 
 
-#  union(去重),union_all(不去重)
+
+#  union(去重),union_all(不去重) 2个表需要有共同的字段
 s1 = session.query(User.id, User.username)
 s2 = session.query(UserType.id, UserType.title)
-result = s1.union_all(s1)
+result = s1.union_all(s2)
 print("result",result)# 返回的是一个结果集
 print("union======================")
 
-# [子查询/临时表]   label()对查询的字段进行命名    子查询的结果集.c.字段，进行对子查询的结果集进行筛选
+'''
+SELECT id FROM `user` WHERE id >1 AND id < 5
+UNION
+SELECT id FROM `usertype` where id >1 AND id < 5
+
+SELECT id,username FROM `user` WHERE id >1 AND id < 5
+UNION ALL
+SELECT id,title FROM `usertype` where id >1 AND id < 5
+
+https://www.runoob.com/mysql/mysql-union-operation.html
+'''
+
+
+# [子查询/临时表]   subquery()  label()对查询的字段进行命名    子查询的结果集.c.字段，进行对子查询的结果集进行筛选
 # select * from (select * from Usertype where id >= 1) as A;
 s3 = session.query(UserType.id, UserType.title).filter(UserType.id>1).subquery()
 result = session.query(s3).filter(s3.c.id==2)
@@ -235,25 +256,21 @@ print("修改多条数据======================")
 session.commit()
 
 
-
 # [删除一条数据]
-
-# 根据id字段，删除指定数据
-result11 =session.query(User).filter(User.id == 1).delete()
-print("result11:",result11)# 1表示删除成功，0表示删除失败
-print("删除一条数据======================")
-session.commit()
+# result11 =session.query(User).filter(User.id == 1).delete()# 根据id字段，删除指定数据
+# print("result11:",result11)# 1表示删除成功，0表示删除失败
+# print("删除一条数据======================")
+# session.commit()
 
 # [删除多条数据]
-
-result12 =session.query(User).filter(User.username.like('liyinchi%')).delete(False)
-print("result12:",result12)# 返回删除的条数
-print("删除多条数据======================")
-session.commit()
+# result12 =session.query(User).filter(User.username.like('liyinchi%')).delete(False)
+# print("result12:",result12)# 返回删除的条数
+# print("删除多条数据======================")
+# session.commit()
 
 # [全删]
 # result13 =session.query(User).delete()
-
+# session.commit()
 
 '''
 func.count:统计行的数量。
