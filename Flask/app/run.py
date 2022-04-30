@@ -17,7 +17,7 @@ import json
 from api.login import * # [蓝图]模块化
 from api.upload import * # [蓝图]模块化
 from api.logout import * # [蓝图]模块化
-from api.register import * # [蓝图]模块化
+from api.user import * # [蓝图]模块化
 
 # 实例化Flask对象 app
 app = Flask(__name__, template_folder='./myProject/templates/',static_folder="./static/") # 访问静态文件夹下的文件 http://127.0.0.1:5876/static/文件名.jpg
@@ -29,7 +29,7 @@ CORS(app, supports_credentials=True)
 app.register_blueprint(login,url_prefix='/login')
 app.register_blueprint(upload,url_prefix='/upload')
 app.register_blueprint(logout,url_prefix='/logout')
-app.register_blueprint(register,url_prefix='/register')
+app.register_blueprint(user,url_prefix='/user')
 
 
 # [文件上传]存放位置
