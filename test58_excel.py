@@ -10,6 +10,7 @@ from datetime import date, datetime
 '''
     [读取excel]
     xlrd
+    注意：xlrd不支持xlsx格式
 '''
 
 file = './file/user_monitor.xls'
