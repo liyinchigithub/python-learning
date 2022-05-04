@@ -61,6 +61,10 @@ tutorial-env\Scripts\activate.bat
 pip freeze > requirements.txt
 ```
 
+####  安装requirement.txt依赖
+```shell
+pip install -r requirements.txt
+```
 
 ### 单元测试
 
