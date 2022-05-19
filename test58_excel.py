@@ -9,6 +9,7 @@ import xlwt  # 写入excel
 import xlrd  # 读取excel
 from datetime import date, datetime
 import sys
+from xlutils.copy import copy
 '''
     [读取excel]
     xlrd
@@ -84,6 +85,40 @@ class Excel():
         #     sheet1.write_merge(1, 2, 3, 3, '打游戏')  # 合并列单元格
         #     sheet1.write_merge(4, 5, 3, 3, '打篮球')  # 合并列单元格
         #     sheet1.write(2, 2, xlwt.Formula("A3+B3"))# 表达式 = A3+B3
+
+    '''
+        [追加写入excel]
+        @param: write_data: 待写入的数据 类型：字符串
+        @param: row_num: 写入第几行 类型：字符串
+        
+    '''
+    def write_excel_sign(self,write_data,row_num):
+            rb = xlrd.open_workbook(self.file,formatting_info=True)
+            r_sheet = rb.sheet_by_index(0) 
+            r = r_sheet.nrows
+            wb = copy(rb) 
+            sheet = wb.get_sheet(0) 
+            sheet.write(row_num,3,write_data)
+            wb.save(self.file)
+            print('Wrote successfully!')
+            
+            # # 创建工作簿
+            # f = xlwt.Workbook() 
+            # # 创建sheet
+            # sheet1 = f.add_sheet(sheet1_name, cell_overwrite_ok=True) 
+            # # 列表表头
+            # row_header = ["legal_name", "ABN", "State", "Postal Code"]
+            # # 待写入的数据
+            # data = write_data
+            # # 写入表头
+            # for i in range(0,len(row_header)):
+            #     sheet1.write(0, i,row_header[i], Excel().set_style0())
+            # # 写入数据（第二行）
+            # # 参数：行，列，值，样式
+            # sheet1.write(row_num, 3,write_data, Excel().set_style1())# 写入第一行，索引为0
+            # # 保存文件
+            # f.save(self.file)
+
 
     '''
         [设置表格样式]
