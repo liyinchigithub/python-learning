@@ -21,10 +21,8 @@ boto3==1.9.228
 botocore==1.12.228
 bunch==1.0.1
 cached-property==1.5.2
-certifi==2019.11.28
 cffi==1.15.0
 chardet==3.0.4
-charset-normalizer==2.0.10
 cigam==0.0.3
 Click==7.0
 colorama==0.4.4
@@ -45,7 +43,6 @@ h11==0.12.0
 h2==4.0.0
 hpack==4.0.0
 hyperframe==6.0.0
-idna==2.8
 image==1.5.33
 importlib-metadata==4.10.0
 iniconfig==1.1.1
@@ -102,7 +99,6 @@ trio==0.19.0
 trio-websocket==0.9.2
 typed-ast==1.4.0
 typing_extensions==4.0.1
-urllib3==1.26.8
 utils==1.0.1
 webdriver-manager==3.5.2
 websockets==10.1
@@ -128,3 +124,8 @@ flask_jwt_extended==4.3.1
 sqlalchemy==1.4.35
 xlrd==2.0.1
 xlutils==2.0.0
+certifi==2022.5.18.1
+charset-normalizer==2.0.12
+idna==3.3
+pyapollos==0.1.5
+urllib3==1.26.9
