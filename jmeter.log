@@ -1,0 +1,65 @@
+2023-04-18 13:46:14,778 INFO o.a.j.u.JMeterUtils: Setting Locale to zh_CN
+2023-04-18 13:46:14,806 INFO o.a.j.JMeter: Loading user properties from: /Users/liyinchi/TestTool/apache-jmeter-5.2.1/bin/user.properties
+2023-04-18 13:46:14,807 INFO o.a.j.JMeter: Loading system properties from: /Users/liyinchi/TestTool/apache-jmeter-5.2.1/bin/system.properties
+2023-04-18 13:46:14,809 INFO o.a.j.JMeter: Copyright (c) 1998-2019 The Apache Software Foundation
+2023-04-18 13:46:14,809 INFO o.a.j.JMeter: Version 5.2.1
+2023-04-18 13:46:14,809 INFO o.a.j.JMeter: java.version=1.8.0_181
+2023-04-18 13:46:14,809 INFO o.a.j.JMeter: java.vm.name=Java HotSpot(TM) 64-Bit Server VM
+2023-04-18 13:46:14,809 INFO o.a.j.JMeter: os.name=Mac OS X
+2023-04-18 13:46:14,809 INFO o.a.j.JMeter: os.arch=x86_64
+2023-04-18 13:46:14,809 INFO o.a.j.JMeter: os.version=10.16
+2023-04-18 13:46:14,809 INFO o.a.j.JMeter: file.encoding=UTF8
+2023-04-18 13:46:14,809 INFO o.a.j.JMeter: java.awt.headless=true
+2023-04-18 13:46:14,809 INFO o.a.j.JMeter: Max memory     =1073741824
+2023-04-18 13:46:14,809 INFO o.a.j.JMeter: Available Processors =8
+2023-04-18 13:46:14,814 INFO o.a.j.JMeter: Default Locale=English (EN)
+2023-04-18 13:46:14,814 INFO o.a.j.JMeter: JMeter  Locale=Chinese (China)
+2023-04-18 13:46:14,814 INFO o.a.j.JMeter: JMeterHome=/Users/liyinchi/TestTool/apache-jmeter-5.2.1
+2023-04-18 13:46:14,815 INFO o.a.j.JMeter: user.dir  =/Users/liyinchi/workspace/python/python-learning
+2023-04-18 13:46:14,815 INFO o.a.j.JMeter: PWD       =/Users/liyinchi/workspace/python/python-learning
+2023-04-18 13:46:14,816 INFO o.a.j.JMeter: IP: 127.0.0.1 Name: liyinchideMacBook-Pro.local FullName: localhost
+2023-04-18 13:46:14,822 INFO o.a.j.s.FileServer: Default base='/Users/liyinchi/workspace/python/python-learning'
+2023-04-18 13:46:14,827 INFO o.a.j.s.FileServer: Set new base='/Users/liyinchi/workspace/功能测试/好慷/测试数据（压测脚本）'
+2023-04-18 13:46:15,016 INFO o.a.j.s.SaveService: Testplan (JMX) version: 2.2. Testlog (JTL) version: 2.2
+2023-04-18 13:46:15,028 INFO o.a.j.s.SaveService: Using SaveService properties file encoding UTF-8
+2023-04-18 13:46:15,034 INFO o.a.j.s.SaveService: Using SaveService properties version 5.0
+2023-04-18 13:46:15,043 INFO o.a.j.s.SaveService: Loading file: /Users/liyinchi/workspace/功能测试/好慷/测试数据（压测脚本）/阶梯拼团多维表格20230418.jmx
+2023-04-18 13:46:15,103 INFO o.a.j.p.h.c.CookieManager: Settings: Delete null: true Check: true Allow variable: true Save: false Prefix: COOKIE_
+2023-04-18 13:46:15,188 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/html is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2023-04-18 13:46:15,188 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for application/xhtml+xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2023-04-18 13:46:15,188 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for application/xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2023-04-18 13:46:15,188 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2023-04-18 13:46:15,188 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/vnd.wap.wml is org.apache.jmeter.protocol.http.parser.RegexpHTMLParser
+2023-04-18 13:46:15,188 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/css is org.apache.jmeter.protocol.http.parser.CssParser
+2023-04-18 13:46:16,322 INFO o.a.j.JMeter: Creating summariser <summary>
+2023-04-18 13:46:16,335 INFO o.a.j.e.StandardJMeterEngine: Running the test!
+2023-04-18 13:46:16,336 INFO o.a.j.s.SampleEvent: List of sample_variables: []
+2023-04-18 13:46:16,336 INFO o.a.j.s.SampleEvent: List of sample_variables: []
+2023-04-18 13:46:16,343 INFO o.a.j.e.u.CompoundVariable: Note: Function class names must contain the string: '.functions.'
+2023-04-18 13:46:16,343 INFO o.a.j.e.u.CompoundVariable: Note: Function class names must not contain the string: '.gui.'
+2023-04-18 13:46:16,836 INFO o.a.j.JMeter: 正在运行的测试 (1681796776836)
+2023-04-18 13:46:16,898 INFO o.a.j.e.StandardJMeterEngine: Starting ThreadGroup: 1 : 2023年阶梯拼团-按台数-多维表
+2023-04-18 13:46:16,898 INFO o.a.j.e.StandardJMeterEngine: Starting 1 threads for group 2023年阶梯拼团-按台数-多维表.
+2023-04-18 13:46:16,898 INFO o.a.j.e.StandardJMeterEngine: Thread will continue on error
+2023-04-18 13:46:16,898 INFO o.a.j.t.ThreadGroup: Starting thread group... number=1 threads=1 ramp-up=1 delayedStart=false
+2023-04-18 13:46:17,009 INFO o.a.j.t.ThreadGroup: Started thread group number 1
+2023-04-18 13:46:17,009 INFO o.a.j.e.StandardJMeterEngine: All thread groups have been started
+2023-04-18 13:46:17,030 INFO o.a.j.t.JMeterThread: Thread started: 2023年阶梯拼团-按台数-多维表 1-1
+2023-04-18 13:46:17,044 ERROR o.a.j.u.BeanShellInterpreter: Error invoking bsh method: eval	Sourced file: inline evaluation of: ``prev.setDataEncoding("utf-8");''
+2023-04-18 13:46:17,044 WARN o.a.j.m.BeanShellPreProcessor: Problem in BeanShell script. org.apache.jorphan.util.JMeterException: Error invoking bsh method: eval	Sourced file: inline evaluation of: ``prev.setDataEncoding("utf-8");''
+2023-04-18 13:46:17,063 INFO o.a.j.p.h.s.HTTPHCAbstractImpl: Local host = liyinchideMacBook-Pro.local
+2023-04-18 13:46:17,070 INFO o.a.j.p.h.s.HTTPHC4Impl: HTTP request retry count = 0
+2023-04-18 13:46:17,072 INFO o.a.j.s.SampleResult: Note: Sample TimeStamps are START times
+2023-04-18 13:46:17,072 INFO o.a.j.s.SampleResult: sampleresult.default.encoding is set to ISO-8859-1
+2023-04-18 13:46:17,072 INFO o.a.j.s.SampleResult: sampleresult.useNanoTime=true
+2023-04-18 13:46:17,073 INFO o.a.j.s.SampleResult: sampleresult.nanoThreadSleep=5000
+2023-04-18 13:46:17,197 INFO o.a.j.p.h.s.h.LazyLayeredConnectionSocketFactory: Setting up HTTPS TrustAll Socket Factory
+2023-04-18 13:46:17,211 INFO o.a.j.u.JsseSSLManager: Using default SSL protocol: TLS
+2023-04-18 13:46:17,211 INFO o.a.j.u.JsseSSLManager: SSL session context: per-thread
+2023-04-18 13:46:17,500 INFO o.a.j.u.SSLManager: JmeterKeyStore Location:  type JKS
+2023-04-18 13:46:17,501 INFO o.a.j.u.SSLManager: KeyStore created OK
+2023-04-18 13:46:17,501 WARN o.a.j.u.SSLManager: Keystore file not found, loading empty keystore
+2023-04-18 13:46:28,774 INFO o.a.j.t.JMeterThread: Thread is done: 2023年阶梯拼团-按台数-多维表 1-1
+2023-04-18 13:46:28,774 INFO o.a.j.t.JMeterThread: Thread finished: 2023年阶梯拼团-按台数-多维表 1-1
+2023-04-18 13:46:28,777 INFO o.a.j.e.StandardJMeterEngine: Notifying test listeners of end of test
+2023-04-18 13:46:28,779 INFO o.a.j.r.Summariser: summary =    239 in 00:00:12 =   20.0/s Avg:    46 Min:     0 Max:   986 Err:    29 (12.13%)
